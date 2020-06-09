@@ -1,0 +1,30 @@
+{% extends "./_base.html" %}
+{% block content %}
+<div class="container">
+    <h1>需要リスト</h1>
+
+    <table class="table table-bordered">
+        <tr>
+            <th scope="col">Facility_Name</th>
+            <th scope="col">Editer_Name</th scope="col">
+            <th scope="col">choice</th>
+            <th scope="col">quantity</th>
+            <th scope="col">deadline</th>
+            <th scope="col">memo</th>
+        </tr>
+
+{% for item in data %}
+    <tr>
+        <td>{{ item.F_name|default_if_none:"未入力" }}</td>
+        <td>{{ item.I_name|default_if_none:"未入力" }}</td>
+        <td>{{ item.get_vegetable_display|default_if_none:"未入力" }}</td>
+        <td>{{ item.quontity|default_if_none:"未入力" }}</td>
+        <td>{{ item.deadline|default_if_none:"未入力" }}</td>
+        <td>{{item.memo|default_if_none:"未入力"}}</td>
+        
+    </tr>
+{% endfor %}
+    </table>
+</div>
+
+{% endblock %}

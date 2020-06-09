@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'users.apps.UsersConfig',
     'app.apps.AppConfig',
+    'accounts.apps.AccountsConfig', # 追記
 ]
 
 MIDDLEWARE = [
@@ -184,3 +185,8 @@ LOGGING = {
         },
     }
 }
+
+
+LOGIN_URL = 'login' # ログインしていないときのリダイレクト先
+LOGIN_REDIRECT_URL = 'index' # ログイン後のリダイレクト先
+LOGOUT_REDIRECT_URL = 'index' # ログアウト後のリダイレクト先
