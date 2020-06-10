@@ -20,7 +20,7 @@
         <td>{{ item.get_vegetable_display|default_if_none:"未入力" }}</td>
         <td>{{ item.quontity|default_if_none:"未入力" }}</td>
         <td>{{ item.deadline|default_if_none:"未入力" }}</td>
-        <td>{{item.memo|default_if_none:"未入力"}}</td>
+        <td>{{ item.memo|default_if_none:"未入力"}}</td>
         
     </tr>
 {% endfor %}

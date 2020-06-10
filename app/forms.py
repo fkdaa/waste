@@ -1,7 +1,6 @@
 from django import forms
 
-from .models import Item
-from .models import F_Item
+from .models import Item, F_Item, Reservation
 
 
 class ItemForm(forms.ModelForm):
@@ -38,4 +37,26 @@ class F_ItemForm(forms.ModelForm):
         # auto_now=True
         # auto_now_add=Ture
         # editable=False
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+
+
+class BookForm(forms.ModelForm):
+
+    field_order=["quontity","memo",]
+    class Meta:
+        model = Reservation
+        fields = '__all__'
+
+        # 以下のフィールド以外が入力フォームに表示される
+        # AutoField
+        # auto_now=True
+        # auto_now_add=Ture
+        # editable=False
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
 

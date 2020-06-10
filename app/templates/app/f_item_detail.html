@@ -8,16 +8,17 @@
             </div>
         </div>
          
-        {% include "./item_detail_contents.html" %}
+        {% include "./f_item_detail_contents.html" %}
         
         <div class="row">
             <div class="col-12">
-                <a class="btn btn-waring float-right" href="{% url 'index' %}">戻る</a>
+                <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
             </div>
         </div>
-
-        <div>
-
+        <div class="row">
+            <div class="col-7">
+                <a class="btn btn-warning float-right" href="{% url 'book' object.pk %}">予　約</a>
+            </div>
         </div>
 
     </div>

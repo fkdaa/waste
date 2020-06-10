@@ -3,16 +3,18 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView, FormView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
 
 from .filters import ItemFilterSet
 from .forms import ItemForm
 from .forms import F_ItemForm
+from .forms import BookForm
 
 from .models import Item
 from .models import F_Item
+from .models import Reservation
 
 
 
@@ -24,20 +26,28 @@ from .models import F_Item
 
 
 def C_View(request):
-    data = Item.objects.all()
+    data = Item.objects.filter(deadline__gt=timezone.now())
     params = { 
-         'title': 'costomer_data',
+         'title': 'customer_data',
          'data':data,
     }
     return render(request,'app/item_C_View.html',params)
 
 def F_View(request):
-    data = F_Item.objects.all()
+    data = F_Item.objects.filter(deadline__gt=timezone.now())
     params = { 
-         'title': 'costomer_data',
+         'title': 'customer_data',
          'data':data,
     }
     return render(request,'app/item_F_View.html',params)
+
+def R_View(request):
+    data = Reservation.objects.filter()
+    params = { 
+         'title': 'customer_data',
+         'data':data,
+    }
+    return render(request,'app/f_item_R_View.html',params)
 
 
 class ItemFilterView(LoginRequiredMixin, FilterView):
@@ -48,7 +58,7 @@ class ItemFilterView(LoginRequiredMixin, FilterView):
     ・django-filter 一覧画面(ListView)に検索機能を追加
     https://django-filter.readthedocs.io/en/master/
     """
-    model = Item
+    model = F_Item
 
     # django-filter 設定
     filterset_class = ItemFilterSet
@@ -81,8 +91,8 @@ class ItemFilterView(LoginRequiredMixin, FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        return Item.objects.all().order_by('-created_at')
-
+        return F_Item.objects.filter(deadline__gt=timezone.now()).order_by('-created_at')
+        
     def get_context_data(self, *, object_list=None, **kwargs):
         """
         表示データの設定
@@ -96,7 +106,8 @@ class ItemDetailView(LoginRequiredMixin, DetailView):
     """
     ビュー：詳細画面
     """
-    model = Item
+
+    model = F_Item
 
     def get_context_data(self, **kwargs):
         """
@@ -106,6 +117,52 @@ class ItemDetailView(LoginRequiredMixin, DetailView):
         # kwargs['sample'] = 'sample'
         return super().get_context_data(**kwargs)
 
+    
+
+class ItemBookView(LoginRequiredMixin, CreateView):
+    """
+    ビュー：予約画面
+    """
+    model = Reservation
+    form_class = BookForm
+
+    def form_valid(self, form):
+        """
+        登録処理
+        """
+        item = form.save(commit=False)
+        item.subscriber = self.request.user
+        item.created_at = timezone.now()
+        item.target = F_Item.objects.get(pk=self.kwargs['pk'])
+        item.save()
+
+        return HttpResponseRedirect("complete")
+
+    def get_context_data(self, **kwargs):
+        """
+        表示データの設定
+        """
+        context = super().get_context_data(**kwargs)
+        context["f_item"] = F_Item.objects.get(pk=self.kwargs['pk'])
+        
+        return context
+
+    
+
+
+class ItemBookConfirmView(LoginRequiredMixin, DetailView):
+    """
+    ボツ
+    """
+    def get_queryset(self):
+        return Reservation.objects.filter(target_id=self.kwargs['pk'])
+
+class ItemBookCompleteView(LoginRequiredMixin, TemplateView):
+    """
+    予約が完了しました
+    """
+    template_name = "f_item_book_complete.html"
+    
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
     """
@@ -155,7 +212,7 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
     """
     ビュー：更新画面
     """
-    model = Item
+    model = F_Item
     form_class = ItemForm
     success_url = reverse_lazy('index')
 
@@ -175,7 +232,7 @@ class ItemDeleteView(LoginRequiredMixin, DeleteView):
     """
     ビュー：削除画面
     """
-    model = Item
+    model = F_Item
     success_url = reverse_lazy('index')
 
     def delete(self, request, *args, **kwargs):

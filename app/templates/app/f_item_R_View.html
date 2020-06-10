@@ -1,0 +1,26 @@
+{% extends "./_base.html" %}
+{% block content %}
+<div class="container">
+    <h1>予約リスト</h1>
+
+    <table class="table table-bordered">
+        <tr>
+            <th scope="col">created_at</th scope="col">
+            <th scope="col">quontity</th>
+            <th scope="col">target</th>
+            <th scope="col">memo</th>
+        </tr>
+
+{% for item in data %}
+    <tr>
+        <td>{{ item.created_at|default_if_none:"未入力" }}</td>
+        <td>{{ item.quontity|default_if_none:"未入力" }}</td>
+        <td>{{ item.target|default_if_none:"未入力" }}</td>
+        <td>{{ item.memo|default_if_none:"未入力"}}</td>
+        
+    </tr>
+{% endfor %}
+    </table>
+</div>
+
+{% endblock %}

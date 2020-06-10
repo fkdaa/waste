@@ -1,0 +1,146 @@
+<!--
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>1_文字列</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{  f_item.sample_1|default_if_none:"未入力"  }}</p>
+    </div>
+</div>
+-->
+<!-- 供給側のページにする -->
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>施設名</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{  f_item.F_name|default_if_none:"未入力"  }}</p>
+    </div>
+</div>
+<!--
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>入力者名</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{  f_item.I_name|default_if_none:"未入力"  }}</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>量</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{  f_item.quontity|default_if_none:"未入力" }}kg</p>
+    </div>
+-->
+    <!-- 需要側からコンタクトをとれるようにする -->
+<!--
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>4_浮動小数点</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{  f_item.sample_4|default_if_none:"未入力" }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>5_固定小数点</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{  f_item.sample_5|default_if_none:"未入力" }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>6_ブール値</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.sample_6|yesno:"はい,いいえ" }}</p>
+    </div>
+</div>
+-->
+<!--
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>いつまで</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.deadline|date:"Y年m月d日" }}</p>
+    </div>
+</div>
+-->
+<!--
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>8_日時</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.sample_8|date:"Y年m月d日 G時i分s秒" }}</p>
+    </div>
+</div>
+-->
+
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>種類</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.get_vegetable_display|default_if_none:"未入力" }}</p>
+    </div>
+</div>
+<!--
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>10_選択肢（マスタ連動）</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.sample_10.get_full_name|default_if_none:"未入力" }}</p>
+    </div>
+</div>
+-->
+
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>備考</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{  f_item.memo|default_if_none:"未入力" }}</p>
+    </div>
+</div>
+<!--
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>作成者</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.created_by.get_full_name }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>作成時間</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.created_at|date:"Y/m/d G:i:s" }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>更新者</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.updated_by.get_full_name }}</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>更新時間</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.updated_at|date:"Y/m/d G:i:s" }}</p>
+    </div>
+</div>
+-->

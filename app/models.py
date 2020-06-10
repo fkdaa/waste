@@ -160,8 +160,6 @@ class F_Item(models.Model):
         null=True,
     )
 
-
-
     # サンプル項目7 日付
     deadline = models.DateField(
         verbose_name='いつ出そうか',
@@ -233,7 +231,7 @@ class F_Item(models.Model):
         """
         リストボックスや管理画面での表示
         """
-        return self.sample_1
+        return self.F_name
 
     class Meta:
         """
@@ -241,3 +239,46 @@ class F_Item(models.Model):
         """
         verbose_name = 'サンプル'
         verbose_name_plural = 'サンプル'
+
+class Reservation(models.Model):
+
+    subscriber = models.ForeignKey(
+        User,
+        verbose_name='予約者',
+        blank=True,
+        null=True,
+        related_name='Subscriber',
+        on_delete=models.SET_NULL,
+        editable=False,
+    )
+    created_at = models.DateTimeField(
+        verbose_name='作成時間',
+        blank=True,
+        null=True,
+        editable=False,
+    )
+    target = models.ForeignKey(
+        F_Item,
+        verbose_name='商品アイテム',
+        blank=True,
+        null=True,
+        related_name='F_Item',
+        on_delete=models.SET_NULL,
+        editable=False,
+    )
+    quontity = models.IntegerField(
+        verbose_name='予約数量',
+        blank=True,
+        null=True,
+    )
+    memo = models.TextField(
+        verbose_name='備考',
+        blank=True,
+        null=True,
+    )
+
+    def __str__(self):
+        """
+        リストボックスや管理画面での表示
+        """
+        return self.subscriber
