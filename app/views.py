@@ -27,7 +27,7 @@ from .models import Reservation
 
 def C_View(request):
     data = Item.objects.filter(deadline__gt=timezone.now())
-    params = { 
+    params = {
          'title': 'customer_data',
          'data':data,
     }
@@ -35,7 +35,7 @@ def C_View(request):
 
 def F_View(request):
     data = F_Item.objects.filter(deadline__gt=timezone.now())
-    params = { 
+    params = {
          'title': 'customer_data',
          'data':data,
     }
@@ -43,7 +43,7 @@ def F_View(request):
 
 def R_View(request):
     data = Reservation.objects.filter()
-    params = { 
+    params = {
          'title': 'customer_data',
          'data':data,
     }
@@ -92,7 +92,7 @@ class ItemFilterView(LoginRequiredMixin, FilterView):
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
         return F_Item.objects.filter(deadline__gt=timezone.now()).order_by('-created_at')
-        
+
     def get_context_data(self, *, object_list=None, **kwargs):
         """
         表示データの設定
@@ -117,7 +117,7 @@ class ItemDetailView(LoginRequiredMixin, DetailView):
         # kwargs['sample'] = 'sample'
         return super().get_context_data(**kwargs)
 
-    
+
 
 class ItemBookView(LoginRequiredMixin, CreateView):
     """
@@ -144,10 +144,10 @@ class ItemBookView(LoginRequiredMixin, CreateView):
         """
         context = super().get_context_data(**kwargs)
         context["f_item"] = F_Item.objects.get(pk=self.kwargs['pk'])
-        
+
         return context
 
-    
+
 
 
 class ItemBookConfirmView(LoginRequiredMixin, DetailView):
@@ -162,7 +162,7 @@ class ItemBookCompleteView(LoginRequiredMixin, TemplateView):
     予約が完了しました
     """
     template_name = "f_item_book_complete.html"
-    
+
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
     """
@@ -198,6 +198,7 @@ class F_ItemCreateView(LoginRequiredMixin, CreateView):
         登録処理
         """
         item = form.save(commit=False)
+        item.I_name = self.request.user
         item.created_by = self.request.user
         item.created_at = timezone.now()
         item.updated_by = self.request.user
