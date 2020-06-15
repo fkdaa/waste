@@ -20,13 +20,14 @@ class Item(models.Model):
         null=True,
     )
 
-
     # 入力者氏名
-    I_name = models.CharField(
+    I_name = models.ForeignKey(
+        User,
         verbose_name='入力者氏名',
         max_length=20,
         blank=True,
         null=True,
+        on_delete=models.SET_NULL,
     )
 
     # サンプル項目2 メモ
@@ -42,8 +43,6 @@ class Item(models.Model):
         blank=True,
         null=True,
     )
-
-
 
     # サンプル項目7 日付
     deadline = models.DateField(
@@ -129,21 +128,16 @@ class F_Item(models.Model):
     ・公式 モデルフィールドリファレンス
     https://docs.djangoproject.com/ja/2.1/ref/models/fields/
     """
-    # 施設名
-    F_name = models.CharField(
-        verbose_name='施設名',
+
+    # 出品者
+    I_name = models.ForeignKey(
+        User,
+        verbose_name='出品者',
         max_length=20,
         blank=True,
         null=True,
-    )
-
-
-    # 入力者氏名
-    I_name = models.CharField(
-        verbose_name='入力者氏名',
-        max_length=20,
-        blank=True,
-        null=True,
+        on_delete=models.SET_NULL,
+        editable=False,
     )
 
     # サンプル項目2 メモ
@@ -239,6 +233,7 @@ class F_Item(models.Model):
         """
         verbose_name = 'サンプル'
         verbose_name_plural = 'サンプル'
+
 
 class Reservation(models.Model):
 
