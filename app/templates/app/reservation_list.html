@@ -1,0 +1,89 @@
+
+{% extends "./_base.html" %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    <div class="container">
+        <div id="myModal" class="modal fade" tabc_index="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">検索条件</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="filter" method="get">
+                        <div class="modal-body">
+                            {{ filter.form|crispy }}
+                        </div>
+                    </form>
+                    <div class="modal-footer">
+                        <a class="btn btn-outline-dark" data-dismiss="modal">戻る</a>
+                        <button type="submit" class="btn btn-outline-dark" form="filter">検索</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row mt-3">
+            <div class="col-10 mx-auto">
+                {% include "./_pagination.html" %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <ul class="list-group">
+                    {% for item in object_list %}
+                        <li class="list-group-item">
+                            {# item_detail_contents.html を参考に必要な項目を追加してください #}
+                            <div class="row">
+                                <div class="col-5 col-sm-3">
+                                    <p>商品名</p>
+                                </div>
+                                <div class="col-7 col-sm-9">
+                                    <p>{{ item.target|default_if_none:"未入力" }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 col-sm-3">
+                                    <p>数量</p>
+                                </div>
+                                <div class="col-7 col-sm-9">
+                                    <p>{{ item.quontity|default_if_none:"未入力" }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 col-sm-3">
+                                    <p>購入日時</p>
+                                </div>
+                                <div class="col-7 col-sm-9">
+                                    <p>{{ item.created_at|default_if_none:"未入力" }}</p>
+                                </div>
+                            </div>
+            
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="float-right">
+                                        <a class="btn btn-outline-dark " href="{% url 'reservation_detail' item.pk %}">詳細</a>
+                                        <a class="btn btn-outline-dark " href="{% url 'reservation_cancel' item.pk %}">取り消し</a>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    {% empty %}
+                        <li class="list-group-item">
+                            対象のデータがありません
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-10 mx-auto">
+                {% include "./_pagination.html" %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

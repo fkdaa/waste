@@ -11,14 +11,14 @@
         <div class="row">
             <div class="col-12">
                 <div class="float-right">
-                    <a class="btn btn-outline-dark" href="{% url 'index' %}">戻る</a>
+                    <a class="btn btn-outline-dark" href="{% url 'f_index' %}">戻る</a>
                     <a class="btn btn-outline-dark save" href="#">保存</a>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <form method="post" id="myform">
+                <form method="post" id="myform" enctype='multipart/form-data'>
                     {% crispy form %}
                 </form>
             </div>
@@ -26,7 +26,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="float-right mb-3">
-                    <a class="btn btn-outline-dark" href="{% url 'index' %}">戻る</a>
+                    <a class="btn btn-outline-dark" href="{% url 'f_index' %}">戻る</a>
                     <a class="btn btn-outline-dark save" href="#">保存</a>
                 </div>
             </div>

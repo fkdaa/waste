@@ -27,20 +27,28 @@ class F_ItemForm(forms.ModelForm):
     ・公式 モデルからフォームを作成する
     https://docs.djangoproject.com/ja/2.1/topics/forms/modelforms/
     """
-    field_order=["vegetable","quontity","deadline","memo"]
+    field_order=["photo","vegetable","quontity","deadline","price","memo"]
     class Meta:
         model = F_Item
-        fields = '__all__'
+        fields = ["photo","vegetable","quontity","deadline","price","memo"]
 
+        widgets = {
+            'title': forms.TextInput(attrs={
+                'class': "form-control",
+            }),
+            'file': forms.ClearableFileInput(attrs={
+                'class': "form-control-file",
+            }),
+        }
         # 以下のフィールド以外が入力フォームに表示される
         # AutoField
         # auto_now=True
         # auto_now_add=Ture
         # editable=False
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field in self.fields.values():
-            field.widget.attrs['class'] = 'form-control'
+    #def __init__(self, *args, **kwargs):
+    #    super().__init__(*args, **kwargs)
+    #    for field in self.fields.values():
+    #        field.widget.attrs['class'] = 'form-control'
 
 
 class BookForm(forms.ModelForm):
@@ -48,7 +56,7 @@ class BookForm(forms.ModelForm):
     field_order=["quontity","memo",]
     class Meta:
         model = Reservation
-        fields = '__all__'
+        fields = ["quontity","memo",]
 
         # 以下のフィールド以外が入力フォームに表示される
         # AutoField

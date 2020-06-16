@@ -154,6 +154,18 @@ class F_Item(models.Model):
         null=True,
     )
 
+    quontity_left = models.IntegerField(
+        verbose_name='在庫',
+        blank=True,
+        null=True,
+    )
+
+    price = models.IntegerField(
+        verbose_name='価格',
+        blank=True,
+        null=True,
+    )
+
     # サンプル項目7 日付
     deadline = models.DateField(
         verbose_name='いつ出そうか',
@@ -179,7 +191,12 @@ class F_Item(models.Model):
         null=True,
     )
 
+    photo = models.ImageField(
+        verbose_name='写真',
+        upload_to='f_items/',
+        default=None,
 
+    )
 
     # 以下、管理項目
 
@@ -225,7 +242,10 @@ class F_Item(models.Model):
         """
         リストボックスや管理画面での表示
         """
-        return self.F_name
+        return self.vege_choice[self.vegetable-1][1]
+
+    def get_filename(self):
+        return os.path.basename(self.photo.name)
 
     class Meta:
         """
@@ -239,7 +259,7 @@ class Reservation(models.Model):
 
     subscriber = models.ForeignKey(
         User,
-        verbose_name='予約者',
+        verbose_name='購入者',
         blank=True,
         null=True,
         related_name='Subscriber',
@@ -261,8 +281,13 @@ class Reservation(models.Model):
         on_delete=models.SET_NULL,
         editable=False,
     )
+    total_price = models.IntegerField(
+        verbose_name='合計金額',
+        blank=True,
+        null=True,
+    )
     quontity = models.IntegerField(
-        verbose_name='予約数量',
+        verbose_name='購入数量',
         blank=True,
         null=True,
     )

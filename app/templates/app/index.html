@@ -1,0 +1,99 @@
+{% extends "app/_base.html" %}
+
+{% block content %}
+<head>
+    <style>
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, "游ゴシック体", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, 'Open Sans', sans-serif;
+  }
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Helvetica Neue", Helvetica, Arial, "游ゴシック体", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, 'Open Sans', sans-serif;
+  }
+
+
+    div{
+        text-align: center;
+      }
+      
+    </style>
+    </head>
+    <body>
+        <header>
+        </header>
+        <div class="jumbotron" style="background-color: #343a40; color: white;" height="auto">
+            <div class="container">
+
+              <p><br>野菜を育てる過程では、自然と商品の規格から外れた仲間外れの野菜が出ます。
+                 <br>それらの野菜は規格外野菜・廃棄野菜と呼ばれ、皆さんの食卓に並ばず廃棄されてしまいます。<br>
+                 <br>けれど、せっかく育った野菜を棄ててしまうなんてあまりにも悲しい。
+                 <br>無駄になってしまう規格外野菜を、必要とする消費者の方に届けたい。<br>
+                 <br>Vegebankは農家さんたちのそんな温かい想いから生まれた、
+                 <br>生産者と消費者を直接繋げて規格外野菜のやりとりをするサイトです。<br><br></p>
+              <p><a class="btn btn-primary btn-lg" href="{%url 'c_index'%}" role="button">もっと詳しく</a></p>
+
+            </div>
+          </div>
+      
+            <div class="container">
+                <div class="icon">
+<!--                    <img src="img/yasai.jpg" width="250" alt="画像">-->
+                </div>
+            
+                    <h1 class="title">VegeBank</h1>
+                    
+            
+
+                
+            <br>
+            VegeBankは、フードバンク八王子様で定期的に行われる廃棄野菜市を支援するため、
+            </br>
+
+            <br>
+            東京高専の学生によって作成されたツールです。
+            </br>
+
+                
+                    <br><br>
+
+        <section class="view">
+
+            <section>
+                <h1>直近の開催日時</h1>
+                <br>
+                <h2>
+                    12/23
+                </h2>
+            </section>
+            <br><br>
+
+            <section>
+                <h1>
+                    商品一覧
+                </h1><br>
+                <a class="btn btn-outline-dark " href="{%url 'c_index'%}">消費者の方々はこちら</a>
+                <a class="btn btn-outline-dark " href="{%url 'f_index'%}">農家の方々はこちら</a>
+                                        
+            </section>
+            <br><br>
+                                        
+        </section>
+
+            </div>
+
+            <footer class="footer">
+                <div class="container">
+                  <p class="text-center">
+                    <br>
+                    Copyright © 2019- 東京高専5J社会実装廃棄野菜班 Allright Reserved.
+                  <br></p>
+                </div>
+              </footer>
+          
+    
+    </body>
+
+</html>
+
+{% endblock %}
+

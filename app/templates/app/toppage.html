@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+{% extends "./_base.html" %}
+{% block content %}
 
 <html lang="ja">
     <head>
@@ -44,9 +45,8 @@
                 <h1>
                     商品一覧
                 </h1>
-                <button type="signup" onclick="location.href='https~~ここに商品登録ページのURLを入れてね'">
-                    商品ページはこちら
-                </button>
+                <a class="btn btn-outline-dark float-right" href="{% url 'c_index' %}">消費者ページはこちら</a>
+                <a class="btn btn-outline-dark float-right" href="{% url 'f_index' %}">農家ページはこちら</a>
             </section>
 
         </section>
@@ -59,3 +59,5 @@
     </body>
 
 </html>
+
+{% endblock %}

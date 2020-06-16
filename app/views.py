@@ -8,6 +8,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
 
 from .filters import ItemFilterSet
+from .filters import ReservationFilterSet
+
 from .forms import ItemForm
 from .forms import F_ItemForm
 from .forms import BookForm
@@ -25,32 +27,13 @@ from .models import Reservation
 
 
 
-def C_View(request):
-    data = Item.objects.filter(deadline__gt=timezone.now())
-    params = {
-         'title': 'customer_data',
-         'data':data,
-    }
-    return render(request,'app/item_C_View.html',params)
+class TopView(TemplateView):
+    """
+    購入が完了しました
+    """
+    template_name = "app/index.html"
 
-def F_View(request):
-    data = F_Item.objects.filter(deadline__gt=timezone.now())
-    params = {
-         'title': 'customer_data',
-         'data':data,
-    }
-    return render(request,'app/item_F_View.html',params)
-
-def R_View(request):
-    data = Reservation.objects.filter()
-    params = {
-         'title': 'customer_data',
-         'data':data,
-    }
-    return render(request,'app/f_item_R_View.html',params)
-
-
-class ItemFilterView(LoginRequiredMixin, FilterView):
+class CustomerView(FilterView):
     """
     ビュー：一覧表示画面
 
@@ -92,7 +75,7 @@ class ItemFilterView(LoginRequiredMixin, FilterView):
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
         return F_Item.objects.filter(deadline__gt=timezone.now()).order_by('-created_at')
-
+        
     def get_context_data(self, *, object_list=None, **kwargs):
         """
         表示データの設定
@@ -101,6 +84,56 @@ class ItemFilterView(LoginRequiredMixin, FilterView):
         # 例：kwargs['sample'] = 'sample'
         return super().get_context_data(object_list=object_list, **kwargs)
 
+class FarmerView(LoginRequiredMixin, FilterView):
+    """
+    ビュー：一覧表示画面
+
+    以下のパッケージを使用
+    ・django-filter 一覧画面(ListView)に検索機能を追加
+    https://django-filter.readthedocs.io/en/master/
+    """
+    model = F_Item
+
+    # django-filter 設定
+    filterset_class = ItemFilterSet
+    # django-filter ver2.0対応 クエリ未設定時に全件表示する設定
+    strict = False
+
+    # 1ページの表示
+    paginate_by = 10
+
+    def get(self, request, **kwargs):
+        """
+        リクエスト受付
+        セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
+        """
+
+        # 一覧画面内の遷移(GETクエリがある)ならクエリを保存する
+        if request.GET:
+            request.session['query'] = request.GET
+        # 詳細画面・登録画面からの遷移(GETクエリはない)ならクエリを復元する
+        else:
+            request.GET = request.GET.copy()
+            if 'query' in request.session.keys():
+                for key in request.session['query'].keys():
+                    request.GET[key] = request.session['query'][key]
+
+        return super().get(request, **kwargs)
+
+    def get_queryset(self):
+        """
+        ソート順・デフォルトの絞り込みを指定
+        """
+        # デフォルトの並び順として、登録時間（降順）をセットする。
+        return F_Item.objects.filter(deadline__gt=timezone.now()).order_by('-created_at')
+        
+    def get_context_data(self, *, object_list=None, **kwargs):
+        """
+        表示データの設定
+        """
+        # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
+        # 例：kwargs['sample'] = 'sample'
+        return super().get_context_data(object_list=object_list, **kwargs)
 
 class ItemDetailView(LoginRequiredMixin, DetailView):
     """
@@ -117,51 +150,6 @@ class ItemDetailView(LoginRequiredMixin, DetailView):
         # kwargs['sample'] = 'sample'
         return super().get_context_data(**kwargs)
 
-
-
-class ItemBookView(LoginRequiredMixin, CreateView):
-    """
-    ビュー：予約画面
-    """
-    model = Reservation
-    form_class = BookForm
-
-    def form_valid(self, form):
-        """
-        登録処理
-        """
-        item = form.save(commit=False)
-        item.subscriber = self.request.user
-        item.created_at = timezone.now()
-        item.target = F_Item.objects.get(pk=self.kwargs['pk'])
-        item.save()
-
-        return HttpResponseRedirect("complete")
-
-    def get_context_data(self, **kwargs):
-        """
-        表示データの設定
-        """
-        context = super().get_context_data(**kwargs)
-        context["f_item"] = F_Item.objects.get(pk=self.kwargs['pk'])
-
-        return context
-
-
-
-
-class ItemBookConfirmView(LoginRequiredMixin, DetailView):
-    """
-    ボツ
-    """
-    def get_queryset(self):
-        return Reservation.objects.filter(target_id=self.kwargs['pk'])
-
-class ItemBookCompleteView(LoginRequiredMixin, TemplateView):
-    """
-    予約が完了しました
-    """
-    template_name = "f_item_book_complete.html"
 
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
@@ -191,14 +179,13 @@ class F_ItemCreateView(LoginRequiredMixin, CreateView):
     """
     model = F_Item
     form_class = F_ItemForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('f_index')
 
     def form_valid(self, form):
         """
         登録処理
         """
         item = form.save(commit=False)
-        item.I_name = self.request.user
         item.created_by = self.request.user
         item.created_at = timezone.now()
         item.updated_by = self.request.user
@@ -206,16 +193,19 @@ class F_ItemCreateView(LoginRequiredMixin, CreateView):
         item.save()
 
         return HttpResponseRedirect(self.success_url)
+    
+    def get_initial(self):
+        return {'price':0}
 
+    
 
-
-class ItemUpdateView(LoginRequiredMixin, UpdateView):
+class F_ItemUpdateView(LoginRequiredMixin, UpdateView):
     """
     ビュー：更新画面
     """
     model = F_Item
     form_class = ItemForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('f_index')
 
     def form_valid(self, form):
         """
@@ -229,12 +219,12 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         return HttpResponseRedirect(self.success_url)
 
 
-class ItemDeleteView(LoginRequiredMixin, DeleteView):
+class F_ItemDeleteView(LoginRequiredMixin, DeleteView):
     """
     ビュー：削除画面
     """
     model = F_Item
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('f_index')
 
     def delete(self, request, *args, **kwargs):
         """
@@ -244,3 +234,186 @@ class ItemDeleteView(LoginRequiredMixin, DeleteView):
         item.delete()
 
         return HttpResponseRedirect(self.success_url)
+
+class ReservationDetailView(LoginRequiredMixin, DetailView):
+    """
+    ビュー：詳細画面
+    """
+
+    model = Reservation
+
+    def get_context_data(self, **kwargs):
+        """
+        表示データの設定
+        """
+        reservation = Reservation.objects.get(pk=self.kwargs['pk'])
+        context = super().get_context_data(**kwargs)
+        context["f_item"] = F_Item.objects.get(pk=reservation.target_id)
+
+        return context
+
+class ItemBookView(LoginRequiredMixin, CreateView):
+    """
+    ビュー：購入画面
+    """
+    model = Reservation
+    form_class = BookForm
+
+    def form_valid(self, form):
+        """
+        登録処理
+        """
+        item = form.save(commit=False)
+        item.subscriber = self.request.user
+        item.created_at = timezone.now()
+        item.target = F_Item.objects.get(pk=self.kwargs['pk'])
+        item.save()
+
+        return HttpResponseRedirect("complete")
+
+    def get_context_data(self, **kwargs):
+        """
+        表示データの設定
+        """
+        context = super().get_context_data(**kwargs)
+        context["f_item"] = F_Item.objects.get(pk=self.kwargs['pk'])
+        
+        return context
+
+
+class ItemBookConfirmView(LoginRequiredMixin, DetailView):
+    """
+    ボツ
+    """
+    def get_queryset(self):
+        return Reservation.objects.filter(target_id=self.kwargs['pk'])
+
+class ItemBookCompleteView(LoginRequiredMixin, TemplateView):
+    """
+    購入が完了しました
+    """
+    template_name = "f_item_book_complete.html"
+    
+
+
+class SupplyList(LoginRequiredMixin, FilterView):
+    model = F_Item
+
+    # django-filter 設定
+    filterset_class = ReservationFilterSet
+    # django-filter ver2.0対応 クエリ未設定時に全件表示する設定
+    strict = False
+
+    # 1ページの表示
+    paginate_by = 10
+
+    def get(self, request, **kwargs):
+        """
+        リクエスト受付
+        セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
+        """
+
+        # 一覧画面内の遷移(GETクエリがある)ならクエリを保存する
+        if request.GET:
+            request.session['query'] = request.GET
+        # 詳細画面・登録画面からの遷移(GETクエリはない)ならクエリを復元する
+        else:
+            request.GET = request.GET.copy()
+            if 'query' in request.session.keys():
+                for key in request.session['query'].keys():
+                    request.GET[key] = request.session['query'][key]
+
+        return super().get(request, **kwargs)
+
+    def get_queryset(self):
+        """
+        ソート順・デフォルトの絞り込みを指定
+        """
+        # デフォルトの並び順として、登録時間（降順）をセットする。
+        return F_Item.objects.filter(created_by=self.request.user, deadline__gt=timezone.now()).order_by('-created_at')
+        
+    def get_context_data(self, *, object_list=None, **kwargs):
+        """
+        表示データの設定
+        """
+        # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
+        # 例：kwargs['sample'] = 'sample'
+        return super().get_context_data(object_list=object_list, **kwargs)
+
+class ReservationList(LoginRequiredMixin, FilterView):
+    """
+    ビュー：一覧表示画面
+
+    以下のパッケージを使用
+    ・django-filter 一覧画面(ListView)に検索機能を追加
+    https://django-filter.readthedocs.io/en/master/
+    """
+    model = Reservation
+
+    # django-filter 設定
+    filterset_class = ReservationFilterSet
+    # django-filter ver2.0対応 クエリ未設定時に全件表示する設定
+    strict = False
+
+    # 1ページの表示
+    paginate_by = 10
+
+    def get(self, request, **kwargs):
+        """
+        リクエスト受付
+        セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
+        """
+
+        # 一覧画面内の遷移(GETクエリがある)ならクエリを保存する
+        if request.GET:
+            request.session['query'] = request.GET
+        # 詳細画面・登録画面からの遷移(GETクエリはない)ならクエリを復元する
+        else:
+            request.GET = request.GET.copy()
+            if 'query' in request.session.keys():
+                for key in request.session['query'].keys():
+                    request.GET[key] = request.session['query'][key]
+
+        return super().get(request, **kwargs)
+
+    def get_queryset(self):
+        """
+        ソート順・デフォルトの絞り込みを指定
+        """
+        # デフォルトの並び順として、登録時間（降順）をセットする。
+        
+        return Reservation.objects.filter(subscriber=self.request.user, target__deadline__gt=timezone.now()).order_by('-created_at')
+        
+    def get_context_data(self, *, object_list=None, **kwargs):
+        """
+        表示データの設定
+        """
+        # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
+        # 例：kwargs['sample'] = 'sample'
+        return super().get_context_data(object_list=object_list, **kwargs)
+
+class ReservationDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    ビュー：削除画面
+    """
+    model = Reservation
+    success_url = reverse_lazy('ReservationList')
+
+    def delete(self, request, *args, **kwargs):
+        """
+        削除処理
+        """
+        item = self.get_object()
+        item.delete()
+
+        return HttpResponseRedirect(self.success_url)
+
+    def get_context_data(self, **kwargs):
+        """
+        表示データの設定
+        """
+        reservation = Reservation.objects.get(pk=self.kwargs['pk'])
+        context = super().get_context_data(**kwargs)
+        context["f_item"] = F_Item.objects.get(pk=reservation.target_id)
+
+        return context

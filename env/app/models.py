@@ -69,6 +69,12 @@ class Item(models.Model):
         blank=True,
         null=True,
     )
+
+    photo = models.ImageField(
+        verbose_name='写真',
+        upload_to='f_items/',
+    )
+
         # 作成者(ユーザー)
     created_by = models.ForeignKey(
         User,

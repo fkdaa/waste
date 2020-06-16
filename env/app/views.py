@@ -45,10 +45,10 @@ def F_View(request):
          'title': 'customer_data',
          'data':data,
     }
-    return render(request,'app/item_F_View.html',params)
+    return render(request,'app/item_f_index.html',params)
 
 
-class ItemFilterView(LoginRequiredMixin, FilterView):
+class CustomerView(LoginRequiredMixin, FilterView):
     """
     ビュー：一覧表示画面
 
@@ -159,7 +159,7 @@ class F_ItemCreateView(LoginRequiredMixin, CreateView):
 
 
 
-class ItemUpdateView(LoginRequiredMixin, UpdateView):
+class F_ItemUpdateView(LoginRequiredMixin, UpdateView):
     """
     ビュー：更新画面
     """
@@ -179,7 +179,7 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         return HttpResponseRedirect(self.success_url)
 
 
-class ItemDeleteView(LoginRequiredMixin, DeleteView):
+class F_ItemDeleteView(LoginRequiredMixin, DeleteView):
     """
     ビュー：削除画面
     """
