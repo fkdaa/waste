@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.views.generic import DetailView, TemplateView, FormView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
+from django.template.loader import render_to_string
 
 from .filters import ItemFilterSet
 from .filters import ReservationFilterSet
@@ -17,6 +18,7 @@ from .forms import BookForm
 from .models import Item
 from .models import F_Item
 from .models import Reservation
+from .models import User
 
 
 
@@ -75,7 +77,7 @@ class CustomerView(FilterView):
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
         return F_Item.objects.filter(deadline__gt=timezone.now()).order_by('-created_at')
-        
+
     def get_context_data(self, *, object_list=None, **kwargs):
         """
         表示データの設定
@@ -126,7 +128,7 @@ class FarmerView(LoginRequiredMixin, FilterView):
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
         return F_Item.objects.filter(deadline__gt=timezone.now()).order_by('-created_at')
-        
+
     def get_context_data(self, *, object_list=None, **kwargs):
         """
         表示データの設定
@@ -193,11 +195,11 @@ class F_ItemCreateView(LoginRequiredMixin, CreateView):
         item.save()
 
         return HttpResponseRedirect(self.success_url)
-    
+
     def get_initial(self):
         return {'price':0}
 
-    
+
 
 class F_ItemUpdateView(LoginRequiredMixin, UpdateView):
     """
@@ -252,24 +254,60 @@ class ReservationDetailView(LoginRequiredMixin, DetailView):
 
         return context
 
-class ItemBookView(LoginRequiredMixin, CreateView):
+class ItemBookView(LoginRequiredMixin, FormView):
     """
     ビュー：購入画面
     """
     model = Reservation
     form_class = BookForm
+    success_url = reverse_lazy('complete')
 
     def form_valid(self, form):
-        """
-        登録処理
-        """
-        item = form.save(commit=False)
-        item.subscriber = self.request.user
-        item.created_at = timezone.now()
-        item.target = F_Item.objects.get(pk=self.kwargs['pk'])
-        item.save()
+        ctx = {'form':form}
+        if self.request.POST.get('next', '') == 'create':
 
-        return HttpResponseRedirect("complete")
+            # 登録処理
+            item = form.save(commit=False)
+            item.subscriber = self.request.user
+            item.created_at = timezone.now()
+            item.target = F_Item.objects.get(pk=self.kwargs['pk'])
+            item.total_price = 0
+            item.save()
+
+            # メール送信
+            from_email = 'vegebank14@gmail.com'#送信元
+            subject_buy = "【VegiBank】予約内容のご確認（自動送信）" #購入に変えたほうがいいかも
+            subject_sell= "【VegeBank】出品中の商品が予約されました（自動送信）"
+
+            user_buy = self.request.user
+            user_sell = item.target.created_by
+
+            context_buy = {
+                #テンプレートに渡す項目
+                "user_name" : user_buy.username,
+                "item_name" : item.target,
+                "item_quantity" : item.quontity,
+                "item_from" : user_sell.username,
+                "item_fee" : item.total_price
+            }
+            context_sell = {
+                #テンプレートに渡す項目
+                "user_name" : user_sell.username,
+                "item_name" : item.target,
+                "item_quantity" : item.quontity,
+                "item_to" : user_buy.username,
+                "item_fee" : item.total_price
+            }
+            message_buy = render_to_string('mail/toBuyer_buy.txt', context_buy)
+            message_sell = render_to_string('mail/toSupplier_buy.txt', context_sell)
+
+            user_buy.email_user(subject_buy, message_buy, from_email)
+            user_sell.email_user(subject_sell, message_sell, from_email)
+
+            return HttpResponseRedirect("complete")
+
+        else:
+            return redirect(reverse_lazy('index'))
 
     def get_context_data(self, **kwargs):
         """
@@ -277,7 +315,7 @@ class ItemBookView(LoginRequiredMixin, CreateView):
         """
         context = super().get_context_data(**kwargs)
         context["f_item"] = F_Item.objects.get(pk=self.kwargs['pk'])
-        
+
         return context
 
 
@@ -288,12 +326,15 @@ class ItemBookConfirmView(LoginRequiredMixin, DetailView):
     def get_queryset(self):
         return Reservation.objects.filter(target_id=self.kwargs['pk'])
 
-class ItemBookCompleteView(LoginRequiredMixin, TemplateView):
+
+class ItemBookCompleteView(LoginRequiredMixin, CreateView):
     """
     購入が完了しました
     """
+    form_class = BookForm
+
+
     template_name = "f_item_book_complete.html"
-    
 
 
 class SupplyList(LoginRequiredMixin, FilterView):
@@ -331,7 +372,7 @@ class SupplyList(LoginRequiredMixin, FilterView):
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
         return F_Item.objects.filter(created_by=self.request.user, deadline__gt=timezone.now()).order_by('-created_at')
-        
+
     def get_context_data(self, *, object_list=None, **kwargs):
         """
         表示データの設定
@@ -381,9 +422,9 @@ class ReservationList(LoginRequiredMixin, FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        
+
         return Reservation.objects.filter(subscriber=self.request.user, target__deadline__gt=timezone.now()).order_by('-created_at')
-        
+
     def get_context_data(self, *, object_list=None, **kwargs):
         """
         表示データの設定

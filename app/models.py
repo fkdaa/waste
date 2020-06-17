@@ -132,6 +132,7 @@ class F_Item(models.Model):
     # 出品者
     I_name = models.ForeignKey(
         User,
+        to_field='id',
         verbose_name='出品者',
         max_length=20,
         blank=True,
@@ -261,35 +262,36 @@ class Reservation(models.Model):
         User,
         verbose_name='購入者',
         blank=True,
-        null=True,
+        null=False,
         related_name='Subscriber',
-        on_delete=models.SET_NULL,
+        on_delete=models.PROTECT,
         editable=False,
     )
     created_at = models.DateTimeField(
         verbose_name='作成時間',
         blank=True,
-        null=True,
+        null=False,
         editable=False,
     )
     target = models.ForeignKey(
         F_Item,
         verbose_name='商品アイテム',
         blank=True,
-        null=True,
+        null=False,
         related_name='F_Item',
-        on_delete=models.SET_NULL,
+        on_delete=models.PROTECT,
         editable=False,
+        to_field='id',
     )
     total_price = models.IntegerField(
         verbose_name='合計金額',
         blank=True,
-        null=True,
+        null=False,
     )
     quontity = models.IntegerField(
         verbose_name='購入数量',
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
     )
     memo = models.TextField(
         verbose_name='備考',
