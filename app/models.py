@@ -281,6 +281,7 @@ class Reservation(models.Model):
         related_name='F_Item',
         on_delete=models.PROTECT,
         editable=False,
+        to_field='id',
     )
     total_price = models.IntegerField(
         verbose_name='合計金額',

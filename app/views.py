@@ -280,12 +280,12 @@ class ItemBookView(LoginRequiredMixin, FormView):
             subject_sell= "【VegeBank】出品中の商品が予約されました（自動送信）"
 
             user_buy = self.request.user
-            user_sell = User.objects.get(id=1)
+            user_sell = item.target.created_by
 
             context_buy = {
                 #テンプレートに渡す項目
                 "user_name" : user_buy.username,
-                "item_name" : item.target.vegetable,
+                "item_name" : item.target,
                 "item_quantity" : item.quontity,
                 "item_from" : user_sell.username,
                 "item_fee" : item.total_price
@@ -293,13 +293,13 @@ class ItemBookView(LoginRequiredMixin, FormView):
             context_sell = {
                 #テンプレートに渡す項目
                 "user_name" : user_sell.username,
-                "item_name" : item.target.vegetable,
+                "item_name" : item.target,
                 "item_quantity" : item.quontity,
                 "item_to" : user_buy.username,
                 "item_fee" : item.total_price
             }
-            message_buy = render_to_string('app/mail/toBuyer_buy.txt', context_buy)
-            message_sell = render_to_string('app/mail/toSupplier_buy.txt', context_sell)
+            message_buy = render_to_string('mail/toBuyer_buy.txt', context_buy)
+            message_sell = render_to_string('mail/toSupplier_buy.txt', context_sell)
 
             user_buy.email_user(subject_buy, message_buy, from_email)
             user_sell.email_user(subject_sell, message_sell, from_email)
