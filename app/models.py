@@ -11,12 +11,12 @@ class Tags(models.Model):
     """
 
     # 名前
-    name = models.charField(
+    name = models.CharField(
         max_length=15,
     )
 
     # 説明（任意）
-    description = textField(
+    description = models.TextField(
         blank=True,
         null=True,
     )
@@ -35,7 +35,7 @@ class Tags(models.Model):
         verbose_name_plural = 'タグ'
 
 
-class vegetable(models.Model):
+class Vegetable(models.Model):
     """
     # システムで取り扱う野菜リスト
     # 野菜の旬の時期とかをもたせておいて自動で「旬」ていうタグが付くようにできればいいのに（野望）
@@ -43,12 +43,12 @@ class vegetable(models.Model):
     """
 
     # 名前
-    name = models.charField(
+    name = models.CharField(
         max_length=10,
     )
 
     # 説明
-    description = textField(
+    description = models.TextField(
         blank=True,
         null=True,
     )
@@ -215,14 +215,14 @@ class F_Item(models.Model):
 
     # 販売単位
     unit_amount = models.CharField(
-        verbose_name='１セット内容量'
+        verbose_name='１セット内容量',
         max_length=10,
         blank=False,
         null=False,
     )
 
     # タグ（野菜の状態）
-    tags = models.ManyToManyFIeld(
+    tags = models.ManyToManyField(
         Tags,
         verbose_name='タグ',
         blank=True,
@@ -237,25 +237,25 @@ class F_Item(models.Model):
     )
 
     # 出品セット数
-    quontity = models.IntegerField(
+    quontity = models.PositiveIntegerField(
         verbose_name='出品セット数',
         blank=False,
         null=False,
     )
 
-    quontity_left = models.IntegerField(
+    quontity_left = models.PositiveIntegerField(
         verbose_name='在庫',
         blank=False,
         null=False,
         editable=False,
     )
 
-    price = models.IntegerField(
+    price = models.PositiveIntegerField(
         verbose_name='価格',
         blank=True,
         null=True,
         default=0,
-        editable=False, # 実験用
+        editable=True, # 実験用
     )
 
     # 出品期限
@@ -271,6 +271,7 @@ class F_Item(models.Model):
         verbose_name='野菜の種類',
         blank=False,
         null=False,
+        on_delete=models.PROTECT,
     )
 
     photo = models.ImageField(
@@ -324,7 +325,7 @@ class F_Item(models.Model):
         """
         リストボックスや管理画面での表示
         """
-        return self.vegetable.name
+        return self.vegetable.title
 
     def get_filename(self):
         return os.path.basename(self.photo.name)
@@ -364,12 +365,12 @@ class Reservation(models.Model):
         editable=False,
         to_field='id',
     )
-    total_price = models.IntegerField(
+    total_price = models.PositiveIntegerField(
         verbose_name='合計金額',
         blank=True,
         null=False,
     )
-    quontity = models.IntegerField(
+    quontity = models.PositiveIntegerField(
         verbose_name='購入数量',
         blank=False,
         null=False,

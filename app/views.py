@@ -20,14 +20,10 @@ from .models import F_Item
 from .models import Reservation
 from .models import User
 
-
-
 # 未ログインのユーザーにアクセスを許可する場合は、LoginRequiredMixinを継承から外してください。
 #
 # LoginRequiredMixin：未ログインのユーザーをログイン画面に誘導するMixin
 # 参考：https://docs.djangoproject.com/ja/2.1/topics/auth/default/#the-loginrequired-mixin
-
-
 
 class TopView(TemplateView):
     """
@@ -280,6 +276,13 @@ class ItemBookView(LoginRequiredMixin, FormView):
             item.total_price = 0
             item.save()
 
+            # 在庫処理
+            if item.target.quontity_left >= item.quontity:
+                item.target.quontity_left -= item.quontity
+
+            else:
+                item.target.quontity_left = 0
+
             # メール送信
             from_email = 'vegebank14@gmail.com'#送信元
             subject_buy = "【VegiBank】予約内容のご確認（自動送信）" #購入に変えたほうがいいかも
@@ -292,7 +295,7 @@ class ItemBookView(LoginRequiredMixin, FormView):
                 #テンプレートに渡す項目
                 "user_name" : user_buy.username,
                 "item_name" : item.target.title,
-                "vege_name" : item.target.name,
+                "vege_name" : item.target.vegetable.name,
                 "item_unit" : item.target.unit_amount,
                 "item_quantity" : item.quontity,
                 "item_from" : user_sell.username,
@@ -302,7 +305,7 @@ class ItemBookView(LoginRequiredMixin, FormView):
                 #テンプレートに渡す項目
                 "user_name" : user_sell.username,
                 "item_name" : item.target.title,
-                "vege_name" : item.target.name,
+                "vege_name" : item.target.vegetable.name,
                 "item_unit" : item.target.unit_amount,
                 "item_quantity" : item.quontity,
                 "item_to" : user_buy.username,

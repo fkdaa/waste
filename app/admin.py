@@ -1,7 +1,15 @@
 from django.contrib import admin
 
 from .models import Item
+from .models import F_Item
+from .models import Reservation
+from .models import Tags
+from .models import Vegetable
 
+admin.site.register(F_Item)
+admin.site.register(Reservation)
+admin.site.register(Tags)
+admin.site.register(Vegetable)
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):

@@ -2,7 +2,6 @@ from django import forms
 
 from .models import Item, F_Item, Reservation
 
-
 class ItemForm(forms.ModelForm):
     """
     モデルフォーム構成クラス
@@ -14,23 +13,16 @@ class ItemForm(forms.ModelForm):
         model = Item
         fields = '__all__'
 
-        # 以下のフィールド以外が入力フォームに表示される
-        # AutoField
-        # auto_now=True
-        # auto_now_add=Ture
-        # editable=False
-
-
 class F_ItemForm(forms.ModelForm):
     """
     モデルフォーム構成クラス
     ・公式 モデルからフォームを作成する
     https://docs.djangoproject.com/ja/2.1/topics/forms/modelforms/
     """
-    field_order=["photo","vegetable","quontity","deadline","price","memo"]
+    field_order=["photo","vegetable","title","unit_amount","quontity","deadline","price","tags","memo"]
     class Meta:
         model = F_Item
-        fields = ["photo","vegetable","quontity","deadline","price","memo"]
+        fields = ["photo","vegetable","title","unit_amount","quontity","deadline","price","tags","memo"]
 
         widgets = {
             'title': forms.TextInput(attrs={
@@ -40,15 +32,6 @@ class F_ItemForm(forms.ModelForm):
                 'class': "form-control-file",
             }),
         }
-        # 以下のフィールド以外が入力フォームに表示される
-        # AutoField
-        # auto_now=True
-        # auto_now_add=Ture
-        # editable=False
-    #def __init__(self, *args, **kwargs):
-    #    super().__init__(*args, **kwargs)
-    #    for field in self.fields.values():
-    #        field.widget.attrs['class'] = 'form-control'
 
 
 class BookForm(forms.ModelForm):
