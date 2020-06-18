@@ -279,9 +279,11 @@ class ItemBookView(LoginRequiredMixin, FormView):
             # 在庫処理
             if item.target.quontity_left >= item.quontity:
                 item.target.quontity_left -= item.quontity
+                item.save()
 
             else:
                 item.target.quontity_left = 0
+                item.save()
 
             # メール送信
             from_email = 'vegebank14@gmail.com'#送信元
