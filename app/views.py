@@ -35,6 +35,7 @@ class TopView(TemplateView):
     """
     template_name = "app/index.html"
 
+
 class CustomerView(FilterView):
     """
     ビュー：一覧表示画面
@@ -85,6 +86,7 @@ class CustomerView(FilterView):
         # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
         # 例：kwargs['sample'] = 'sample'
         return super().get_context_data(object_list=object_list, **kwargs)
+
 
 class FarmerView(LoginRequiredMixin, FilterView):
     """
@@ -137,6 +139,7 @@ class FarmerView(LoginRequiredMixin, FilterView):
         # 例：kwargs['sample'] = 'sample'
         return super().get_context_data(object_list=object_list, **kwargs)
 
+
 class ItemDetailView(LoginRequiredMixin, DetailView):
     """
     ビュー：詳細画面
@@ -153,10 +156,9 @@ class ItemDetailView(LoginRequiredMixin, DetailView):
         return super().get_context_data(**kwargs)
 
 
-
 class ItemCreateView(LoginRequiredMixin, CreateView):
     """
-    ビュー：登録画面
+    ビュー：需要登録画面
     """
     model = Item
     form_class = ItemForm
@@ -175,9 +177,10 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 
         return HttpResponseRedirect(self.success_url)
 
+
 class F_ItemCreateView(LoginRequiredMixin, CreateView):
     """
-    ビュー：登録画面
+    ビュー：商品登録画面
     """
     model = F_Item
     form_class = F_ItemForm
@@ -188,6 +191,8 @@ class F_ItemCreateView(LoginRequiredMixin, CreateView):
         登録処理
         """
         item = form.save(commit=False)
+        item.I_name = self.request.user
+        item.quontity_left = item.quontity
         item.created_by = self.request.user
         item.created_at = timezone.now()
         item.updated_by = self.request.user
@@ -198,7 +203,6 @@ class F_ItemCreateView(LoginRequiredMixin, CreateView):
 
     def get_initial(self):
         return {'price':0}
-
 
 
 class F_ItemUpdateView(LoginRequiredMixin, UpdateView):
@@ -237,6 +241,7 @@ class F_ItemDeleteView(LoginRequiredMixin, DeleteView):
 
         return HttpResponseRedirect(self.success_url)
 
+
 class ReservationDetailView(LoginRequiredMixin, DetailView):
     """
     ビュー：詳細画面
@@ -254,6 +259,7 @@ class ReservationDetailView(LoginRequiredMixin, DetailView):
 
         return context
 
+
 class ItemBookView(LoginRequiredMixin, FormView):
     """
     ビュー：購入画面
@@ -263,7 +269,7 @@ class ItemBookView(LoginRequiredMixin, FormView):
     success_url = reverse_lazy('complete')
 
     def form_valid(self, form):
-        ctx = {'form':form}
+
         if self.request.POST.get('next', '') == 'create':
 
             # 登録処理
@@ -280,12 +286,14 @@ class ItemBookView(LoginRequiredMixin, FormView):
             subject_sell= "【VegeBank】出品中の商品が予約されました（自動送信）"
 
             user_buy = self.request.user
-            user_sell = item.target.created_by
+            user_sell = item.target.I_name
 
             context_buy = {
                 #テンプレートに渡す項目
                 "user_name" : user_buy.username,
-                "item_name" : item.target,
+                "item_name" : item.target.title,
+                "vege_name" : item.target.name,
+                "item_unit" : item.target.unit_amount,
                 "item_quantity" : item.quontity,
                 "item_from" : user_sell.username,
                 "item_fee" : item.total_price
@@ -293,11 +301,14 @@ class ItemBookView(LoginRequiredMixin, FormView):
             context_sell = {
                 #テンプレートに渡す項目
                 "user_name" : user_sell.username,
-                "item_name" : item.target,
+                "item_name" : item.target.title,
+                "vege_name" : item.target.name,
+                "item_unit" : item.target.unit_amount,
                 "item_quantity" : item.quontity,
                 "item_to" : user_buy.username,
                 "item_fee" : item.total_price
             }
+
             message_buy = render_to_string('mail/toBuyer_buy.txt', context_buy)
             message_sell = render_to_string('mail/toSupplier_buy.txt', context_sell)
 
@@ -307,7 +318,7 @@ class ItemBookView(LoginRequiredMixin, FormView):
             return HttpResponseRedirect("complete")
 
         else:
-            return redirect(reverse_lazy('index'))
+            return redirect(reverse_lazy('detail'))
 
     def get_context_data(self, **kwargs):
         """
@@ -332,8 +343,6 @@ class ItemBookCompleteView(LoginRequiredMixin, CreateView):
     購入が完了しました
     """
     form_class = BookForm
-
-
     template_name = "f_item_book_complete.html"
 
 
@@ -380,6 +389,7 @@ class SupplyList(LoginRequiredMixin, FilterView):
         # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
         # 例：kwargs['sample'] = 'sample'
         return super().get_context_data(object_list=object_list, **kwargs)
+
 
 class ReservationList(LoginRequiredMixin, FilterView):
     """
@@ -432,6 +442,7 @@ class ReservationList(LoginRequiredMixin, FilterView):
         # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
         # 例：kwargs['sample'] = 'sample'
         return super().get_context_data(object_list=object_list, **kwargs)
+
 
 class ReservationDeleteView(LoginRequiredMixin, DeleteView):
     """

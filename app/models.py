@@ -1,10 +1,11 @@
+import datetime
+
 from django.db import models
 
 from users.models import User
 
 
-"""
-class Tag(models.Model):
+class Tags(models.Model):
     """
     # 商品につけるタグ blankとnullはデフォルトfalseです
     """
@@ -32,7 +33,6 @@ class Tag(models.Model):
         """
         verbose_name = 'タグ'
         verbose_name_plural = 'タグ'
-"""
 
 
 class vegetable(models.Model):
@@ -205,9 +205,8 @@ class F_Item(models.Model):
         related_name='F_exhibitor'
     )
 
-    """
     # 商品名
-    description = models.CharField(
+    title = models.CharField(
         verbose_name='商品名',
         max_length=25,
         blank=False,
@@ -224,12 +223,11 @@ class F_Item(models.Model):
 
     # タグ（野菜の状態）
     tags = models.ManyToManyFIeld(
-        Tag,
+        Tags,
         verbose_name='タグ',
         blank=True,
         null=True,
     )
-    """
 
     # 商品詳細（任意）
     memo = models.TextField(
@@ -238,7 +236,7 @@ class F_Item(models.Model):
         null=True,
     )
 
-    # サンプル項目3 整数
+    # 出品セット数
     quontity = models.IntegerField(
         verbose_name='出品セット数',
         blank=False,
@@ -249,12 +247,15 @@ class F_Item(models.Model):
         verbose_name='在庫',
         blank=False,
         null=False,
+        editable=False,
     )
 
     price = models.IntegerField(
         verbose_name='価格',
         blank=True,
         null=True,
+        default=0,
+        editable=False, # 実験用
     )
 
     # 出品期限
@@ -262,13 +263,14 @@ class F_Item(models.Model):
         verbose_name='出品期限',
         blank=True,
         null=True,
+        default=datetime.datetime.now() + datetime.timedelta(weeks=1)
     )
 
     vegetable = models.ForeignKey(
         Vegetable,
         verbose_name='野菜の種類',
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
     )
 
     photo = models.ImageField(
