@@ -3,6 +3,69 @@ from django.db import models
 from users.models import User
 
 
+"""
+class Tag(models.Model):
+    """
+    # 商品につけるタグ blankとnullはデフォルトfalseです
+    """
+
+    # 名前
+    name = models.charField(
+        max_length=15,
+    )
+
+    # 説明（任意）
+    description = textField(
+        blank=True,
+        null=True,
+    )
+
+    def __str__(self):
+        """
+        # リストボックスや管理画面での表示
+        """
+        return self.name
+
+    class Meta:
+        """
+        # 管理画面でのタイトル表示
+        """
+        verbose_name = 'タグ'
+        verbose_name_plural = 'タグ'
+"""
+
+
+class vegetable(models.Model):
+    """
+    # システムで取り扱う野菜リスト
+    # 野菜の旬の時期とかをもたせておいて自動で「旬」ていうタグが付くようにできればいいのに（野望）
+
+    """
+
+    # 名前
+    name = models.charField(
+        max_length=10,
+    )
+
+    # 説明
+    description = textField(
+        blank=True,
+        null=True,
+    )
+
+    def __str__(self):
+        """
+        # リストボックスや管理画面での表示
+        """
+        return self.name
+
+    class Meta:
+        """
+        # 管理画面でのタイトル表示
+        """
+        verbose_name = '取り扱い野菜'
+        verbose_name_plural = '取り扱い野菜'
+
 
 class Item(models.Model):
     """
@@ -116,8 +179,8 @@ class Item(models.Model):
         """
         管理画面でのタイトル表示
         """
-        verbose_name = 'サンプル'
-        verbose_name_plural = 'サンプル'
+        verbose_name = '需要'
+        verbose_name_plural = '需要'
 
 
 class F_Item(models.Model):
@@ -129,19 +192,46 @@ class F_Item(models.Model):
     https://docs.djangoproject.com/ja/2.1/ref/models/fields/
     """
 
-    # 出品者
+    # 出品者（農場名をリレーション先からもってこられるようにしたい）
     I_name = models.ForeignKey(
         User,
         to_field='id',
         verbose_name='出品者',
         max_length=20,
         blank=True,
-        null=True,
-        on_delete=models.SET_NULL,
+        null=False,
+        on_delete=models.PROTECT,
         editable=False,
+        related_name='F_exhibitor'
     )
 
-    # サンプル項目2 メモ
+    """
+    # 商品名
+    description = models.CharField(
+        verbose_name='商品名',
+        max_length=25,
+        blank=False,
+        null=False,
+    )
+
+    # 販売単位
+    unit_amount = models.CharField(
+        verbose_name='１セット内容量'
+        max_length=10,
+        blank=False,
+        null=False,
+    )
+
+    # タグ（野菜の状態）
+    tags = models.ManyToManyFIeld(
+        Tag,
+        verbose_name='タグ',
+        blank=True,
+        null=True,
+    )
+    """
+
+    # 商品詳細（任意）
     memo = models.TextField(
         verbose_name='備考',
         blank=True,
@@ -150,15 +240,15 @@ class F_Item(models.Model):
 
     # サンプル項目3 整数
     quontity = models.IntegerField(
-        verbose_name='何kg出そうか',
-        blank=True,
-        null=True,
+        verbose_name='出品セット数',
+        blank=False,
+        null=False,
     )
 
     quontity_left = models.IntegerField(
         verbose_name='在庫',
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
     )
 
     price = models.IntegerField(
@@ -167,27 +257,16 @@ class F_Item(models.Model):
         null=True,
     )
 
-    # サンプル項目7 日付
+    # 出品期限
     deadline = models.DateField(
-        verbose_name='いつ出そうか',
+        verbose_name='出品期限',
         blank=True,
         null=True,
     )
 
-    # サンプル項目9 選択肢（固定）
-    vege_choice = (
-        (1, '人参'),
-        (2, '大根'),
-        (3, 'じゃがいも'),
-        (4, 'キャベツ'),
-        (5, 'ホウレンソウ'),
-        (6, 'ピーマン'),
-        (7, 'なにかしら'),
-    )
-
-    vegetable = models.IntegerField(
-        verbose_name='出せる野菜',
-        choices=vege_choice,
+    vegetable = models.ForeignKey(
+        Vegetable,
+        verbose_name='野菜の種類',
         blank=True,
         null=True,
     )
@@ -243,7 +322,7 @@ class F_Item(models.Model):
         """
         リストボックスや管理画面での表示
         """
-        return self.vege_choice[self.vegetable-1][1]
+        return self.vegetable.name
 
     def get_filename(self):
         return os.path.basename(self.photo.name)
@@ -252,8 +331,8 @@ class F_Item(models.Model):
         """
         管理画面でのタイトル表示
         """
-        verbose_name = 'サンプル'
-        verbose_name_plural = 'サンプル'
+        verbose_name = '商品'
+        verbose_name_plural = '商品'
 
 
 class Reservation(models.Model):
@@ -304,3 +383,10 @@ class Reservation(models.Model):
         リストボックスや管理画面での表示
         """
         return self.subscriber
+
+    class Meta:
+        """
+        管理画面でのタイトル表示
+        """
+        verbose_name = '予約'
+        verbose_name_plural = '予約'
