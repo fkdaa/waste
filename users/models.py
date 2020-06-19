@@ -26,6 +26,25 @@ class User(AbstractUser):
         default=True,
     )
 
+    # ユーザーの年齢
+    age_choice = (
+        (1, '10代'),
+        (2, '20代'),
+        (3, '30代'),
+        (4, '40代'),
+        (5, '50代'),
+        (6, '60代'),
+        (7, '70代'),
+        (8, '80代以降'),
+    )
+
+    age = models.IntegerField(
+        verbose_name='年齢',
+        choices=age_choice,
+        blank=True,
+        null=True,
+    )
+
     # get_full_name()の変更
     def get_full_name(self):
         if self.full_name:

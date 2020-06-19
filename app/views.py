@@ -81,6 +81,8 @@ class CustomerView(FilterView):
         """
         # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
         # 例：kwargs['sample'] = 'sample'
+        kwargs['user'] = self.request.user
+
         return super().get_context_data(object_list=object_list, **kwargs)
 
 
@@ -133,10 +135,12 @@ class FarmerView(LoginRequiredMixin, FilterView):
         """
         # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
         # 例：kwargs['sample'] = 'sample'
+        kwargs['user'] = self.request.user
+
         return super().get_context_data(object_list=object_list, **kwargs)
 
 
-class ItemDetailView(LoginRequiredMixin, DetailView):
+class ItemDetailView(DetailView):
     """
     ビュー：詳細画面
     """
@@ -147,8 +151,8 @@ class ItemDetailView(LoginRequiredMixin, DetailView):
         """
         表示データの設定
         """
-        # 表示データの追加はここで 例：
-        # kwargs['sample'] = 'sample'
+        kwargs['user'] = self.request.user
+
         return super().get_context_data(**kwargs)
 
 
@@ -180,7 +184,6 @@ class F_ItemCreateView(LoginRequiredMixin, CreateView):
     """
     model = F_Item
     form_class = F_ItemForm
-    success_url = reverse_lazy('f_index')
 
     def form_valid(self, form):
         """
@@ -195,9 +198,10 @@ class F_ItemCreateView(LoginRequiredMixin, CreateView):
         item.updated_at = timezone.now()
         item.save()
 
-        return HttpResponseRedirect(self.success_url)
+        return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
     def get_initial(self):
+
         return {'price':0}
 
 
@@ -207,7 +211,6 @@ class F_ItemUpdateView(LoginRequiredMixin, UpdateView):
     """
     model = F_Item
     form_class = ItemForm
-    success_url = reverse_lazy('f_index')
 
     def form_valid(self, form):
         """
@@ -218,7 +221,7 @@ class F_ItemUpdateView(LoginRequiredMixin, UpdateView):
         item.updated_at = timezone.now()
         item.save()
 
-        return HttpResponseRedirect(self.success_url)
+        return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
 
 class F_ItemDeleteView(LoginRequiredMixin, DeleteView):
@@ -226,7 +229,6 @@ class F_ItemDeleteView(LoginRequiredMixin, DeleteView):
     ビュー：削除画面
     """
     model = F_Item
-    success_url = reverse_lazy('f_index')
 
     def delete(self, request, *args, **kwargs):
         """
@@ -235,25 +237,7 @@ class F_ItemDeleteView(LoginRequiredMixin, DeleteView):
         item = self.get_object()
         item.delete()
 
-        return HttpResponseRedirect(self.success_url)
-
-
-class ReservationDetailView(LoginRequiredMixin, DetailView):
-    """
-    ビュー：詳細画面
-    """
-
-    model = Reservation
-
-    def get_context_data(self, **kwargs):
-        """
-        表示データの設定
-        """
-        reservation = Reservation.objects.get(pk=self.kwargs['pk'])
-        context = super().get_context_data(**kwargs)
-        context["f_item"] = F_Item.objects.get(pk=reservation.target_id)
-
-        return context
+        return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
 
 class ItemBookView(LoginRequiredMixin, FormView):
@@ -349,6 +333,33 @@ class ItemBookCompleteView(LoginRequiredMixin, CreateView):
     """
     form_class = BookForm
     template_name = "f_item_book_complete.html"
+
+    def get_context_data(self, **kwargs):
+        """
+        表示データの設定
+        """
+        kwargs['user'] = self.request.user
+
+        return super().get_context_data(**kwargs)
+
+
+class ReservationDetailView(LoginRequiredMixin, DetailView):
+    """
+    ビュー：予約情報
+    """
+
+    model = Reservation
+
+    def get_context_data(self, **kwargs):
+        """
+        表示データの設定
+        """
+        reservation = Reservation.objects.get(pk=self.kwargs['pk'])
+        context = super().get_context_data(**kwargs)
+        context["f_item"] = F_Item.objects.get(pk=reservation.target_id)
+        context['user'] = self.request.user
+
+        return context
 
 
 class SupplyList(LoginRequiredMixin, FilterView):
@@ -446,6 +457,7 @@ class ReservationList(LoginRequiredMixin, FilterView):
         """
         # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
         # 例：kwargs['sample'] = 'sample'
+        
         return super().get_context_data(object_list=object_list, **kwargs)
 
 
@@ -454,7 +466,6 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
     ビュー：削除画面
     """
     model = Reservation
-    success_url = reverse_lazy('ReservationList')
 
     def delete(self, request, *args, **kwargs):
         """
@@ -463,7 +474,7 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
         item = self.get_object()
         item.delete()
 
-        return HttpResponseRedirect(self.success_url)
+        return HttpResponseRedirect(reverse_lazy('reservation_list',args=(self.request.user.id,)))
 
     def get_context_data(self, **kwargs):
         """

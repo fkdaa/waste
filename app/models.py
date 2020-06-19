@@ -278,7 +278,8 @@ class F_Item(models.Model):
         verbose_name='写真',
         upload_to='f_items/',
         default=None,
-
+        blank=True,
+        null=True,
     )
 
     # 以下、管理項目
@@ -325,7 +326,7 @@ class F_Item(models.Model):
         """
         リストボックスや管理画面での表示
         """
-        return self.vegetable.title
+        return self.vegetable.name
 
     def get_filename(self):
         return os.path.basename(self.photo.name)
