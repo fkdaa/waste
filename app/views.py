@@ -81,6 +81,8 @@ class CustomerView(FilterView):
         """
         # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
         # 例：kwargs['sample'] = 'sample'
+        kwargs['user'] = self.request.user
+
         return super().get_context_data(object_list=object_list, **kwargs)
 
 
@@ -133,10 +135,12 @@ class FarmerView(LoginRequiredMixin, FilterView):
         """
         # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
         # 例：kwargs['sample'] = 'sample'
+        kwargs['user'] = self.request.user
+
         return super().get_context_data(object_list=object_list, **kwargs)
 
 
-class ItemDetailView(LoginRequiredMixin, DetailView):
+class ItemDetailView(DetailView):
     """
     ビュー：詳細画面
     """
@@ -147,8 +151,8 @@ class ItemDetailView(LoginRequiredMixin, DetailView):
         """
         表示データの設定
         """
-        # 表示データの追加はここで 例：
-        # kwargs['sample'] = 'sample'
+        kwargs['user'] = self.request.user
+
         return super().get_context_data(**kwargs)
 
 
@@ -180,7 +184,6 @@ class F_ItemCreateView(LoginRequiredMixin, CreateView):
     """
     model = F_Item
     form_class = F_ItemForm
-    success_url = reverse_lazy('f_index')
 
     def form_valid(self, form):
         """
@@ -195,9 +198,10 @@ class F_ItemCreateView(LoginRequiredMixin, CreateView):
         item.updated_at = timezone.now()
         item.save()
 
-        return HttpResponseRedirect(self.success_url)
+        return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
     def get_initial(self):
+
         return {'price':0}
 
 
@@ -207,7 +211,6 @@ class F_ItemUpdateView(LoginRequiredMixin, UpdateView):
     """
     model = F_Item
     form_class = ItemForm
-    success_url = reverse_lazy('f_index')
 
     def form_valid(self, form):
         """
@@ -218,7 +221,7 @@ class F_ItemUpdateView(LoginRequiredMixin, UpdateView):
         item.updated_at = timezone.now()
         item.save()
 
-        return HttpResponseRedirect(self.success_url)
+        return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
 
 class F_ItemDeleteView(LoginRequiredMixin, DeleteView):
@@ -226,7 +229,6 @@ class F_ItemDeleteView(LoginRequiredMixin, DeleteView):
     ビュー：削除画面
     """
     model = F_Item
-    success_url = reverse_lazy('f_index')
 
     def delete(self, request, *args, **kwargs):
         """
@@ -235,25 +237,7 @@ class F_ItemDeleteView(LoginRequiredMixin, DeleteView):
         item = self.get_object()
         item.delete()
 
-        return HttpResponseRedirect(self.success_url)
-
-
-class ReservationDetailView(LoginRequiredMixin, DetailView):
-    """
-    ビュー：詳細画面
-    """
-
-    model = Reservation
-
-    def get_context_data(self, **kwargs):
-        """
-        表示データの設定
-        """
-        reservation = Reservation.objects.get(pk=self.kwargs['pk'])
-        context = super().get_context_data(**kwargs)
-        context["f_item"] = F_Item.objects.get(pk=reservation.target_id)
-
-        return context
+        return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
 
 class ItemBookView(LoginRequiredMixin, FormView):
@@ -279,46 +263,46 @@ class ItemBookView(LoginRequiredMixin, FormView):
             # 在庫処理
             if item.target.quontity_left >= item.quontity:
                 item.target.quontity_left -= item.quontity
-                item.target.save()
+                item.save()
 
-                # メール送信
-                from_email = 'vegebank14@gmail.com'#送信元
-                subject_buy = "【VegiBank】予約内容のご確認（自動送信）" #購入に変えたほうがいいかも
-                subject_sell= "【VegeBank】出品中の商品が予約されました（自動送信）"
-
-                user_buy = self.request.user
-                user_sell = item.target.I_name
-
-                context_buy = {
-                    #テンプレートに渡す項目
-                    "user_name" : user_buy.username,
-                    "item_name" : item.target.title,
-                    "vege_name" : item.target.vegetable.name,
-                    "item_unit" : item.target.unit_amount,
-                    "item_quantity" : item.quontity,
-                    "item_from" : user_sell.username,
-                    "item_fee" : item.total_price
-                }
-                context_sell = {
-                    #テンプレートに渡す項目
-                    "user_name" : user_sell.username,
-                    "item_name" : item.target.title,
-                    "vege_name" : item.target.vegetable.name,
-                    "item_unit" : item.target.unit_amount,
-                    "item_quantity" : item.quontity,
-                    "item_to" : user_buy.username,
-                    "item_fee" : item.total_price
-                }
-
-                message_buy = render_to_string('mail/toBuyer_buy.txt', context_buy)
-                message_sell = render_to_string('mail/toSupplier_buy.txt', context_sell)
-
-                user_buy.email_user(subject_buy, message_buy, from_email)
-                user_sell.email_user(subject_sell, message_sell, from_email)
-
-            else:#予約できませんでしたの処理
+            else:
                 item.target.quontity_left = 0
                 item.save()
+
+            # メール送信
+            from_email = 'vegebank14@gmail.com'#送信元
+            subject_buy = "【VegiBank】予約内容のご確認（自動送信）" #購入に変えたほうがいいかも
+            subject_sell= "【VegeBank】出品中の商品が予約されました（自動送信）"
+
+            user_buy = self.request.user
+            user_sell = item.target.I_name
+
+            context_buy = {
+                #テンプレートに渡す項目
+                "user_name" : user_buy.username,
+                "item_name" : item.target.title,
+                "vege_name" : item.target.vegetable.name,
+                "item_unit" : item.target.unit_amount,
+                "item_quantity" : item.quontity,
+                "item_from" : user_sell.username,
+                "item_fee" : item.total_price
+            }
+            context_sell = {
+                #テンプレートに渡す項目
+                "user_name" : user_sell.username,
+                "item_name" : item.target.title,
+                "vege_name" : item.target.vegetable.name,
+                "item_unit" : item.target.unit_amount,
+                "item_quantity" : item.quontity,
+                "item_to" : user_buy.username,
+                "item_fee" : item.total_price
+            }
+
+            message_buy = render_to_string('mail/toBuyer_buy.txt', context_buy)
+            message_sell = render_to_string('mail/toSupplier_buy.txt', context_sell)
+
+            user_buy.email_user(subject_buy, message_buy, from_email)
+            user_sell.email_user(subject_sell, message_sell, from_email)
 
             return HttpResponseRedirect("complete")
 
@@ -349,6 +333,33 @@ class ItemBookCompleteView(LoginRequiredMixin, CreateView):
     """
     form_class = BookForm
     template_name = "f_item_book_complete.html"
+
+    def get_context_data(self, **kwargs):
+        """
+        表示データの設定
+        """
+        kwargs['user'] = self.request.user
+
+        return super().get_context_data(**kwargs)
+
+
+class ReservationDetailView(LoginRequiredMixin, DetailView):
+    """
+    ビュー：予約情報
+    """
+
+    model = Reservation
+
+    def get_context_data(self, **kwargs):
+        """
+        表示データの設定
+        """
+        reservation = Reservation.objects.get(pk=self.kwargs['pk'])
+        context = super().get_context_data(**kwargs)
+        context["f_item"] = F_Item.objects.get(pk=reservation.target_id)
+        context['user'] = self.request.user
+
+        return context
 
 
 class SupplyList(LoginRequiredMixin, FilterView):
@@ -446,6 +457,7 @@ class ReservationList(LoginRequiredMixin, FilterView):
         """
         # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
         # 例：kwargs['sample'] = 'sample'
+        
         return super().get_context_data(object_list=object_list, **kwargs)
 
 
@@ -454,7 +466,6 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
     ビュー：削除画面
     """
     model = Reservation
-    success_url = reverse_lazy('ReservationList')
 
     def delete(self, request, *args, **kwargs):
         """
@@ -463,7 +474,7 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
         item = self.get_object()
         item.delete()
 
-        return HttpResponseRedirect(self.success_url)
+        return HttpResponseRedirect(reverse_lazy('reservation_list',args=(self.request.user.id,)))
 
     def get_context_data(self, **kwargs):
         """

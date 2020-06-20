@@ -1,8 +1,8 @@
 {% extends "./_base.html" %}
 {% block content %}
-{% if request.user.is_staff %}       
     {% load crispy_forms_tags %}
     <div class="container">
+        <h2 class="text-center">商品一覧</h2>
         <div id="myModal" class="modal fade" tabc_index="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -28,7 +28,7 @@
             <div class="col-12">
                 <a class="btn btn-secondary filtered" style="visibility:hidden" href="/?page=1">検索を解除</a>
                 <div class="float-right mt-1">
-                    <a class="btn btn-outline-dark" href="{% url 'SupplyList' %}">出品済み</a>
+                    <a class="btn btn-outline-dark" href="{% url 'supply_list' user.id %}">出品済み一覧</a>
                     
                     <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
                 </div>
@@ -48,28 +48,36 @@
                     
                             <div class="row">
                                 <div class="col-5 col-sm-3">
+                                    <p>商品名</p>
+                                </div>
+                                <div class="col-7 col-sm-9">
+                                    <p>{{ item.title|default_if_none:"未入力" }}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 col-sm-3">
                                     <p>種類</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ item.get_vegetable_display|default_if_none:"未入力" }}</p>
+                                    <p>{{ item.vegetable|default_if_none:"未入力" }}</p>
                                 </div>
                                 <div class="col-9 col-sm-15">
                                     {% if item.photo %}
-                                        <img src="{{ item.photo.url }}" width="100" height="100"/>
+                                    <img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" max-width="100%" height="auto"/>
                                     {% endif %}
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-5 col-sm-3">
-                                    <p>いつ</p>
+                                    <p>在庫</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ item.deadline|default_if_none:"未入力" }}</p>
+                                    <p>{{item.quontity_left}}  ×  {{item.unit_amount}}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-5 col-sm-3">
-                                    <p>作成者</p>
+                                    <p>販売元</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
                                     <p>{{ item.created_by.get_full_name }}</p>
@@ -77,19 +85,16 @@
                             </div>
                             <div class="row">
                                 <div class="col-5 col-sm-3">
-                                    <p>作成時間</p>
+                                    <p>販売予定日</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ item.created_at|date:"Y/m/d G:i:s" }}</p>
+                                    <p>{{ item.deadline|default_if_none:"未入力" }}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="float-right">
                                         <a class="btn btn-outline-dark " href="{% url 'detail' item.pk %}">詳細</a>
-                                        <a class="btn btn-outline-dark " href="{% url 'update' item.pk %}">編集</a>
-                                        <a class="btn btn-outline-dark " href="{% url 'delete' item.pk %}">削除</a>
-                                        
                                     </div>
                                 </div>
                             </div>
@@ -110,19 +115,11 @@
         <div class="row">
             <div class="col-12">
                 <div class="float-right mt-1 mb-3">
-                    <a class="btn btn-outline-dark" href="{% url 'F_create' %}">新規供給</a>
-                    
-
+                    <a class="btn btn-outline-dark" href="{% url 'F_create' %}">新規出品</a>
                     <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
+                    <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
                 </div>
             </div>
         </div>
     </div>
-{% else %} 
-<div class="container">
-<h1>権限が不足しているためこのページは表示できません</h1>   
-<a class="btn btn-outline-dark" href="{%url 'index'%}">戻る</a>
-</div>
-
-{% endif %}    
 {% endblock %}

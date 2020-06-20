@@ -204,5 +204,5 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 
-IMAGE_ROOT = BASE_DIR
-IMAGE_URL = '.'
+MEDIA_ROOT = BASE_DIR + "/app/media/"
+MEDIA_URL = '/app/media/'

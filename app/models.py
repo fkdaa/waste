@@ -278,6 +278,8 @@ class F_Item(models.Model):
         verbose_name='写真',
         upload_to='f_items/',
         default=None,
+        blank=True,
+        null=True,
     )
 
     # 以下、管理項目
