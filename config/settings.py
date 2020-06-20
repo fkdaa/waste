@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'users.apps.UsersConfig',
     'app.apps.AppConfig',
-   # 'accounts.apps.AccountsConfig', # 追記
+    'accounts.apps.AccountsConfig', # 追記
 ]
 
 MIDDLEWARE = [
@@ -187,6 +187,12 @@ LOGGING = {
     }
 }
 
+
+LOGIN_URL = 'login' # ログインしていないときのリダイレクト先
+LOGIN_REDIRECT_URL = 'index' # ログイン後のリダイレクト先
+LOGOUT_REDIRECT_URL = 'index' # ログアウト後のリダイレクト先
+
+
 # Eメールの送信をコンソールに指定している（実際には送信されない）
 # 実験時には変更すること。
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
@@ -196,5 +202,5 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_TLS = False
 
-MEDIA_ROOT = BASE_DIR + "/app/media/"
-MEDIA_URL = '/app/media/'
+IMAGE_ROOT = BASE_DIR
+IMAGE_URL = '.'

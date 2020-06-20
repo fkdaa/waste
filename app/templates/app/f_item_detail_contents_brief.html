@@ -7,9 +7,6 @@
     <div class="col-7 col-sm-9">
         <p>{{ f_item.get_vegetable_display|default_if_none:"未入力" }}</p>
     </div>
-    {% if f_item.photo %}
-        <img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" max-width="100%" height="auto"/>
-    {% endif %}
 </div>
 
 <div class="row">

@@ -12,10 +12,10 @@ class AdminUserAdmin(UserAdmin):
 
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        (_('Personal info'), {'fields': ('full_name', 'email', 'age')}),
+        (_('Personal info'), {'fields': ('full_name', 'email')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
-    list_display = ('username', 'email', 'age')
-    search_fields = ('username', 'email', 'age')
+    list_display = ('username', 'email', 'full_name')
+    search_fields = ('username', 'email', 'full_name')
