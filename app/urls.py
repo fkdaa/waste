@@ -13,6 +13,7 @@ urlpatterns = [
     path('detail/<int:pk>/book/', ItemBookView.as_view(template_name='app/f_item_book.html'), name='book'),
     path('detail/<int:pk>/book/confirm', ItemBookConfirmView.as_view(template_name='app/f_item_book_confirm.html'), name='book_confirm'),
     path('detail/<int:pk>/book/complete', ItemBookCompleteView.as_view(template_name='app/f_item_book_complete.html'), name='book_complete'),
+    path('detail/<int:pk>/book/failed', ItemBookCompleteView.as_view(template_name='app/f_item_book_failed.html'), name='book_failed'),
     path('create/', ItemCreateView.as_view(), name='create'),
     path('SupplyList/',SupplyList.as_view(template_name='app/supply_list.html'),name = 'SupplyList'),
     path('ReservationList/',ReservationList.as_view(template_name='app/reservation_list.html'),name = 'ReservationList'),

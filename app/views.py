@@ -263,23 +263,24 @@ class ItemBookView(LoginRequiredMixin, FormView):
     model = Reservation
     form_class = BookForm
     success_url = reverse_lazy('complete')
+    failed_url = reverse_lazy('book_failed')
 
     def form_valid(self, form):
 
         if self.request.POST.get('next', '') == 'create':
 
-            # 登録処理
             item = form.save(commit=False)
-            item.subscriber = self.request.user
-            item.created_at = timezone.now()
             item.target = F_Item.objects.get(pk=self.kwargs['pk'])
-            item.total_price = 0
-            item.save()
 
-            # 在庫処理
-            if item.target.quontity_left >= item.quontity:
+            if item.target.quontity_left < item.quontity:
+                return HttpResponseRedirect(self.failed_url)
+
+            else: # 登録処理
+                item.subscriber = self.request.user
+                item.created_at = timezone.now()
+                item.total_price = 0
                 item.target.quontity_left -= item.quontity
-                item.target.save()
+                item.save()
 
                 # メール送信
                 from_email = 'vegebank14@gmail.com'#送信元
@@ -316,14 +317,10 @@ class ItemBookView(LoginRequiredMixin, FormView):
                 user_buy.email_user(subject_buy, message_buy, from_email)
                 user_sell.email_user(subject_sell, message_sell, from_email)
 
-            else:#予約できませんでしたの処理
-                item.target.quontity_left = 0
-                item.save()
+                return HttpResponseRedirect("complete")
 
-            return HttpResponseRedirect("complete")
+            return HttpResponseRedirect('index')
 
-        else:
-            return redirect(reverse_lazy('detail'))
 
     def get_context_data(self, **kwargs):
         """
@@ -345,10 +342,9 @@ class ItemBookConfirmView(LoginRequiredMixin, DetailView):
 
 class ItemBookCompleteView(LoginRequiredMixin, CreateView):
     """
-    購入が完了しました
+    購入が完了しました・失敗しました
     """
     form_class = BookForm
-    template_name = "f_item_book_complete.html"
 
 
 class SupplyList(LoginRequiredMixin, FilterView):
