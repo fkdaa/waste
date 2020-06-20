@@ -7,7 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>サンプル</title>
+    <title>廃棄野菜流通システム（実験用）</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
@@ -28,6 +28,10 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: "Helvetica Neue", Helvetica, Arial, "游ゴシック体", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, 'Open Sans', sans-serif;
   }
+
+  li {
+      font-family: "Helvetica Neue", Helvetica, Arial, "游ゴシック体", "Yu Gothic", YuGothic, "Hiragino Kaku Gothic ProN", Meiryo, 'Open Sans', sans-serif;
+    }
 
     </style>
     <link href="{% static 'css/app.css' %}" rel="stylesheet">
@@ -53,6 +57,10 @@ h1, h2, h3, h4, h5, h6 {
         </ul>
         <ul class="navbar-nav">
             <li class="nav-item">
+              <li>{{ request.user }}でログイン中 </li>
+                {% if request.user.is_staff %} 
+              <li>(農家権限)</li>
+                {% endif %}
                 <a class="nav-link" href="{% url 'admin:logout' %}">ログアウト</a>
             </li>
         </ul>

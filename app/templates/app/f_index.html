@@ -1,5 +1,6 @@
 {% extends "./_base.html" %}
 {% block content %}
+{% if request.user.is_staff %}
     {% load crispy_forms_tags %}
     <div class="container">
         <h2 class="text-center">商品一覧</h2>
@@ -29,7 +30,7 @@
                 <a class="btn btn-secondary filtered" style="visibility:hidden" href="/?page=1">検索を解除</a>
                 <div class="float-right mt-1">
                     <a class="btn btn-outline-dark" href="{% url 'supply_list' user.id %}">出品済み一覧</a>
-                    
+
                     <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
                 </div>
             </div>
@@ -45,7 +46,7 @@
                     {% for item in object_list %}
                         <li class="list-group-item">
                             {# item_detail_contents.html を参考に必要な項目を追加してください #}
-                    
+
                             <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>商品名</p>
@@ -130,4 +131,10 @@
             </div>
         </div>
     </div>
+{% else %}
+<div class="container">
+<h1>権限が不足しているためこのページは表示できません</h1>
+<a class="btn btn-outline-dark" href="{%url 'index'%}">戻る</a>
+</div>
+{% endif %}
 {% endblock %}
