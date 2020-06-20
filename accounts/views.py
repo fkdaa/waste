@@ -12,16 +12,16 @@ from django.urls import reverse_lazy # 追記
 
 class MyLoginView(LoginView):
     form_class = forms.LoginForm
-    template_name = "login.html"
+    template_name = "accounts/login.html"
 
 class MyLogoutView(LoginRequiredMixin, LogoutView):
-    template_name = "logout.html"
+    template_name = "accounts/logout.html"
 
 class IndexView(TemplateView):
-    template_name = "index.html"
+    template_name = "app/index.html"
 
 # 追記
 class UserCreateView(CreateView):
     form_class = UserCreationForm
-    template_name = "create.html"
+    template_name = "accounts/create.html"
     success_url = reverse_lazy("login")
