@@ -41,11 +41,8 @@ class BookForm(forms.ModelForm):
         model = Reservation
         fields = ["quontity","memo",]
 
-        # 以下のフィールド以外が入力フォームに表示される
-        # AutoField
-        # auto_now=True
-        # auto_now_add=Ture
-        # editable=False
+
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():

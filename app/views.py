@@ -279,46 +279,46 @@ class ItemBookView(LoginRequiredMixin, FormView):
             # 在庫処理
             if item.target.quontity_left >= item.quontity:
                 item.target.quontity_left -= item.quontity
-                item.save()
+                item.target.save()
 
-            else:
+                # メール送信
+                from_email = 'vegebank14@gmail.com'#送信元
+                subject_buy = "【VegiBank】予約内容のご確認（自動送信）" #購入に変えたほうがいいかも
+                subject_sell= "【VegeBank】出品中の商品が予約されました（自動送信）"
+
+                user_buy = self.request.user
+                user_sell = item.target.I_name
+
+                context_buy = {
+                    #テンプレートに渡す項目
+                    "user_name" : user_buy.username,
+                    "item_name" : item.target.title,
+                    "vege_name" : item.target.vegetable.name,
+                    "item_unit" : item.target.unit_amount,
+                    "item_quantity" : item.quontity,
+                    "item_from" : user_sell.username,
+                    "item_fee" : item.total_price
+                }
+                context_sell = {
+                    #テンプレートに渡す項目
+                    "user_name" : user_sell.username,
+                    "item_name" : item.target.title,
+                    "vege_name" : item.target.vegetable.name,
+                    "item_unit" : item.target.unit_amount,
+                    "item_quantity" : item.quontity,
+                    "item_to" : user_buy.username,
+                    "item_fee" : item.total_price
+                }
+
+                message_buy = render_to_string('mail/toBuyer_buy.txt', context_buy)
+                message_sell = render_to_string('mail/toSupplier_buy.txt', context_sell)
+
+                user_buy.email_user(subject_buy, message_buy, from_email)
+                user_sell.email_user(subject_sell, message_sell, from_email)
+
+            else:#予約できませんでしたの処理
                 item.target.quontity_left = 0
                 item.save()
-
-            # メール送信
-            from_email = 'vegebank14@gmail.com'#送信元
-            subject_buy = "【VegiBank】予約内容のご確認（自動送信）" #購入に変えたほうがいいかも
-            subject_sell= "【VegeBank】出品中の商品が予約されました（自動送信）"
-
-            user_buy = self.request.user
-            user_sell = item.target.I_name
-
-            context_buy = {
-                #テンプレートに渡す項目
-                "user_name" : user_buy.username,
-                "item_name" : item.target.title,
-                "vege_name" : item.target.vegetable.name,
-                "item_unit" : item.target.unit_amount,
-                "item_quantity" : item.quontity,
-                "item_from" : user_sell.username,
-                "item_fee" : item.total_price
-            }
-            context_sell = {
-                #テンプレートに渡す項目
-                "user_name" : user_sell.username,
-                "item_name" : item.target.title,
-                "vege_name" : item.target.vegetable.name,
-                "item_unit" : item.target.unit_amount,
-                "item_quantity" : item.quontity,
-                "item_to" : user_buy.username,
-                "item_fee" : item.total_price
-            }
-
-            message_buy = render_to_string('mail/toBuyer_buy.txt', context_buy)
-            message_sell = render_to_string('mail/toSupplier_buy.txt', context_sell)
-
-            user_buy.email_user(subject_buy, message_buy, from_email)
-            user_sell.email_user(subject_sell, message_sell, from_email)
 
             return HttpResponseRedirect("complete")
 
