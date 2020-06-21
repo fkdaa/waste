@@ -52,6 +52,16 @@
 
 <div class="row">
     <div class="col-5 col-sm-3">
+        <p>タグ</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.vegetable.tags.get_tag_name }}</p>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-5 col-sm-3">
         <p>備考</p>
     </div>
     <div class="col-7 col-sm-9">
@@ -67,6 +77,18 @@
         <p>{{ f_item.created_by.get_full_name }}</p>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>作成者農場</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.created_by.get_farm_name }}</p>
+    </div>
+</div>
+
+
+
 <div class="row">
     <div class="col-5 col-sm-3">
         <p>作成時間</p>

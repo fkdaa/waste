@@ -26,6 +26,12 @@ class User(AbstractUser):
         default=True,
     )
 
+    farm_name = models.CharField(
+        verbose_name='農場名',
+        max_length=100,
+        blank=True,
+    )
+
     # get_full_name()の変更
     def get_full_name(self):
         if self.full_name:
@@ -36,3 +42,11 @@ class User(AbstractUser):
     # 選択リストでの表示
     def __str__(self):
         return self.get_full_name()
+
+    def get_farm_name(self):
+        if self.farm_name:
+            return self.farm_name
+        else:
+            return self.username + '（農場名未登録）'
+
+    # 選択リストでの表示
