@@ -285,7 +285,7 @@ class ItemBookView(LoginRequiredMixin, FormView):
                     "vege_name" : item.target.vegetable.name,
                     "item_unit" : item.target.unit_amount,
                     "item_quantity" : item.quontity,
-                    "item_from" : user_sell.username,
+                    "item_from" : user_sell.farm_name,
                     "item_fee" : item.total_price
                 }
                 context_sell = {
