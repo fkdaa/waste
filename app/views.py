@@ -212,6 +212,7 @@ class F_ItemUpdateView(LoginRequiredMixin, UpdateView):
     model = F_Item
     form_class = ItemForm
 
+
     def form_valid(self, form):
         """
         更新処理
@@ -220,6 +221,7 @@ class F_ItemUpdateView(LoginRequiredMixin, UpdateView):
         item.updated_by = self.request.user
         item.updated_at = timezone.now()
         item.save()
+
 
         return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
