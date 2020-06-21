@@ -260,7 +260,7 @@ class ItemBookView(LoginRequiredMixin, FormView):
             #item.save()
 
             if item.target.quontity_left < item.quontity:
-                return HttpResponseRedirect(reverse_lazy('book_failed'))
+                return HttpResponseRedirect(reverse_lazy('book_failed',args=(self.kwargs['pk'],)))
 
             else:
                 item.subscriber = self.request.user
@@ -355,7 +355,7 @@ class ItemBookFailedView(LoginRequiredMixin, CreateView):
         """
         表示データの設定
         """
-        kwargs['user'] = self.request.user
+        kwargs['pk'] = self.kwargs['pk']
 
         return super().get_context_data(**kwargs)
 
