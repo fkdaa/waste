@@ -21,11 +21,17 @@ class Tags(models.Model):
         null=True,
     )
 
+    def get_tag_name(self):
+        return self.name
+
+
     def __str__(self):
         """
         # リストボックスや管理画面での表示
         """
         return self.name
+
+        
 
     class Meta:
         """

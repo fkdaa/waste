@@ -41,8 +41,6 @@ class BookForm(forms.ModelForm):
         model = Reservation
         fields = ["quontity","memo",]
 
-
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.fields.values():

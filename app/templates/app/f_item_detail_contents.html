@@ -1,24 +1,44 @@
 
+
 <div class="row">
     <div class="col-5 col-sm-3">
-        <p>入力者名</p>
+        <p>商品名</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>{{  f_item.I_name|default_if_none:"未入力"  }}</p>
+        <p>{{  f_item.title|default_if_none:"未入力"  }}</p>
     </div>
     {% if f_item.photo %}
-        <img src="{{f_item.photo.url}}" class="img-fluid img-thumbnail float-right" max-width="100%" height="auto"/>
+        <img src="{{f_item.photo.url}}" class="img-fluid img-thumbnail float-right" width="200px" height="auto"/>
     {% endif %}
+</div>
+
+{% if user.is_staff %}
+    <div class="row">
+        <div class="col-5 col-sm-3">
+            <p>出品量</p>
+        </div>
+        <div class="col-7 col-sm-9">
+            <p>{{  f_item.quontity|default_if_none:"未入力" }}kg</p>
+        </div>
+    </div>  
+{% endif %}
+
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>種類</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.vegetable.name|default_if_none:"未入力" }}</p>
+    </div>
 </div>
 
 <div class="row">
     <div class="col-5 col-sm-3">
-        <p>量</p>
+        <p>在庫</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>{{  f_item.quontity|default_if_none:"未入力" }}kg</p>
+        <p>{{f_item.quontity_left}}  ×  {{f_item.unit_amount}}</p>
     </div>
-
 </div>
 
 <div class="row">
@@ -33,20 +53,10 @@
 
 <div class="row">
     <div class="col-5 col-sm-3">
-        <p>いつまで</p>
+        <p>タグ</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>{{ f_item.deadline|date:"Y年m月d日" }}</p>
-    </div>
-</div>
-
-
-<div class="row">
-    <div class="col-5 col-sm-3">
-        <p>種類</p>
-    </div>
-    <div class="col-7 col-sm-9">
-        <p>{{ f_item.vegetable.name|default_if_none:"未入力" }}</p>
+        <p>{{ f_item.vegetable.tags }}</p>
     </div>
 </div>
 
@@ -59,6 +69,8 @@
     </div>
 </div>
 
+<br>
+
 <div class="row">
     <div class="col-5 col-sm-3">
         <p>作成者</p>
@@ -67,6 +79,16 @@
         <p>{{ f_item.created_by.get_full_name }}</p>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>農場名</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.created_by.get_farm_name }}</p>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-5 col-sm-3">
         <p>作成時間</p>
@@ -75,6 +97,16 @@
         <p>{{ f_item.created_at|date:"Y/m/d G:i:s" }}</p>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>出品期限</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.deadline|date:"Y年m月d日" }}</p>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-5 col-sm-3">
         <p>更新者</p>
