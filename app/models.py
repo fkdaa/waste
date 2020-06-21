@@ -4,6 +4,9 @@ from django.db import models
 
 from users.models import User
 
+from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator
+
 
 class Tags(models.Model):
     """
@@ -229,7 +232,7 @@ class F_Item(models.Model):
     # タグ（野菜の状態）
     tags = models.ManyToManyField(
         Tags,
-        verbose_name='タグ',
+        verbose_name='タグ（PCではCtrlキーを押しながら複数選択可）',
         blank=True,
         null=True,
     )
@@ -246,6 +249,7 @@ class F_Item(models.Model):
         verbose_name='出品セット数',
         blank=False,
         null=False,
+        validators=[MinValueValidator(1,"1セット以上の出品をしてください")],
     )
 
     quontity_left = models.PositiveIntegerField(
@@ -256,7 +260,7 @@ class F_Item(models.Model):
     )
 
     price = models.PositiveIntegerField(
-        verbose_name='価格',
+        verbose_name='価格（￥）',
         blank=True,
         null=True,
         default=0,
@@ -280,7 +284,7 @@ class F_Item(models.Model):
     )
 
     photo = models.ImageField(
-        verbose_name='写真',
+        verbose_name='写真（任意）',
         upload_to='f_items/',
         default=None,
         blank=True,
@@ -292,7 +296,7 @@ class F_Item(models.Model):
     # 作成者(ユーザー)
     created_by = models.ForeignKey(
         User,
-        verbose_name='作成者',
+        verbose_name='出品者',
         blank=True,
         null=True,
         related_name='F_CreatedBy',
@@ -302,7 +306,7 @@ class F_Item(models.Model):
 
     # 作成時間
     created_at = models.DateTimeField(
-        verbose_name='作成時間',
+        verbose_name='出品時間',
         blank=True,
         null=True,
         editable=False,
@@ -331,7 +335,7 @@ class F_Item(models.Model):
         """
         リストボックスや管理画面での表示
         """
-        return self.vegetable.name
+        return self.title
 
     def get_filename(self):
         return os.path.basename(self.photo.name)
@@ -380,6 +384,7 @@ class Reservation(models.Model):
         verbose_name='購入数量',
         blank=False,
         null=False,
+        validators=[MinValueValidator(1,"1セット以上の購入をしてください")]
     )
     memo = models.TextField(
         verbose_name='備考',

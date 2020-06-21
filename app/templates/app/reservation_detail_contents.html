@@ -20,16 +20,25 @@
         <p>注文数量</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>{{  reservation.quontity|default_if_none:"未入力" }}kg</p>
+        <p>{{  reservation.quontity }}  ×  {{f_item.quontity_left}}セット</p> 
     </div>
 </div>
-
+<!--
 <div class="row">
     <div class="col-5 col-sm-3">
         <p>備考</p>
     </div>
     <div class="col-7 col-sm-9">
         <p>{{  reservation.memo|default_if_none:"未入力" }}</p>
+    </div>
+</div>
+-->
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>合計金額</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>￥ 0</p> 
     </div>
 </div>
 

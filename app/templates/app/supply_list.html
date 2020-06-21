@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="col-9 col-sm-15">
                                     {% if item.photo %}
-                                    <img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" width="200px" height="auto"/>
+                                        <img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" width="200px" height="auto"/>
                                     {% endif %}
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
                                     <p>在庫</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{item.quontity_left}}  ×  {{item.unit_amount}}</p>
+                                    <p>{{item.unit_amount}}  ×  {{item.quontity_left}}セット</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -80,12 +80,12 @@
                                     <p>販売元</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ item.created_by.get_full_name }}</p>
+                                    <p>{{ item.farm_name }}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-5 col-sm-3">
-                                    <p>販売予定日</p>
+                                    <p>出品期限</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
                                     <p>{{ item.deadline|default_if_none:"未入力" }}</p>
