@@ -4,7 +4,7 @@ from django.contrib.staticfiles.urls import static
 from django.conf import settings
 
 from .models import Item,F_Item,Reservation
-from .views import TopView,SupplyList,ReservationList,CustomerView,FarmerView,F_ItemCreateView, ItemDetailView, ItemBookView, ItemBookConfirmView, ItemBookCompleteView, ItemCreateView, F_ItemUpdateView, F_ItemDeleteView, ReservationDetailView, ReservationDeleteView
+from .views import TopView,SupplyList,ReservationList,CustomerView,FarmerView,F_ItemCreateView, ItemDetailView, ItemBookView, ItemBookConfirmView, ItemBookCompleteView, ItemCreateView, F_ItemUpdateView, F_ItemDeleteView, ReservationDetailView, ReservationDeleteView,ItemBookFailedView
 
 # アプリケーションのルーティング設定
 
@@ -16,7 +16,7 @@ urlpatterns = [
     path('detail/<int:pk>/book/', ItemBookView.as_view(template_name='app/f_item_book.html'), name='book'),
     path('detail/<int:pk>/book/confirm', ItemBookConfirmView.as_view(template_name='app/f_item_book_confirm.html'), name='book_confirm'),
     path('detail/<int:pk>/book/complete', ItemBookCompleteView.as_view(template_name='app/f_item_book_complete.html'), name='book_complete'),
-    path('detail/<int:pk>/book/failed', ItemBookCompleteView.as_view(template_name='app/f_item_book_failed.html'), name='book_failed'),
+    path('detail/<int:pk>/book/failed', ItemBookFailedView.as_view(template_name='app/f_item_book_failed.html'), name='book_failed'),
     path('create/', ItemCreateView.as_view(), name='create'),
     path('SupplyList/<int:pk>',SupplyList.as_view(template_name='app/supply_list.html'),name = 'supply_list'),
     path('ReservationList/<int:pk>/',ReservationList.as_view(template_name='app/reservation_list.html'),name = 'reservation_list'),

@@ -199,7 +199,7 @@ class F_ItemCreateView(LoginRequiredMixin, CreateView):
         item.updated_at = timezone.now()
         item.save()
 
-        return HttpResponseRedirect(reverse_lazy('SupplyList',args=(self.request.user.id,)))
+        return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
     def get_initial(self):
 
@@ -260,20 +260,20 @@ class ItemBookView(LoginRequiredMixin, FormView):
             #item.save()
 
             if item.target.quontity_left < item.quontity:
-                return HttpResponseRedirect(reverse_lazy('book_failed',args=(self.request.user.id,)))
+                return HttpResponseRedirect(reverse_lazy('book_failed'))
 
-            # 在庫処理
             else:
                 item.subscriber = self.request.user
                 item.created_at = timezone.now()
-                item.target.quontity_left -= item.quontity
+                item.target.quontity_left = item.target.quontity_left - item.quontity
                 item.total_price = 0
+                item.target.save()
                 item.save()
 
                 # メール送信
                 from_email = 'vegebank14@gmail.com'#送信元
-                subject_buy = "【VegiBank】予約内容のご確認（自動送信）" #購入に変えたほうがいいかも
-                subject_sell= "【VegeBank】出品中の商品が予約されました（自動送信）"
+                subject_buy = "【VegiBank】購入内容のご確認（自動送信）" #購入に変えたほうがいいかも
+                subject_sell= "【VegeBank】出品中の商品が購入されました（自動送信）"
 
                 user_buy = self.request.user
                 user_sell = item.target.I_name
@@ -305,10 +305,10 @@ class ItemBookView(LoginRequiredMixin, FormView):
                 user_buy.email_user(subject_buy, message_buy, from_email)
                 user_sell.email_user(subject_sell, message_sell, from_email)
 
-                return HttpResponseRedirect(reverse_lazy('detail',args=(self.request.user.id,)))
+                return HttpResponseRedirect(reverse_lazy('book_complete',args=(self.request.user.id,)))
 
         else:
-            return redirect("detail")
+            return HttpResponseRedirect(reverse_lazy('detail',args=(self.request.user.id,)))
 
     def get_context_data(self, **kwargs):
         """
@@ -342,6 +342,23 @@ class ItemBookCompleteView(LoginRequiredMixin, CreateView):
         kwargs['user'] = self.request.user
 
         return super().get_context_data(**kwargs)
+
+
+class ItemBookFailedView(LoginRequiredMixin, CreateView):
+    """
+    購入に失敗しました
+    """
+    form_class = BookForm
+    template_name = "f_item_book_failed.html"
+
+    def get_context_data(self, **kwargs):
+        """
+        表示データの設定
+        """
+        kwargs['user'] = self.request.user
+
+        return super().get_context_data(**kwargs)
+
 
 
 class ReservationDetailView(LoginRequiredMixin, DetailView):
