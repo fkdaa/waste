@@ -1,0 +1,11 @@
+{% extends "./_base.html" %}
+{% block content %}
+    <div class="container">
+        <h2 class="text-center">購入数が在庫数より多いため、購入できませんでした。</h2>
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-outline-dark float-right" href="{% url 'book' pk %}">戻る</a>
+            </div>
+        </div>
+
+{% endblock %}
