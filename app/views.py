@@ -212,17 +212,14 @@ class F_ItemUpdateView(LoginRequiredMixin, UpdateView):
     model = F_Item
     form_class = ItemForm
 
-
     def form_valid(self, form):
         """
         更新処理
         """
         item = form.save(commit=False)
-        item.quontity_left = item.quontity
         item.updated_by = self.request.user
         item.updated_at = timezone.now()
         item.save()
-
 
         return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
@@ -460,7 +457,7 @@ class ReservationList(LoginRequiredMixin, FilterView):
         """
         # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
         # 例：kwargs['sample'] = 'sample'
-
+        
         return super().get_context_data(object_list=object_list, **kwargs)
 
 

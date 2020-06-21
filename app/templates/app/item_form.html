@@ -19,46 +19,7 @@
         <div class="row">
             <div class="col-12">
                 <form method="post" id="myform" enctype='multipart/form-data'>
-                    {% csrf_token %}
-                    <table>
-                        <tr>
-                            <td>{{ form.photo.label_tag }}</td>
-                            <td>{{ form.photo }}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ form.vegetable.label_tag }}(必須)</td>
-                            <td>{{ form.vegetable}}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ form.title.label_tag }}(必須)</td>
-                            <td>{{ form.title}}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ form.unit_amount.label_tag }}(必須)</td>
-                            <td>{{ form.unit_amount}}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ form.quontity.label_tag }}(必須)</td>
-                            <td>{{ form.quontity}}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ form.deadline.label_tag }}</td>
-                            <td>{{ form.deadline}}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ form.price.label_tag }}</td>
-                            <td>{{ form.price}}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ form.tags.label_tag }}</td>
-                            <td>{{ form.tags}}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ form.memo.label_tag }}</td>
-                            <td>{{ form.memo}}</td>
-                        </tr>
-                        </table>
-                        
+                    {% crispy form %}
                 </form>
             </div>
         </div>

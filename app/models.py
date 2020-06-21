@@ -195,12 +195,13 @@ class F_Item(models.Model):
     # 出品者（農場名をリレーション先からもってこられるようにしたい）
     I_name = models.ForeignKey(
         User,
+        to_field='id',
         verbose_name='出品者',
         max_length=20,
         blank=True,
         null=False,
         on_delete=models.PROTECT,
-    #    editable=False,
+        editable=False,
         related_name='F_exhibitor'
     )
 
@@ -244,9 +245,9 @@ class F_Item(models.Model):
 
     quontity_left = models.PositiveIntegerField(
         verbose_name='在庫',
-        blank=True,
-        null=True,
-    #    editable=False,
+        blank=False,
+        null=False,
+        editable=False,
     )
 
     price = models.PositiveIntegerField(
