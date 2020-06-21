@@ -1,15 +1,31 @@
-
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>商品名</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{  f_item.title|default_if_none:"未入力"  }}</p>
+    </div>
+    {% if f_item.photo %}
+        <img src="{{f_item.photo.url}}" class="img-fluid img-thumbnail float-right" width="200px" height="auto"/>
+    {% endif %}
+</div>
 
 <div class="row">
     <div class="col-5 col-sm-3">
         <p>種類</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>{{ f_item.get_vegetable_display|default_if_none:"未入力" }}</p>
+        <p>{{ f_item.vegetable.name|default_if_none:"未入力" }}</p>
     </div>
-    {% if f_item.photo %}
-        <img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" max-width="100%" height="auto"/>
-    {% endif %}
+</div>
+
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>在庫</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{f_item.quontity_left}}  ×  {{f_item.unit_amount}}</p>
+    </div>
 </div>
 
 <div class="row">
@@ -17,9 +33,8 @@
         <p>価格</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>￥{{  f_item.price|default_if_none:"0" }}</p>
+        <p>￥{{ f_item.price|default_if_none:"0" }}</p>
     </div>
-
 </div>
 
 <div class="row">
@@ -27,6 +42,6 @@
         <p>備考</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>{{  f_item.memo|default_if_none:"未入力" }}</p>
+        <p>{{ f_item.memo|default_if_none:"未入力" }}</p>
     </div>
 </div>
