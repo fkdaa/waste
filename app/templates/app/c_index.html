@@ -28,6 +28,7 @@
             <div class="col-12">
                 <a class="btn btn-secondary filtered" style="visibility:hidden" href="/?page=1">検索を解除</a>
                 <div class="float-right mt-1">
+                    <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
                     {% if user.is_authenticated %}
                         <a class="btn btn-outline-dark" href="{% url 'reservation_list' user.id %}">購入済み一覧</a>
                     {% endif %}
@@ -75,7 +76,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-5 col-sm-3">
-                                    <p>出品者</p>
+                                    <p>販売元</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
                                     <p>{{ item.created_by.get_full_name }}</p>
@@ -83,7 +84,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-5 col-sm-3">
-                                    <p>出品期限</p>
+                                    <p>販売予定日</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
                                     <p>{{ item.deadline|default_if_none:"未入力" }}</p>
@@ -115,8 +116,8 @@
             <div class="col-12">
                 <div class="float-right mt-1 mb-3">
                     <!--<a class="btn btn-outline-dark" href="{% url 'create' %}">新規需要</a>-->
-                    <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
                     <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
+                    <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
                 </div>
             </div>
         </div>
