@@ -195,12 +195,12 @@ LOGOUT_REDIRECT_URL = 'index' # ログアウト後のリダイレクト先
 
 # Eメールの送信をコンソールに指定している（実際には送信されない）
 # 実験時には変更すること。
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'vegebank14@gmail.com'
+EMAIL_HOST_PASSWORD = 'hachiouji80'
+EMAIL_USE_TLS = True
 
-IMAGE_ROOT = BASE_DIR
-IMAGE_URL = '.'
+MEDIA_ROOT = BASE_DIR + "/app/media/"
+MEDIA_URL = '/app/media/'
