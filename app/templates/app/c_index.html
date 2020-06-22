@@ -30,7 +30,7 @@
                 <div class="float-right mt-1">
                     <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
                     {% if user.is_authenticated and user.is_staff == False %}
-                        <a class="btn btn-outline-dark" href="{% url 'reservation_list' user.id %}">購入済み一覧</a>
+                        <a class="btn btn-outline-dark" href="{% url 'reservation_list' user.id %}">購入履歴</a>
                     {% endif %}
                     <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
                 </div>
@@ -91,7 +91,7 @@
                                     <p>販売元</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ item.created_by.get_full_name }}</p>
+                                    <p>{{ user.farm_name }}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -106,6 +106,9 @@
                                 <div class="col-12">
                                     <div class="float-right">
                                         <a class="btn btn-outline-dark " href="{% url 'detail' item.pk %}">詳細</a>
+                                        {% if  user.is_staff == False %}
+                                            <a class="btn btn-warning float-right" href="{% url 'book' item.pk %}">購入</a>
+                                        {% endif %} 
                                     </div>
                                 </div>
                             </div>
