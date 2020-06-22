@@ -159,7 +159,7 @@ class ItemDetailView(DetailView):
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
     """
-    ビュー：需要登録画面
+    #ビュー：需要登録画面
     """
     model = Item
     form_class = ItemForm
@@ -167,7 +167,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         """
-        登録処理
+        #登録処理
         """
         item = form.save(commit=False)
         item.created_by = self.request.user
@@ -415,7 +415,7 @@ class SupplyList(LoginRequiredMixin, FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        return F_Item.objects.filter(created_by=self.request.user, deadline__gt=timezone.now()).order_by('-created_at')
+        return F_Item.objects.filter(created_by=self.request.user, deadline__gt=timezone.now(),quontity_left__gte=1).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
