@@ -179,7 +179,7 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         return HttpResponseRedirect(self.success_url)
 
 
-class F_ItemDeleteView(LoginRequiredMixin, DeleteView):
+class ItemDeleteView(LoginRequiredMixin, DeleteView):
     """
     ビュー：削除画面
     """
