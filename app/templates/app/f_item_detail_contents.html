@@ -18,7 +18,7 @@
             <p>出品量</p>
         </div>
         <div class="col-7 col-sm-9">
-            <p>{{  f_item.quontity|default_if_none:"未入力" }}kg</p>
+            <p>{{f_item.unit_amount}}  ×  {{f_item.quontity_left}}セット</p>
         </div>
     </div>  
 {% endif %}
@@ -37,7 +37,7 @@
         <p>在庫</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>{{f_item.quontity_left}}  ×  {{f_item.unit_amount}}</p>
+        <p>{{f_item.unit_amount}}  ×  {{f_item.quontity_left}}セット</p>
     </div>
 </div>
 
@@ -51,14 +51,18 @@
 
 </div>
 
+
 <div class="row">
     <div class="col-5 col-sm-3">
         <p>タグ</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>{{ f_item.vegetable.tags }}</p>
+        {% for tag in f_item.tags.all %}
+            <p>{{ tag.name }}</p>
+        {% endfor %}
     </div>
 </div>
+
 
 <div class="row">
     <div class="col-5 col-sm-3">
@@ -73,7 +77,7 @@
 
 <div class="row">
     <div class="col-5 col-sm-3">
-        <p>作成者</p>
+        <p>出品者</p>
     </div>
     <div class="col-7 col-sm-9">
         <p>{{ f_item.created_by.get_full_name }}</p>
@@ -82,7 +86,7 @@
 
 <div class="row">
     <div class="col-5 col-sm-3">
-        <p>農場名</p>
+        <p>施設名</p>
     </div>
     <div class="col-7 col-sm-9">
         <p>{{ f_item.created_by.get_farm_name }}</p>
@@ -91,7 +95,7 @@
 
 <div class="row">
     <div class="col-5 col-sm-3">
-        <p>作成時間</p>
+        <p>出品時間</p>
     </div>
     <div class="col-7 col-sm-9">
         <p>{{ f_item.created_at|date:"Y/m/d G:i:s" }}</p>
@@ -107,14 +111,6 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-5 col-sm-3">
-        <p>更新者</p>
-    </div>
-    <div class="col-7 col-sm-9">
-        <p>{{ f_item.updated_by.get_full_name }}</p>
-    </div>
-</div>
 <div class="row">
     <div class="col-5 col-sm-3">
         <p>更新時間</p>

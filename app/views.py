@@ -57,7 +57,7 @@ class CustomerView(FilterView):
         セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
         """
 
-        # 一覧画面内の遷移(GETクエリがある)ならクエリを保存する
+        # 一覧画面内の遷移(GETクエリがある)ならクエリを出品・編集を確定する
         if request.GET:
             request.session['query'] = request.GET
         # 詳細画面・登録画面からの遷移(GETクエリはない)ならクエリを復元する
@@ -111,7 +111,7 @@ class FarmerView(LoginRequiredMixin, FilterView):
         セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
         """
 
-        # 一覧画面内の遷移(GETクエリがある)ならクエリを保存する
+        # 一覧画面内の遷移(GETクエリがある)ならクエリを出品・編集を確定する
         if request.GET:
             request.session['query'] = request.GET
         # 詳細画面・登録画面からの遷移(GETクエリはない)ならクエリを復元する
@@ -128,7 +128,7 @@ class FarmerView(LoginRequiredMixin, FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        return F_Item.objects.filter(deadline__gt=timezone.now(), quontity_left__gte=1).order_by('-created_at')
+        return F_Item.objects.filter(deadline__gt=timezone.now()).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -179,7 +179,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         return HttpResponseRedirect(self.success_url)
 
 
-class F_ItemCreateView(LoginRequiredMixin, CreateView):
+class ItemCreateView(LoginRequiredMixin, CreateView):
     """
     ビュー：商品登録画面
     """
@@ -206,12 +206,12 @@ class F_ItemCreateView(LoginRequiredMixin, CreateView):
         return {'price':0}
 
 
-class F_ItemUpdateView(LoginRequiredMixin, UpdateView):
+class ItemUpdateView(LoginRequiredMixin, UpdateView):
     """
     ビュー：更新画面
     """
     model = F_Item
-    form_class = ItemForm
+    form_class = F_ItemForm
 
     def form_valid(self, form):
         """
@@ -316,6 +316,7 @@ class ItemBookView(LoginRequiredMixin, FormView):
         """
         context = super().get_context_data(**kwargs)
         context["f_item"] = F_Item.objects.get(pk=self.kwargs['pk'])
+        context['user'] = self.request.user
 
         return context
 
@@ -397,7 +398,7 @@ class SupplyList(LoginRequiredMixin, FilterView):
         セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
         """
 
-        # 一覧画面内の遷移(GETクエリがある)ならクエリを保存する
+        # 一覧画面内の遷移(GETクエリがある)ならクエリを出品・編集を確定する
         if request.GET:
             request.session['query'] = request.GET
         # 詳細画面・登録画面からの遷移(GETクエリはない)ならクエリを復元する
@@ -449,7 +450,7 @@ class ReservationList(LoginRequiredMixin, FilterView):
         セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
         """
 
-        # 一覧画面内の遷移(GETクエリがある)ならクエリを保存する
+        # 一覧画面内の遷移(GETクエリがある)ならクエリを出品・編集を確定する
         if request.GET:
             request.session['query'] = request.GET
         # 詳細画面・登録画面からの遷移(GETクエリはない)ならクエリを復元する

@@ -36,10 +36,10 @@ class F_ItemForm(forms.ModelForm):
 
 class BookForm(forms.ModelForm):
 
-    field_order=["quontity","memo",]
+    field_order=["quontity",]
     class Meta:
         model = Reservation
-        fields = ["quontity","memo",]
+        fields = ["quontity",]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

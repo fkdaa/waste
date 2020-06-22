@@ -1,42 +1,64 @@
 {% extends "./_base.html" %}
 {% load crispy_forms_tags %}
+
 {% block content %}
-    {{ form.certifications.errors }}
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <h2 class="text-center">購入</h2>
+    {% if user.is_staff %}
+        {{ form.certifications.errors }}
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center">農家アカウントでは購入できません</h2>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="float-right">
+                        <a class="btn btn-outline-dark" href="{% url 'c_index' %}">戻る</a>
+                    </div>
+                </div>
+            </div>
+            <br><br>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div class="float-right">
-                    <a class="btn btn-outline-dark" href="{% url 'c_index' %}">戻る</a>
+    {% else %}
+        {{ form.certifications.errors }}
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center">購入</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="float-right">
+                        <a class="btn btn-outline-dark" href="{% url 'c_index' %}">戻る</a>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+
+            {% include "./f_item_detail_contents_brief.html" %}
+
+            <br><br>
+            <div class="row">
+                <div class="col-12">
+                    <form method="post" id="myform">
+                        {% csrf_token %}
+                        {% crispy form %}
+                    </form>
+                    <a>合計金額　￥0</a>
+                    <br></br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-7">
+                    <div class="float-right mb-3">
+                        <a class="btn btn-outline-dark" href="{% url 'c_index' %}">戻る</a>
+                        <button class="btn btn-outline-danger" form="myform" href="#" name="next" value="create">購入</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <br><br>
-
-        {% include "./f_item_detail_contents_brief.html" %}
-
-        <br><br>
-        <div class="row">
-            <div class="col-12">
-                <form method="post" id="myform">
-                    {% csrf_token %}
-                    {% crispy form %}
-                </form>
-                <a>合計金額　￥0</a>
-                <br></br>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-7">
-                <div class="float-right mb-3">
-                    <a class="btn btn-outline-dark" href="{% url 'c_index' %}">戻る</a>
-                    <button class="btn btn-outline-danger" form="myform" href="#" name="next" value="create">購入</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% endif %}
 {% endblock %}
+
+

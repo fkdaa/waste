@@ -1,6 +1,8 @@
 {% extends "./_base.html" %}
 {% block content %}
     {% load crispy_forms_tags %}
+    {% if request.user.is_staff %}
+
     <div class="container">
         <h2 class="text-center">商品一覧</h2>
         <div id="myModal" class="modal fade" tabc_index="-1" role="dialog">
@@ -26,7 +28,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <a class="btn btn-secondary filtered" style="visibility:hidden" href="/?page=1">検索を解除</a>
+                <a class="btn btn-secondary filtered" style="visibility:hidden" href="{% url 'f_index' %}">検索を解除</a>
                 <div class="float-right mt-1">
                     <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
                     <a class="btn btn-outline-dark" href="{% url 'F_create' %}">新規出品</a>
@@ -74,7 +76,7 @@
                                     <p>在庫</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{item.quontity_left}}  ×  {{item.unit_amount}}</p>
+                                    <p>{{item.unit_amount}}  ×  {{item.quontity_left}}セット</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -87,7 +89,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-5 col-sm-3">
-                                    <p>販売予定日</p>
+                                    <p>出品期限</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
                                     <p>{{ item.deadline|default_if_none:"未入力" }}</p>
@@ -124,4 +126,8 @@
             </div>
         </div>
     </div>
+    {% else %}
+    <h1>農家アカウントではないため、ページを表示できません。</h1>
+    <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
+    {% endif %}
 {% endblock %}
