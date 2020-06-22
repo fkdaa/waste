@@ -1,6 +1,8 @@
 {% extends "./_base.html" %}
 {% block content %}
     {% load crispy_forms_tags %}
+    {% if request.user.is_staff %}
+
     <div class="container">
         <h2 class="text-center">商品一覧</h2>
         <div id="myModal" class="modal fade" tabc_index="-1" role="dialog">
@@ -124,4 +126,8 @@
             </div>
         </div>
     </div>
+    {% else %}
+    <h1>農家アカウントではないため、ページを表示できません。</h1>
+    <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
+    {% endif %}
 {% endblock %}
