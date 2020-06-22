@@ -26,7 +26,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <a class="btn btn-secondary filtered" style="visibility:hidden" href="{% url 'c_index' %}">検索を解除</a>
+                <a class="btn btn-secondary filtered" style="visibility:hidden" href="?page=1">検索を解除</a>
                 <div class="float-right mt-1">
                     <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
                     {% if user.is_authenticated and user.is_staff == False %}
@@ -74,6 +74,18 @@
                                     <p>{{item.unit_amount}}  ×  {{item.quontity_left}}セット</p>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-5 col-sm-3">
+                                    <p>タグ</p>
+                                </div>
+                                <div class="col-7 col-sm-9">
+                                    {% for tag in item.tags.all %}
+                                        <p>{{ tag.name }}</p>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>販売元</p>
