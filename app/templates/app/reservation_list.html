@@ -3,7 +3,7 @@
 {% block content %}
     {% load crispy_forms_tags %}
     <div class="container">
-        <h2 class="text-center">購入済み一覧</h2>
+        <h2 class="text-center">購入履歴</h2>
         <div id="myModal" class="modal fade" tabc_index="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -53,6 +53,14 @@
                                 <div class="col-7 col-sm-9">
                                     <p>{{ item.target|default_if_none:"未入力" }}</p>
                                 </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 col-sm-3">
+                                    <p>販売元</p>
+                                </div>
+                                <div class="col-7 col-sm-9">
+                                    <p>{{ item.target.I_name.farm_name|default_if_none:"不明"}}</p>
+                                </div>
                                 {% if item.target.photo %}
                                     <img src="{{item.target.photo.url}}" class="img-fluid img-thumbnail float-right" width="200px" height="auto"/>
                                 {% endif %}
@@ -73,6 +81,7 @@
                                     <p>{{ item.created_at|default_if_none:"未入力" }}</p>
                                 </div>
                             </div>
+                            
                             <div class="row">
                                 <div class="col-12">
                                     <div class="float-right">
