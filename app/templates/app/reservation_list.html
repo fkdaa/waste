@@ -59,7 +59,7 @@
                                     <p>販売元</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ item.target.I_name.farm_name|default_if_none:"不明"}}</p>
+                                    <p>{{ item.target.I_name.farm_name|default_if_none:"未入力"}}</p>
                                 </div>
                                 {% if item.target.photo %}
                                     <img src="{{item.target.photo.url}}" class="img-fluid img-thumbnail float-right" width="200px" height="auto"/>

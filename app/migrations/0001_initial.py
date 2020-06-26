@@ -22,8 +22,8 @@ class Migration(migrations.Migration):
                 ('memo', models.TextField(blank=True, null=True, verbose_name='備考')),
                 ('quontity', models.PositiveIntegerField(validators=[django.core.validators.MinValueValidator(1, '1セット以上の出品をしてください')], verbose_name='出品セット数')),
                 ('quontity_left', models.PositiveIntegerField(blank=True, null=True, verbose_name='在庫')),
-                ('price', models.PositiveIntegerField(blank=True, default=0, null=True, verbose_name='価格（￥）')),
-                ('deadline', models.DateField(blank=True, default=datetime.datetime(2020, 6, 29, 15, 34, 35, 196389), null=True, verbose_name='出品期限')),
+                ('price', models.PositiveIntegerField(blank=True, default=0, null=True, verbose_name='セット単価（￥）')),
+                ('deadline', models.DateField(blank=True, default=datetime.datetime(2020, 6, 29, 15, 34, 35, 196389), null=True, verbose_name='購入期限')),
                 ('photo', models.ImageField(blank=True, default=None, null=True, upload_to='f_items/', verbose_name='写真（任意）')),
                 ('created_at', models.DateTimeField(blank=True, editable=False, null=True, verbose_name='出品時間')),
                 ('updated_at', models.DateTimeField(blank=True, editable=False, null=True, verbose_name='更新時間')),
@@ -56,7 +56,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('created_at', models.DateTimeField(blank=True, editable=False, verbose_name='作成時間')),
                 ('total_price', models.PositiveIntegerField(blank=True, verbose_name='合計金額')),
-                ('quontity', models.PositiveIntegerField(validators=[django.core.validators.MinValueValidator(1, '1セット以上の購入をしてください')], verbose_name='購入数量')),
+                ('quontity', models.PositiveIntegerField(validators=[django.core.validators.MinValueValidator(1, '1セット以上の購入をしてください')], verbose_name='購入セット数')),
                 ('memo', models.TextField(blank=True, null=True, verbose_name='備考')),
             ],
             options={
@@ -72,8 +72,8 @@ class Migration(migrations.Migration):
                 ('description', models.TextField(blank=True, null=True)),
             ],
             options={
-                'verbose_name': 'タグ',
-                'verbose_name_plural': 'タグ',
+                'verbose_name': '訳あり理由',
+                'verbose_name_plural': '訳あり理由',
             },
         ),
         migrations.CreateModel(
