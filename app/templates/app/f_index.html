@@ -82,7 +82,7 @@
 
                             <div class="row">
                                 <div class="col-5 col-sm-3">
-                                    <p>タグ</p>
+                                    <p>訳あり理由</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
                                     {% for tag in item.tags.all %}
@@ -98,12 +98,12 @@
                                     <p>販売元</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ user.farm_name }}</p>
+                                    <p>{{ user.farm_name ｜|default:"未入力" }}</p>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-5 col-sm-3">
-                                    <p>出品期限</p>
+                                    <p>購入期限</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
                                     <p>{{ item.deadline|default_if_none:"未入力" }}</p>

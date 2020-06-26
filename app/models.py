@@ -10,7 +10,7 @@ from django.core.validators import MinValueValidator
 
 class Tags(models.Model):
     """
-    # 商品につけるタグ blankとnullはデフォルトfalseです
+    # 商品につける訳あり理由 blankとnullはデフォルトfalseです
     """
 
     # 名前
@@ -40,14 +40,14 @@ class Tags(models.Model):
         """
         # 管理画面でのタイトル表示
         """
-        verbose_name = 'タグ'
-        verbose_name_plural = 'タグ'
+        verbose_name = '訳あり理由'
+        verbose_name_plural = '訳あり理由'
 
 
 class Vegetable(models.Model):
     """
     # システムで取り扱う野菜リスト
-    # 野菜の旬の時期とかをもたせておいて自動で「旬」ていうタグが付くようにできればいいのに（野望）
+    # 野菜の旬の時期とかをもたせておいて自動で「旬」ていう訳あり理由が付くようにできればいいのに（野望）
 
     """
 
@@ -229,10 +229,10 @@ class F_Item(models.Model):
         null=False,
     )
 
-    # タグ（野菜の状態）
+    # 訳あり理由（野菜の状態）
     tags = models.ManyToManyField(
         Tags,
-        verbose_name='タグ（PCではCtrlキーを押しながら複数選択可）',
+        verbose_name='訳あり理由（PCではCtrlキーを押しながら複数選択可）',
         blank=True,
         null=True,
     )
@@ -260,16 +260,16 @@ class F_Item(models.Model):
     )
 
     price = models.PositiveIntegerField(
-        verbose_name='価格（￥）',
+        verbose_name='セット単価（￥）',
         blank=True,
         null=True,
         default=0,
         editable=True, # 実験用
     )
 
-    # 出品期限
+    # 購入期限
     deadline = models.DateField(
-        verbose_name='出品期限',
+        verbose_name='購入期限',
         blank=True,
         null=True,
         default=datetime.datetime.now() + datetime.timedelta(weeks=1)
@@ -381,7 +381,7 @@ class Reservation(models.Model):
         null=False,
     )
     quontity = models.PositiveIntegerField(
-        verbose_name='購入数量',
+        verbose_name='購入セット数',
         blank=False,
         null=False,
         validators=[MinValueValidator(1,"1セット以上の購入をしてください")]

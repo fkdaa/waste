@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='f_item',
             name='deadline',
-            field=models.DateField(blank=True, default=datetime.datetime(2020, 6, 29, 15, 37, 12, 486181), null=True, verbose_name='出品期限'),
+            field=models.DateField(blank=True, default=datetime.datetime(2020, 6, 29, 15, 37, 12, 486181), null=True, verbose_name='購入期限'),
         ),
     ]

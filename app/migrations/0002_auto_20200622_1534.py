@@ -53,7 +53,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='f_item',
             name='tags',
-            field=models.ManyToManyField(blank=True, null=True, to='app.Tags', verbose_name='タグ（PCではCtrlキーを押しながら複数選択可）'),
+            field=models.ManyToManyField(blank=True, null=True, to='app.Tags', verbose_name='訳あり理由（PCではCtrlキーを押しながら複数選択可）'),
         ),
         migrations.AddField(
             model_name='f_item',
