@@ -223,6 +223,7 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         item.updated_by = self.request.user
         item.updated_at = timezone.now()
         item.save()
+        form.save_m2m()
 
         return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
@@ -267,7 +268,7 @@ class ItemBookView(LoginRequiredMixin, FormView):
                 item.subscriber = self.request.user
                 item.created_at = timezone.now()
                 item.target.quontity_left = item.target.quontity_left - item.quontity
-                item.total_price = 0
+                item.total_price = item.target.price * item.quontity
                 item.target.save()
                 item.save()
 
@@ -282,8 +283,8 @@ class ItemBookView(LoginRequiredMixin, FormView):
                 context_buy = {
                     #テンプレートに渡す項目
                     "user_name" : user_buy.username,
-                    "item_name" : item.target.title,
-                    "vege_name" : item.target.vegetable.name,
+                    "item_name" : item.target.vegetable.name,
+                    "vege_name" : item.target.title,
                     "item_unit" : item.target.unit_amount,
                     "item_quantity" : item.quontity,
                     "item_from" : user_sell.farm_name,
@@ -292,8 +293,8 @@ class ItemBookView(LoginRequiredMixin, FormView):
                 context_sell = {
                     #テンプレートに渡す項目
                     "user_name" : user_sell.username,
-                    "item_name" : item.target.title,
-                    "vege_name" : item.target.vegetable.name,
+                    "item_name" : item.target.vegetable.name,
+                    "vege_name" : item.target.title,
                     "item_unit" : item.target.unit_amount,
                     "item_quantity" : item.quontity,
                     "item_to" : user_buy.username,

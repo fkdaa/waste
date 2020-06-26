@@ -33,7 +33,7 @@
                     <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
                     <a class="btn btn-outline-dark" href="{% url 'F_create' %}">新規出品</a>
                     <a class="btn btn-outline-dark" href="{% url 'supply_list' user.id %}">出品一覧</a>
-                    
+
                     <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
                 </div>
             </div>
@@ -49,7 +49,7 @@
                     {% for item in object_list %}
                         <li class="list-group-item">
                             {# item_detail_contents.html を参考に必要な項目を追加してください #}
-                    
+
                             <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>商品名</p>
@@ -90,7 +90,7 @@
                                     {% endfor %}
                                 </div>
                             </div>
-                            
+
 
                             <div class="row">
                                 <div class="col-5 col-sm-3">
@@ -98,7 +98,7 @@
                                     <p>販売元</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ user.farm_name ｜|default:"未入力" }}</p>
+                                    <p>{{ user.farm_name|default:"未入力" }}</p>
                                 </div>
                             </div>
                             <div class="row">
