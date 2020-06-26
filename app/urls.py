@@ -4,7 +4,7 @@ from django.contrib.staticfiles.urls import static
 from django.conf import settings
 
 from .models import Item,F_Item,Reservation
-from .views import TopView,SupplyList,ReservationList,ItemReservationList,CustomerView,FarmerView,ItemCreateView, ItemDetailView, ItemBookView, ItemBookConfirmView, ItemBookCompleteView, ItemCreateView, ItemUpdateView, ItemDeleteView, ReservationDetailView, ReservationDeleteView,ItemBookFailedView
+from .views import TopView,SupplyList,ReservationList,ItemReservationList,CustomerView,FarmerView,ItemCreateView, ItemDetailView, ItemBookView, ItemBookConfirmView, ItemBookCompleteView, ItemCreateView, ItemUpdateView, ItemDeleteView, ReservationDetailView, ReservationDeleteView,ItemBookFailedView, ReservationDeleteFailedView
 
 # アプリケーションのルーティング設定
 
@@ -23,6 +23,7 @@ urlpatterns = [
     path('ReservationList/<int:pk>/',ReservationList.as_view(template_name='app/reservation_list.html'),name = 'reservation_list'),
     path('reservation_detail/<int:pk>/', ReservationDetailView.as_view(template_name='app/reservation_detail.html'), name='reservation_detail'),
     path('reservation_delete/<int:pk>/', ReservationDeleteView.as_view(), name='reservation_cancel'),
+    path('reservation_delete_failed/<int:pk>/', ReservationDeleteFailedView.as_view(template_name='app/reservation_delete_failed.html'), name='reservation_delete_failed'),
     path('f_create/', ItemCreateView.as_view(template_name='app/item_form.html'), name='F_create'),
     path('update/<int:pk>/', ItemUpdateView.as_view(template_name='app/item_form.html'), name='update'),
     path('delete/<int:pk>/', ItemDeleteView.as_view(), name='delete'),

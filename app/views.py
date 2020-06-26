@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
+from datetime import datetime,timedelta,date
 from django.views.generic import DetailView, TemplateView, FormView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
@@ -74,7 +75,7 @@ class CustomerView(FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        return F_Item.objects.filter(deadline__gt=timezone.now(), quontity_left__gte=1).order_by('-created_at')
+        return F_Item.objects.filter(deadline__gt=timezone.datetime.now(), quontity_left__gte=1).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -128,7 +129,7 @@ class FarmerView(LoginRequiredMixin, FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        return F_Item.objects.filter(deadline__gt=timezone.now(), quontity_left__gte=1).order_by('-created_at')
+        return F_Item.objects.filter(deadline__gt=timezone.datetime.now(), quontity_left__gte=1).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -171,9 +172,9 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         """
         item = form.save(commit=False)
         item.created_by = self.request.user
-        item.created_at = timezone.now()
+        item.created_at = timezone.datetime.now()
         item.updated_by = self.request.user
-        item.updated_at = timezone.now()
+        item.updated_at = timezone.datetime.now()
         item.save()
 
         return HttpResponseRedirect(self.success_url)
@@ -194,9 +195,9 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         item.I_name = self.request.user
         item.quontity_left = item.quontity
         item.created_by = self.request.user
-        item.created_at = timezone.now()
+        item.created_at = timezone.datetime.now()
         item.updated_by = self.request.user
-        item.updated_at = timezone.now()
+        item.updated_at = timezone.datetime.now()
         item.save()
         form.save_m2m()
 
@@ -221,9 +222,8 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         item = form.save(commit=False)
         item.quontity_left = item.quontity
         item.updated_by = self.request.user
-        item.updated_at = timezone.now()
+        item.updated_at = timezone.datetime.now()
         item.save()
-        form.save_m2m()
 
         return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
@@ -266,9 +266,9 @@ class ItemBookView(LoginRequiredMixin, FormView):
 
             else:
                 item.subscriber = self.request.user
-                item.created_at = timezone.now()
+                item.created_at = timezone.datetime.now()
                 item.target.quontity_left = item.target.quontity_left - item.quontity
-                item.total_price = item.target.price * item.quontity
+                item.total_price = 0
                 item.target.save()
                 item.save()
 
@@ -283,8 +283,8 @@ class ItemBookView(LoginRequiredMixin, FormView):
                 context_buy = {
                     #テンプレートに渡す項目
                     "user_name" : user_buy.username,
-                    "item_name" : item.target.vegetable.name,
-                    "vege_name" : item.target.title,
+                    "item_name" : item.target.title,
+                    "vege_name" : item.target.vegetable.name,
                     "item_unit" : item.target.unit_amount,
                     "item_quantity" : item.quontity,
                     "item_from" : user_sell.farm_name,
@@ -293,8 +293,8 @@ class ItemBookView(LoginRequiredMixin, FormView):
                 context_sell = {
                     #テンプレートに渡す項目
                     "user_name" : user_sell.username,
-                    "item_name" : item.target.vegetable.name,
-                    "vege_name" : item.target.title,
+                    "item_name" : item.target.title,
+                    "vege_name" : item.target.vegetable.name,
                     "item_unit" : item.target.unit_amount,
                     "item_quantity" : item.quontity,
                     "item_to" : user_buy.username,
@@ -417,7 +417,7 @@ class SupplyList(LoginRequiredMixin, FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        return F_Item.objects.filter(created_by=self.request.user, deadline__gt=timezone.now(),quontity_left__gte=1).order_by('-created_at')
+        return F_Item.objects.filter(created_by=self.request.user, deadline__gt=timezone.datetime.now(),quontity_left__gte=1).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -524,7 +524,7 @@ class ReservationList(LoginRequiredMixin, FilterView):
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
 
-        return Reservation.objects.filter(subscriber=self.request.user, target__deadline__gt=timezone.now()).order_by('-created_at')
+        return Reservation.objects.filter(subscriber=self.request.user, target__deadline__gt=timezone.datetime.now()).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -547,7 +547,52 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
         削除処理
         """
         item = self.get_object()
-        item.delete()
+        if timezone.now() < item.created_at + timedelta(hours=24) and date.today() < item.target.deadline:#注文から２４時間以内かつ出品期限を過ぎていなければ削除可能
+
+            if item.created_at > item.target.updated_at: #在庫数を戻すか否か
+                item.target.quontity_left += item.quontity
+                item.target.save()
+
+            # メール送信
+            from_email = 'vegebank14@gmail.com'#送信元
+            subject_buy = "【VegiBank】ご注文キャンセルのご確認（自動送信）" #購入に変えたほうがいいかも
+            subject_sell= "【VegeBank】出品中の商品の注文がキャンセルされました（自動送信）"
+
+            user_buy = self.request.user
+            user_sell = item.target.I_name
+
+            context_buy = {
+                #テンプレートに渡す項目
+                "user_name" : user_buy.username,
+                "item_name" : item.target.title,
+                "vege_name" : item.target.vegetable.name,
+                "item_unit" : item.target.unit_amount,
+                "item_quantity" : item.quontity,
+                "item_from" : user_sell.farm_name,
+                "item_fee" : item.total_price
+            }
+            context_sell = {
+                    #テンプレートに渡す項目
+                "user_name" : user_sell.username,
+                "item_name" : item.target.title,
+                "vege_name" : item.target.vegetable.name,
+                "item_unit" : item.target.unit_amount,
+                "item_quantity" : item.quontity,
+                "item_to" : user_buy.username,
+                "item_fee" : item.total_price
+            }
+
+            message_buy = render_to_string('mail/toBuyer_delete.txt', context_buy)
+            message_sell = render_to_string('mail/toSupplier_delete.txt', context_sell)
+
+            user_buy.email_user(subject_buy, message_buy, from_email)
+            user_sell.email_user(subject_sell, message_sell, from_email)
+
+            item.delete()
+
+        else:
+            #このご注文はキャンセルできません
+            return HttpResponseRedirect(reverse_lazy('reservation_delete_failed',args=(self.kwargs['pk'],)))
 
         return HttpResponseRedirect(reverse_lazy('reservation_list',args=(self.request.user.id,)))
 
@@ -560,3 +605,16 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
         context["f_item"] = F_Item.objects.get(pk=reservation.target_id)
 
         return context
+
+class ReservationDeleteFailedView(LoginRequiredMixin, TemplateView):
+    """
+    予約の取り消しに失敗しました
+    """
+
+    def get_context_data(self, **kwargs):
+        """
+        表示データの設定
+        """
+        kwargs['pk'] = self.kwargs['pk']
+
+        return super().get_context_data(**kwargs)

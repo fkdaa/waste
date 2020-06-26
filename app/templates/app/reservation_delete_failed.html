@@ -1,0 +1,11 @@
+{% extends "./_base.html" %}
+{% block content %}
+    <div class="container">
+        <h2 class="text-center">このご注文はキャンセルできません。</h2>
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-outline-dark float-right" href="{% url 'reservation_cancel' pk %}">戻る</a>
+            </div>
+        </div>
+
+{% endblock %}
