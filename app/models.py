@@ -348,7 +348,7 @@ class F_Item(models.Model):
         """
         リストボックスや管理画面での表示
         """
-        return self.title
+        return self.I_name.username
 
     def get_filename(self):
         return os.path.basename(self.photo.name)

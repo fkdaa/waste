@@ -31,6 +31,7 @@ class F_ItemForm(forms.ModelForm):
             'file': forms.ClearableFileInput(attrs={
                 'class': "form-control-file",
             }),
+            'tags': forms.CheckboxSelectMultiple(),
         }
 
 

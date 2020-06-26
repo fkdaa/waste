@@ -223,6 +223,7 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         item.updated_by = self.request.user
         item.updated_at = timezone.now()
         item.save()
+        form.save_m2m()
 
         return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
