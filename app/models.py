@@ -34,7 +34,7 @@ class Tags(models.Model):
         """
         return self.name
 
-        
+
 
     class Meta:
         """
@@ -217,8 +217,8 @@ class F_Item(models.Model):
     title = models.CharField(
         verbose_name='商品名',
         max_length=25,
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
     )
 
     # 販売単位
@@ -227,6 +227,19 @@ class F_Item(models.Model):
         max_length=10,
         blank=False,
         null=False,
+    )
+
+    #ランク
+    RANK = (
+        (1, 'Aランク'), # 一般流通品
+        (2, 'Bランク'), # ロス野菜良品
+        (3, 'Cランク'), # ロス野菜
+        (4, 'Dランク') # 非食用品
+    )
+
+    rank = models.IntegerField(
+        choices = RANK,
+        verbose_name = 'ランク',
     )
 
     # タグ（野菜の状態）
@@ -261,8 +274,8 @@ class F_Item(models.Model):
 
     price = models.PositiveIntegerField(
         verbose_name='価格（￥）',
-        blank=True,
-        null=True,
+        blank=False,
+        null=False,
         default=0,
         editable=True, # 実験用
     )
