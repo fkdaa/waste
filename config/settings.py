@@ -26,7 +26,7 @@ SECRET_KEY = '_(u)&e-3076d7_a(gfhb85*)u-u4vwc%#qt7c7q3-t98%lvp&g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['13.230.49.13']
 
 # Application definition
 
@@ -132,6 +132,8 @@ LOGOUT_REDIRECT_URL = '/'
 # https://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # django-filter
 # https://django-filter.readthedocs.io/en/latest/ref/settings.html#filters-verbose-lookups
