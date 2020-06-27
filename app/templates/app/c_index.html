@@ -49,7 +49,7 @@
                             {# item_detail_contents.html を参考に必要な項目を追加してください #}
                             <div class="row">
                                 {% if item.photo %}
-                                    <img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" width="200px" height="auto"/>
+                                    <img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" width="25%" height="auto"/>
                                 {% endif %}
                             </div>
                             <div class="row">
@@ -57,7 +57,7 @@
                                     <p>種類</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ item.vegetable|default_if_none:"未入力" }}</p>
+                                    <p>{{ item.vegetable|default_if_none:"未入力" }} : {{item.unit_amount}}セット</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -65,7 +65,7 @@
                                     <p>在庫</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{item.unit_amount}}  ×  {{item.quontity_left}}セット</p>
+                                    <p>{{item.quontity_left}}セット</p>
                                 </div>
                             </div>
 
@@ -75,6 +75,15 @@
                                 </div>
                                 <div class="col-7 col-sm-9">
                                     <p>{{ item.get_rank_display|default_if_none:"未分類" }}</p>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-5 col-sm-3">
+                                    <p>1セット単価</p>
+                                </div>
+                                <div class="col-7 col-sm-9">
+                                    <p>{{ item.price|default_if_none:"未分類" }}円</p>
                                 </div>
                             </div>
 
@@ -95,7 +104,7 @@
                                     <p>販売元</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ user.farm_name|default:"未入力"}}</p>
+                                    <p>{{ item.I_name.farm_name|default_if_none:"未入力"}}</p>
                                 </div>
                             </div>
                             <div class="row">

@@ -1,12 +1,6 @@
 <div class="row">
-    <div class="col-5 col-sm-3">
-        <p>商品名</p>
-    </div>
-    <div class="col-7 col-sm-9">
-        <p>{{  f_item.title|default_if_none:"未入力"  }}</p>
-    </div>
     {% if f_item.photo %}
-        <img src="{{f_item.photo.url}}" class="img-fluid img-thumbnail float-right" width="200px" height="auto"/>
+        <img src="{{f_item.photo.url}}" class="img-fluid img-thumbnail float-right" width="25%" height="auto"/>
     {% endif %}
 </div>
 
@@ -15,7 +9,7 @@
         <p>種類</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>{{ f_item.vegetable.name|default_if_none:"未入力" }}</p>
+        <p>{{ f_item.vegetable.name|default_if_none:"未入力" }} {{f_item.unit_amount}}セット</p>
     </div>
 </div>
 
@@ -24,7 +18,7 @@
         <p>在庫</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>{{f_item.unit_amount}}  ×  {{f_item.quontity_left}}セット</p>
+        <p>{{f_item.quontity_left}}セット</p>
     </div>
 </div>
 
@@ -52,7 +46,7 @@
 
 <div class="row">
     <div class="col-5 col-sm-3">
-        <p>セット単価</p>
+        <p>1セット単価</p>
     </div>
     <div class="col-7 col-sm-9">
         <p>￥{{ f_item.price|default_if_none:"0" }}</p>

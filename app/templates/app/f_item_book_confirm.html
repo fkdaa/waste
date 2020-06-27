@@ -7,12 +7,12 @@
                 <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
             </div>
         </div>
-         
+
         {% include "./f_item_detail_contents.html" %}
 
         <div class="row">
             <div class="col-5 col-sm-3">
-                <p>数量：</p>
+                <p>購入数量：</p>
             </div>
             <div class="col-7 col-sm-9">
                 <p>{{ object.quontity|default_if_none:"未入力"  }}</p>
@@ -20,14 +20,14 @@
         </div>
         <div class="row">
             <div class="col-5 col-sm-3">
-                <p>備考:</p>
+                <p>合計金額:</p>
             </div>
             <div class="col-7 col-sm-9">
-                <p>{{ object.memo|default_if_none:"未入力"  }}</p>
+                <p>{{ object.total_price|default_if_none:"未入力"  }}</p>
             </div>
         </div>
 
-        
+
         <div class="row">
             <div class="col-12">
                 <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
