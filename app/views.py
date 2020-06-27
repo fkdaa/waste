@@ -234,13 +234,13 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
 
 class ItemDeleteView(LoginRequiredMixin, DeleteView):
     """
-    ビュー：削除画面
+    ビュー：取り消し画面
     """
     model = F_Item
 
     def delete(self, request, *args, **kwargs):
         """
-        削除処理
+        取り消し処理
         """
         item = self.get_object()
         item.delete()
@@ -542,16 +542,16 @@ class ReservationList(LoginRequiredMixin, FilterView):
 
 class ReservationDeleteView(LoginRequiredMixin, DeleteView):
     """
-    ビュー：削除画面
+    ビュー：取り消し画面
     """
     model = Reservation
 
     def delete(self, request, *args, **kwargs):
         """
-        削除処理
+        取り消し処理
         """
         item = self.get_object()
-        if timezone.now() < item.created_at + timedelta(hours=24) and date.today() < item.target.deadline:#注文から２４時間以内かつ出品期限を過ぎていなければ削除可能
+        if timezone.now() < item.created_at + timedelta(hours=24) and date.today() < item.target.deadline:#注文から２４時間以内かつ出品期限を過ぎていなければ取り消し可能
 
             if item.created_at > item.target.updated_at: #在庫数を戻すか否か
                 item.target.quontity_left += item.quontity

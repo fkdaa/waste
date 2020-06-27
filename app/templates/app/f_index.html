@@ -30,11 +30,18 @@
             <div class="col-12">
                 <a class="btn btn-secondary filtered" style="visibility:hidden" href="?page=1">検索を解除</a>
                 <div class="float-right mt-1">
+                    <a class="btn btn-outline-primary" href="{% url 'F_create' %}">新規出品</a>
+                    <a class="btn btn-outline-info" href="{% url 'supply_list' user.id %}">出品一覧</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-secondary filtered" style="visibility:hidden" href="?page=1">検索を解除</a>
+                <div class="float-right mt-1">
                     <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
-                    <a class="btn btn-outline-dark" href="{% url 'F_create' %}">新規出品</a>
-                    <a class="btn btn-outline-dark" href="{% url 'supply_list' user.id %}">出品一覧</a>
 
-                    <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
+                    <a class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" href="#">検索</a>
                 </div>
             </div>
         </div>
@@ -148,14 +155,14 @@
             <div class="col-12">
                 <div class="float-right mt-1 mb-3">
                     <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
-                    <a class="btn btn-outline-dark" href="{% url 'F_create' %}">新規出品</a>
-                    <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
+                    <a class="btn btn-outline-primary" href="{% url 'F_create' %}">新規出品</a>
+                    <a class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" href="#">検索</a>
                 </div>
             </div>
         </div>
     </div>
     {% else %}
-    <h1>農家アカウントではないため、ページを表示できません。</h1>
-    <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
+        <h1>農家アカウントではないため、ページを表示できません。</h1>
+        <a class="btn btn-outline-success float-right" href="{% url 'index' %}">戻る</a>
     {% endif %}
 {% endblock %}
