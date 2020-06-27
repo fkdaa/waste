@@ -55,7 +55,7 @@
                                     <p>種類</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ item.vegetable|default_if_none:"未入力" }} : {{item.unit_amount}}セット</p>
+                                    <p>{{ item.vegetable|default_if_none:"未入力" }} ({{item.unit_amount}})</p>
                                 </div>
                                 <div class="col-9 col-sm-15">
                                     {% if item.photo %}
@@ -81,6 +81,15 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-5 col-sm-3">
+                                    <p>1セット単価</p>
+                                </div>
+                                <div class="col-7 col-sm-9">
+                                    <p>{{ item.price|default_if_none:"未分類" }}円</p>
+                                </div>
+                            </div>
+
                             {% if item.tags.all%}
                                 <div class="row">
                                     <div class="col-5 col-sm-3">
@@ -101,7 +110,7 @@
                                     <p>販売元</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ user.farm_name|default:"未入力" }}</p>
+                                    <p>{{ item.I_name.farm_name|default_if_none:"未入力" }}</p>
                                 </div>
                             </div>
                             <div class="row">

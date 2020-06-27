@@ -19,7 +19,7 @@
                     </form>
                     <div class="modal-footer">
                         <a class="btn btn-outline-dark" data-dismiss="modal">戻る</a>
-                        <button type="submit" class="btn btn-outline-dark" form="filter">検索</button>
+
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                                     <p>種類</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ item.vegetable|default_if_none:"未入力" }} : {{item.unit_amount}}セット</p>
+                                    <p>{{ item.vegetable|default_if_none:"未入力" }} ({{item.unit_amount}})</p>
                                 </div>
                                 <div class="col-9 col-sm-15">
                                     {% if item.photo %}
@@ -67,6 +67,7 @@
                                     <p>{{item.quontity_left}}セット</p>
                                 </div>
                             </div>
+
                             <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>商品ランク</p>
@@ -75,6 +76,16 @@
                                     <p>{{ item.get_rank_display|default_if_none:"未分類" }}</p>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-5 col-sm-3">
+                                    <p>1セット単価</p>
+                                </div>
+                                <div class="col-7 col-sm-9">
+                                    <p>{{ item.price|default_if_none:"未分類" }}円</p>
+                                </div>
+                            </div>
+
                             {% if item.tags.all%}
                                 <div class="row">
                                     <div class="col-5 col-sm-3">
@@ -87,14 +98,6 @@
                                     </div>
                                 </div>
                             {% endif %}
-                            <div class="row">
-                                <div class="col-5 col-sm-3">
-                                    <p>販売元</p>
-                                </div>
-                                <div class="col-7 col-sm-9">
-                                    <p>{{ user.farm_name|default_if_none:"未入力" }}</p>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>購入期限</p>

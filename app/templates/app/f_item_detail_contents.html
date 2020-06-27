@@ -11,7 +11,7 @@
         <p>種類</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>{{ f_item.vegetable.name|default_if_none:"未入力" }} ： {{f_item.unit_amount}}セット</p>
+        <p>{{ f_item.vegetable.name|default_if_none:"未入力" }} ({{f_item.unit_amount}})</p>
     </div>
 </div>
 
@@ -110,14 +110,5 @@
     </div>
     <div class="col-7 col-sm-9">
         <p>{{ f_item.deadline|date:"Y年m月d日" }}</p>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-5 col-sm-3">
-        <p>更新時間</p>
-    </div>
-    <div class="col-7 col-sm-9">
-        <p>{{ f_item.updated_at|date:"Y/m/d G:i:s" }}</p>
     </div>
 </div>

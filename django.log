@@ -86,3 +86,59 @@
 2020-06-27 17:27:33,685 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
 2020-06-27 17:28:33,573 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
 2020-06-27 17:28:33,662 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-06-27 17:48:39,372 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\PngImagePlugin.py:153 STREAM b'IHDR' 16 13
+2020-06-27 17:48:39,374 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\PngImagePlugin.py:153 STREAM b'sRGB' 41 1
+2020-06-27 17:48:39,374 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\PngImagePlugin.py:153 STREAM b'gAMA' 54 4
+2020-06-27 17:48:39,375 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\PngImagePlugin.py:153 STREAM b'pHYs' 70 9
+2020-06-27 17:48:39,375 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\PngImagePlugin.py:153 STREAM b'tEXt' 91 33
+2020-06-27 17:48:39,376 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\PngImagePlugin.py:153 STREAM b'IDAT' 136 65400
+2020-06-27 17:48:39,382 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing BlpImagePlugin
+2020-06-27 17:48:39,384 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing BmpImagePlugin
+2020-06-27 17:48:39,384 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing BufrStubImagePlugin
+2020-06-27 17:48:39,386 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing CurImagePlugin
+2020-06-27 17:48:39,387 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing DcxImagePlugin
+2020-06-27 17:48:39,390 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing DdsImagePlugin
+2020-06-27 17:48:39,391 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing EpsImagePlugin
+2020-06-27 17:48:39,418 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing FitsStubImagePlugin
+2020-06-27 17:48:39,420 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing FliImagePlugin
+2020-06-27 17:48:39,421 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing FpxImagePlugin
+2020-06-27 17:48:39,422 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:407 Image: failed to import FpxImagePlugin: No module named 'olefile'
+2020-06-27 17:48:39,422 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing FtexImagePlugin
+2020-06-27 17:48:39,424 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing GbrImagePlugin
+2020-06-27 17:48:39,425 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing GifImagePlugin
+2020-06-27 17:48:39,426 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing GribStubImagePlugin
+2020-06-27 17:48:39,428 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing Hdf5StubImagePlugin
+2020-06-27 17:48:39,429 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing IcnsImagePlugin
+2020-06-27 17:48:39,432 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing IcoImagePlugin
+2020-06-27 17:48:39,433 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing ImImagePlugin
+2020-06-27 17:48:39,435 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing ImtImagePlugin
+2020-06-27 17:48:39,437 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing IptcImagePlugin
+2020-06-27 17:48:39,440 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing JpegImagePlugin
+2020-06-27 17:48:39,440 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing Jpeg2KImagePlugin
+2020-06-27 17:48:39,440 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing McIdasImagePlugin
+2020-06-27 17:48:39,442 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing MicImagePlugin
+2020-06-27 17:48:39,444 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:407 Image: failed to import MicImagePlugin: No module named 'olefile'
+2020-06-27 17:48:39,444 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing MpegImagePlugin
+2020-06-27 17:48:39,445 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing MpoImagePlugin
+2020-06-27 17:48:39,445 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing MspImagePlugin
+2020-06-27 17:48:39,448 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PalmImagePlugin
+2020-06-27 17:48:39,453 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PcdImagePlugin
+2020-06-27 17:48:39,454 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PcxImagePlugin
+2020-06-27 17:48:39,455 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PdfImagePlugin
+2020-06-27 17:48:39,464 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PixarImagePlugin
+2020-06-27 17:48:39,465 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PngImagePlugin
+2020-06-27 17:48:39,465 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PpmImagePlugin
+2020-06-27 17:48:39,465 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PsdImagePlugin
+2020-06-27 17:48:39,467 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing SgiImagePlugin
+2020-06-27 17:48:39,469 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing SpiderImagePlugin
+2020-06-27 17:48:39,470 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing SunImagePlugin
+2020-06-27 17:48:39,471 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing TgaImagePlugin
+2020-06-27 17:48:39,472 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing TiffImagePlugin
+2020-06-27 17:48:39,473 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing WebPImagePlugin
+2020-06-27 17:48:39,502 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing WmfImagePlugin
+2020-06-27 17:48:39,503 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing XbmImagePlugin
+2020-06-27 17:48:39,506 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing XpmImagePlugin
+2020-06-27 17:48:39,507 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing XVThumbImagePlugin
+2020-06-27 18:03:02,119 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-06-27 18:09:23,984 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-06-27 18:09:24,058 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
