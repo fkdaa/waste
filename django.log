@@ -76,3 +76,5 @@
 2020-06-27 15:02:39,341 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
 2020-06-27 15:09:11,084 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
 2020-06-27 15:09:50,806 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-06-27 15:22:26,819 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-06-27 15:22:34,793 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
