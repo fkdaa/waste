@@ -55,12 +55,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-5 col-sm-3">
-                                    <p>商品名</p>
-                                </div>
-                                <div class="col-7 col-sm-9">
-                                    <p>{{ item.target|default_if_none:"未入力" }}</p>
-                                </div>
                                 {% if item.target.photo %}
                                     <img src="{{item.target.photo.url}}" class="img-fluid img-thumbnail float-right" width="200px" height="auto"/>
                                 {% endif %}
@@ -70,9 +64,29 @@
                                     <p>数量</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ item.quontity|default_if_none:"未入力" }}</p>
+                                    <p>{{item.target.unit_amount}}  ×  {{item.target.quontity_left}}セット</p>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-5 col-sm-3">
+                                    <p>商品ランク</p>
+                                </div>
+                                <div class="col-7 col-sm-9">
+                                    <p>{{ item.target.get_rank_display|default_if_none:"未分類" }}</p>
+                                </div>
+                            </div>
+                            {% if item.target.tags.all%}
+                                <div class="row">
+                                    <div class="col-5 col-sm-3">
+                                        <p>訳あり理由</p>
+                                    </div>
+                                    <div class="col-7 col-sm-9">
+                                        {% for tag in item.target.tags.all %}
+                                            <p>{{ tag.name }}</p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
                             <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>購入日時</p>

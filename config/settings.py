@@ -157,8 +157,26 @@ LOGGING = {
         'local': {
             'format': '%(asctime)s [%(levelname)s] %(pathname)s:%(lineno)d %(message)s'
         },
+        'all': {    # 出力フォーマットに`all`という名前をつける
+            'format': '\t'.join([
+                "[%(levelname)s]",
+                "asctime:%(asctime)s",
+                "module:%(module)s",
+                "message:%(message)s",
+                # "process:%(process)d",
+                # "thread:%(thread)d",
+            ])
+        },
     },
     'handlers': {
+        'file':{
+            'level': 'NOTSET',  # DEBUG以上のログを取り扱うという意味
+            'class': 'logging.handlers.RotatingFileHandler',  # ログを出力するためのクラスを指定(サイズローテーション
+            'filename': os.path.join(BASE_DIR, 'django.log'),  # どこに出すか
+            'formatter': 'local',  # どの出力フォーマットで出すかを名前で指定
+            'maxBytes': 1024 * 1024 * 10, # 10GBでローテーション
+            'backupCount': 10, # バックアップファイルは10ファイルまで
+        },
         'console': {
             'class': 'logging.StreamHandler',
             'formatter': 'local',
@@ -167,7 +185,7 @@ LOGGING = {
     'loggers': {
         # 自作アプリケーション全般のログを拾う
         '': {
-            'handlers': ['console'],
+            'handlers': ['file','console'],
             'level': 'DEBUG',
             'propagate': False,
         },

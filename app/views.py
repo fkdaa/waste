@@ -22,6 +22,10 @@ from .models import F_Item
 from .models import Reservation
 from .models import User
 
+from django.conf import settings
+import csv
+
+
 # 未ログインのユーザーにアクセスを許可する場合は、LoginRequiredMixinを継承から外してください。
 #
 # LoginRequiredMixin：未ログインのユーザーをログイン画面に誘導するMixin

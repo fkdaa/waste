@@ -1,12 +1,6 @@
 
 
 <div class="row">
-    <div class="col-5 col-sm-3">
-        <p>商品名</p>
-    </div>
-    <div class="col-7 col-sm-9">
-        <p>{{  f_item.title|default_if_none:"未入力"  }}</p>
-    </div>
     {% if f_item.photo %}
         <img src="{{f_item.photo.url}}" class="img-fluid img-thumbnail float-right" width="200px" height="auto"/>
     {% endif %}
@@ -43,24 +37,34 @@
 
 <div class="row">
     <div class="col-5 col-sm-3">
+        <p>商品ランク</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ f_item.get_rank_display|default_if_none:"未分類" }}</p>
+    </div>
+</div>
+
+{% if f_item.tags.all %}
+    <div class="row">
+        <div class="col-5 col-sm-3">
+            <p>訳あり理由</p>
+        </div>
+        <div class="col-7 col-sm-9">
+            {% for tag in f_item.tags.all %}
+                <p>{{ tag.name }}</p>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+<div class="row">
+    <div class="col-5 col-sm-3">
         <p>セット単価</p>
     </div>
     <div class="col-7 col-sm-9">
         <p>￥{{  f_item.price|default_if_none:"0" }}</p>
     </div>
 
-</div>
-
-
-<div class="row">
-    <div class="col-5 col-sm-3">
-        <p>訳あり理由</p>
-    </div>
-    <div class="col-7 col-sm-9">
-        {% for tag in f_item.tags.all %}
-            <p>{{ tag.name }}</p>
-        {% endfor %}
-    </div>
 </div>
 
 

@@ -1,0 +1,75 @@
+2020-06-27 12:06:39,993 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 12:06:48,267 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 12:06:48,765 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 12:14:06,676 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 12:14:10,466 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 12:14:10,962 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 12:24:08,323 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 12:50:30,239 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 12:50:34,603 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 12:50:46,859 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 12:51:07,587 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 12:51:13,151 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:09:23,190 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:09:48,781 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:10:33,253 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:10:35,300 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:11:51,017 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:11:57,987 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:36:38,816 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:36:48,249 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:36:56,390 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:37:02,051 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:37:17,815 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:37:24,743 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:37:39,396 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:41:33,445 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 13:46:00,399 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 14:15:04,833 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 14:15:26,753 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 14:16:56,131 [DEBUG] /usr/lib/python3.6/asyncio/selector_events.py:54 Using selector: EpollSelector
+2020-06-27 14:18:44,325 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing BlpImagePlugin
+2020-06-27 14:18:44,327 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing BmpImagePlugin
+2020-06-27 14:18:44,328 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing BufrStubImagePlugin
+2020-06-27 14:18:44,330 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing CurImagePlugin
+2020-06-27 14:18:44,332 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing DcxImagePlugin
+2020-06-27 14:18:44,335 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing DdsImagePlugin
+2020-06-27 14:18:44,336 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing EpsImagePlugin
+2020-06-27 14:18:44,339 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing FitsStubImagePlugin
+2020-06-27 14:18:44,341 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing FliImagePlugin
+2020-06-27 14:18:44,343 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing FpxImagePlugin
+2020-06-27 14:18:44,351 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing FtexImagePlugin
+2020-06-27 14:18:44,352 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing GbrImagePlugin
+2020-06-27 14:18:44,353 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing GifImagePlugin
+2020-06-27 14:18:44,354 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing GribStubImagePlugin
+2020-06-27 14:18:44,355 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing Hdf5StubImagePlugin
+2020-06-27 14:18:44,356 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing IcnsImagePlugin
+2020-06-27 14:18:44,359 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing IcoImagePlugin
+2020-06-27 14:18:44,361 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing ImImagePlugin
+2020-06-27 14:18:44,362 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing ImtImagePlugin
+2020-06-27 14:18:44,364 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing IptcImagePlugin
+2020-06-27 14:18:44,365 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing JpegImagePlugin
+2020-06-27 14:18:44,365 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing Jpeg2KImagePlugin
+2020-06-27 14:18:44,366 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing McIdasImagePlugin
+2020-06-27 14:18:44,367 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing MicImagePlugin
+2020-06-27 14:18:44,368 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing MpegImagePlugin
+2020-06-27 14:18:44,369 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing MpoImagePlugin
+2020-06-27 14:18:44,370 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing MspImagePlugin
+2020-06-27 14:18:44,371 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing PalmImagePlugin
+2020-06-27 14:18:44,374 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing PcdImagePlugin
+2020-06-27 14:18:44,376 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing PcxImagePlugin
+2020-06-27 14:18:44,376 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing PdfImagePlugin
+2020-06-27 14:18:44,385 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing PixarImagePlugin
+2020-06-27 14:18:44,386 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing PngImagePlugin
+2020-06-27 14:18:44,387 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing PpmImagePlugin
+2020-06-27 14:18:44,387 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing PsdImagePlugin
+2020-06-27 14:18:44,389 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing SgiImagePlugin
+2020-06-27 14:18:44,390 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing SpiderImagePlugin
+2020-06-27 14:18:44,391 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing SunImagePlugin
+2020-06-27 14:18:44,393 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing TgaImagePlugin
+2020-06-27 14:18:44,394 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing TiffImagePlugin
+2020-06-27 14:18:44,394 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing WebPImagePlugin
+2020-06-27 14:18:44,403 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing WmfImagePlugin
+2020-06-27 14:18:44,405 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing XbmImagePlugin
+2020-06-27 14:18:44,408 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing XpmImagePlugin
+2020-06-27 14:18:44,410 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing XVThumbImagePlugin

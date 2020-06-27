@@ -19,10 +19,10 @@ class F_ItemForm(forms.ModelForm):
     ・公式 モデルからフォームを作成する
     https://docs.djangoproject.com/ja/2.1/topics/forms/modelforms/
     """
-    field_order=["photo","vegetable","rank","title","unit_amount","quontity","deadline","price","tags","memo"]
+    field_order=["photo","vegetable","rank","unit_amount","quontity","deadline","price","tags","memo"]
     class Meta:
         model = F_Item
-        fields = ["photo","vegetable","rank","title","unit_amount","quontity","deadline","price","tags","memo"]
+        fields = ["photo","vegetable","rank","unit_amount","quontity","deadline","price","tags","memo"]
 
         widgets = {
             'title': forms.TextInput(attrs={
