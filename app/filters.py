@@ -34,20 +34,21 @@ class ItemFilterSet(django_filters.FilterSet):
 
     class Meta:
         model = F_Item
-        # 一部フィールドを除きモデルクラスの定義を全て引用する
-        exclude = ['created_at', 'updated_by', 'updated_at',"photo" ]
+        # 引用するフィールドを指定
+        fields = ['rank', 'tags', 'vegetable']
+        # exclude = ['created_at', 'updated_by', 'updated_at','photo','I_name','title','unit_amount','memo','quontity','quontity_left','price','deadline' ]
         # 文字列検索のデフォルトを部分一致に変更
         filter_overrides = {
             models.CharField: {
                 'filter_class': django_filters.CharFilter,
                 'extra': lambda f: {
-                    'lookup_expr': 'icontains',
+                    'lookup_expr': 'contains',
                 },
             },
             models.TextField: {
                 'filter_class': django_filters.CharFilter,
                 'extra': lambda f: {
-                    'lookup_expr': 'icontains',
+                    'lookup_expr': 'contains',
                 },
             },
         }
@@ -72,20 +73,21 @@ class ReservationFilterSet(django_filters.FilterSet):
 
     class Meta:
         model = Reservation
+        fields = [] 
         # 一部フィールドを除きモデルクラスの定義を全て引用する
-        exclude = ['subscriber',]
+        # exclude = ['subscriber','created_at','total_price','quontity','memo']
         # 文字列検索のデフォルトを部分一致に変更
         filter_overrides = {
             models.CharField: {
                 'filter_class': django_filters.CharFilter,
                 'extra': lambda f: {
-                    'lookup_expr': 'icontains',
+                    'lookup_expr': 'contains',
                 },
             },
             models.TextField: {
                 'filter_class': django_filters.CharFilter,
                 'extra': lambda f: {
-                    'lookup_expr': 'icontains',
+                    'lookup_expr': 'contains',
                 },
             },
         }
