@@ -55,9 +55,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                {% if item.target.photo %}
-                                    <img src="{{item.target.photo.url}}" class="img-fluid img-thumbnail float-right" width="25%" height="auto"/>
-                                {% endif %}
+                                <div class="col-md-4">
+                                  {% if item.photo %}
+                                      <img src="{{item.target.photo.url}}" class="img-fluid img-thumbnail float-right" width="100%" height="auto"/>
+                                  {% endif %}
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-5 col-sm-3">

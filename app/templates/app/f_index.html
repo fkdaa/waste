@@ -50,19 +50,21 @@
                         <li class="list-group-item">
                             {# item_detail_contents.html を参考に必要な項目を追加してください #}
 
-                            <div class="row">
+                              <div class="row">
+                                <div class="col-md-4">
+                                  {% if item.photo %}
+                                      <img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" width="100%" height="auto"/>
+                                  {% endif %}
+                                </div>
+                              </div>
+                              <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>種類</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
                                     <p>{{ item.vegetable|default_if_none:"未入力" }} ({{item.unit_amount}})</p>
                                 </div>
-                                <div class="col-9 col-sm-15">
-                                    {% if item.photo %}
-                                        <img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" width="25%" height="auto"/>
-                                    {% endif %}
-                                </div>
-                            </div>
+                              </div>
                             <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>在庫</p>
