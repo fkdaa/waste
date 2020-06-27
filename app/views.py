@@ -272,7 +272,7 @@ class ItemBookView(LoginRequiredMixin, FormView):
                 item.subscriber = self.request.user
                 item.created_at = timezone.datetime.now()
                 item.target.quontity_left = item.target.quontity_left - item.quontity
-                item.total_price = 0
+                item.total_price = item.target.price * item.quontity
                 item.target.save()
                 item.save()
 

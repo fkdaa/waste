@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="row mt-3">
             <div class="col-10 mx-auto">
                 {% include "./_pagination.html" %}
@@ -51,7 +51,7 @@
                                     <p>種類</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ item.target.vegetable|default_if_none:"未入力" }}</p>
+                                    <p>{{ item.target.vegetable|default_if_none:"未入力" }}({{item.target.unit_amount}})</p>
                                 </div>
                                 <div class="col-9 col-sm-15">
                                     {% if item.target.photo %}
@@ -72,7 +72,15 @@
                                     <p>数量</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{item.target.unit_amount}}  ×  {{item.target.quontity_left}}セット</p>
+                                    <p>{{item.quontity}}セット</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5 col-sm-3">
+                                    <p>合計金額(単価)</p>
+                                </div>
+                                <div class="col-7 col-sm-9">
+                                    <p>{{item.total_price}}円 (単価：{{item.target.price}})セット</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -108,7 +116,7 @@
                                     <div class="float-right">
                                         <a class="btn btn-outline-dark " href="{% url 'reservation_detail' item.pk %}">詳細</a>
                                         <a class="btn btn-outline-dark " href="{% url 'reservation_cancel' item.pk %}">取り消し</a>
-                                        
+
                                     </div>
                                 </div>
                             </div>

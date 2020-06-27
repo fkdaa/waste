@@ -1,13 +1,5 @@
 <div class="row">
     <div class="col-5 col-sm-3">
-        <p>注文者</p>
-    </div>
-    <div class="col-7 col-sm-9">
-        <p>{{ reservation.subscriber.get_full_name }}</p>
-    </div>
-</div>
-<div class="row">
-    <div class="col-5 col-sm-3">
         <p>注文時間</p>
     </div>
     <div class="col-7 col-sm-9">
@@ -20,7 +12,7 @@
         <p>注文数量</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>{{  reservation.quontity }}  ×  {{f_item.quontity_left}}セット</p> 
+        <p>{{  reservation.quontity }}セット</p>
     </div>
 </div>
 <!--
@@ -38,13 +30,13 @@
         <p>合計金額</p>
     </div>
     <div class="col-7 col-sm-9">
-        <p>￥ {{ reservation.total_price }}</p> 
+        <p>￥ {{ reservation.total_price }}</p>
     </div>
 </div>
 
 <div class="row">
     <br></br>
-    
+
 </div>
 
 {% include "./f_item_detail_contents.html" %}
