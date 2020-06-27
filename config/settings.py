@@ -26,7 +26,7 @@ SECRET_KEY = '_(u)&e-3076d7_a(gfhb85*)u-u4vwc%#qt7c7q3-t98%lvp&g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['54.248.7.195']
 
 # Application definition
 
@@ -118,6 +118,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # カスタムユーザーモデルの使用
 # https://docs.djangoproject.com/ja/2.1/topics/auth/customizing/#substituting-a-custom-user-model
