@@ -246,7 +246,7 @@ class F_Item(models.Model):
     # 訳あり理由（野菜の状態）
     tags = models.ManyToManyField(
         Tags,
-        verbose_name='訳あり理由（PCではCtrlキーを押しながら複数選択可）',
+        verbose_name='訳あり理由',
         blank=True,
         null=True,
     )

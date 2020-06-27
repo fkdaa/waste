@@ -45,17 +45,17 @@
                     {% for item in object_list %}
                         <li class="list-group-item">
                             {# item_detail_contents.html を参考に必要な項目を追加してください #}
-                            
+
                             <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>種類</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ item.vegetable|default_if_none:"未入力" }}</p>
+                                    <p>{{ item.vegetable|default_if_none:"未入力" }} : {{item.unit_amount}}セット</p>
                                 </div>
                                 <div class="col-9 col-sm-15">
                                     {% if item.photo %}
-                                        <img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" width="200px" height="auto"/>
+                                        <img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" width="25%" height="auto"/>
                                     {% endif %}
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
                                     <p>在庫</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{item.unit_amount}}  ×  {{item.quontity_left}}セット</p>
+                                    <p>{{item.quontity_left}}セット</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -92,7 +92,7 @@
                                     <p>販売元</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{ user.farm_name|default:"未入力" }}</p>
+                                    <p>{{ user.farm_name|default_if_none:"未入力" }}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -138,5 +138,5 @@
             </div>
         </div>
     </div>
-    
+
 {% endblock %}

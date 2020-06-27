@@ -73,3 +73,8 @@
 2020-06-27 14:18:44,405 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing XbmImagePlugin
 2020-06-27 14:18:44,408 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing XpmImagePlugin
 2020-06-27 14:18:44,410 [DEBUG] /home/hogehoge/.local/lib/python3.6/site-packages/PIL/Image.py:404 Importing XVThumbImagePlugin
+2020-06-27 16:42:54,711 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-06-27 16:42:54,813 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-06-27 17:15:20,500 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-06-27 17:18:25,784 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-06-27 17:18:25,881 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
