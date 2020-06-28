@@ -10,8 +10,8 @@
 ーーーーーーーーーーーーーーーーー
 
 ■ご購入内容
-商品名　　：{{item_name}} ({{vege_name}})
-数量　　　：{{item_unit}} : {{item_quantity}}セット
+商品名　　：{{vege_name}} ({{item_unit}})
+数量　　　：{{item_quantity}}セット
 出品元　　：{{item_from}}
 合計金額　：{{item_fee}}円
 
@@ -27,5 +27,5 @@
 ーーーーーーーーーーーーーーーーー
 VegeBank：廃棄野菜流通実験サイト
 URL：http://13.230.49.13/
-メール：vegebank14@gmail.com
+メール：s16073@tokyo.kosen-ac.jp
 ーーーーーーーーーーーーーーーーー
