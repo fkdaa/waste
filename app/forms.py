@@ -44,5 +44,6 @@ class BookForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fields['quontity'].initial = 1
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'

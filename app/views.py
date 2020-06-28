@@ -422,7 +422,7 @@ class SupplyList(LoginRequiredMixin, FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        return F_Item.objects.filter(created_by=self.request.user, quontity_left__gte=1).order_by('-created_at')
+        return F_Item.objects.filter(created_by=self.request.user, deadline__gt=timezone.datetime.now()).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
