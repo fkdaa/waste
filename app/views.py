@@ -421,7 +421,7 @@ class SupplyList(LoginRequiredMixin, FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        return F_Item.objects.filter(created_by=self.request.user, deadline__gt=timezone.datetime.now(),quontity_left__gte=1).order_by('-created_at')
+        return F_Item.objects.filter(created_by=self.request.user, quontity_left__gte=1).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -430,6 +430,7 @@ class SupplyList(LoginRequiredMixin, FilterView):
         # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
         # 例：kwargs['sample'] = 'sample'
         return super().get_context_data(object_list=object_list, **kwargs)
+
 
 class ItemReservationList(LoginRequiredMixin, FilterView):
     """
@@ -485,6 +486,7 @@ class ItemReservationList(LoginRequiredMixin, FilterView):
         kwargs['pk'] = self.kwargs['pk']
 
         return super().get_context_data(object_list=object_list, **kwargs)
+
 
 class ReservationList(LoginRequiredMixin, FilterView):
     """

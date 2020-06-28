@@ -410,7 +410,7 @@ class Reservation(models.Model):
         """
         リストボックスや管理画面での表示
         """
-        return self.subscriber
+        return self.subscriber.full_name
 
     class Meta:
         """
