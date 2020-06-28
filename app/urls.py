@@ -4,7 +4,7 @@ from django.contrib.staticfiles.urls import static
 from django.conf import settings
 
 from .models import Item,F_Item,Reservation
-from .views import TopView,SupplyList,ReservationList,ItemReservationList,CustomerView,FarmerView,ItemCreateView, ItemDetailView, ItemBookView, ItemBookConfirmView, ItemBookCompleteView, ItemCreateView, ItemUpdateView, ItemDeleteView, ReservationDetailView, ReservationDeleteView,ItemBookFailedView, ReservationDeleteFailedView,RankView
+from .views import TopView,SupplyList,ReservationList,ItemReservationList,CustomerView,FarmerView,ItemCreateView, ItemDetailView, ItemBookView, ItemBookConfirmView, ItemBookCompleteView, ItemCreateView, ItemUpdateView, ItemDeleteView, ReservationDetailView, ReservationDeleteView,ItemBookFailedView, ReservationDeleteFailedView,RankView, ContactFromView, ContactReultView
 
 # アプリケーションのルーティング設定
 
@@ -31,6 +31,8 @@ urlpatterns = [
     #    path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')), # [追加]
     path('rank/',RankView.as_view(),name='rank'),
+    path('contact/', ContactFromView.as_view(template_name='app/contact.html'), name='contact'),
+    path('contact_result', ContactReultView.as_view(template_name='app/contact_results.html'), name='contact_result'),
 ]
 
 

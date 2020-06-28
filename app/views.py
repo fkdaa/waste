@@ -9,6 +9,7 @@ from django.views.generic import DetailView, TemplateView, FormView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
 from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
 
 from .filters import ItemFilterSet
 from .filters import ReservationFilterSet
@@ -16,6 +17,7 @@ from .filters import ReservationFilterSet
 from .forms import ItemForm
 from .forms import F_ItemForm
 from .forms import BookForm
+from .forms import ContactForm
 
 from .models import Item
 from .models import F_Item
@@ -422,7 +424,7 @@ class SupplyList(LoginRequiredMixin, FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        return F_Item.objects.filter(created_by=self.request.user, quontity_left__gte=1).order_by('-created_at')
+        return F_Item.objects.filter(created_by=self.request.user, deadline__gt=timezone.datetime.now()).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -625,3 +627,32 @@ class ReservationDeleteFailedView(LoginRequiredMixin, TemplateView):
         kwargs['pk'] = self.kwargs['pk']
 
         return super().get_context_data(**kwargs)
+
+
+class ContactFromView(LoginRequiredMixin, FormView):
+    form_class = ContactForm
+
+    def form_valid(self, form):
+        context = {
+            "user_name" : self.request.user.full_name,
+            "user_id" : self.request.user.username,
+            "contact_time" : timezone.now(),
+            "contact_body" : form.cleaned_data['message'],
+        }
+        message = render_to_string('mail/contact.txt', context)
+        EmailMessage(
+            subject = "【vegebank】お問い合わせ内容のご確認",
+            body = message,
+            from_email = 'vegebank14@gmail.com',
+            to = [self.request.user.email],
+            bcc = ['s16073@tokyo.kosen-ac.jp','s16164@tokyo.kosen-ac.jp'],
+        ).send()
+
+        return HttpResponseRedirect(reverse_lazy('contact_result',))
+
+
+class ContactReultView(LoginRequiredMixin, TemplateView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['success'] = "お問い合わせは正常に送信されました。"
+        return context

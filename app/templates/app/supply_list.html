@@ -2,6 +2,7 @@
 {% block content %}
     {% load crispy_forms_tags %}
     <div class="container">
+      <br><br>
         <h2 class="text-center">出品中の商品</h2>
         <div id="myModal" class="modal fade" tabc_index="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -114,7 +115,7 @@
                                         <a class="btn btn-outline-warning " href="{% url 'item_reservation_list' item.pk %}">注文一覧</a>
                                         <a class="btn btn-outline-dark " href="{% url 'detail' item.pk %}">詳細</a>
                                         <a class="btn btn-outline-info " href="{% url 'update' item.pk %}">編集</a>
-                                        <a class="btn btn-outline-danger " href="{% url 'delete' item.pk %}">削除</a>
+                                        <a class="btn btn-outline-danger " href="{% url 'delete' item.pk %}">出品取り下げ</a>
                                     </div>
                                 </div>
                             </div>
