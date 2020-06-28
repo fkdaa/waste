@@ -148,3 +148,6 @@
 2020-06-27 20:02:44,414 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
 2020-06-27 20:02:55,378 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
 2020-06-27 20:03:03,536 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-06-28 13:27:12,617 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-06-28 13:27:25,424 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-06-28 13:27:38,883 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
