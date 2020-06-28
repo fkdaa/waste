@@ -43,13 +43,18 @@
                     {% for item in object_list %}
                         <li class="list-group-item">
                             {# item_detail_contents.html を参考に必要な項目を追加してください #}
+                        <div class="row">
+                          <div class="col-md-4">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                   {% if item.target.photo %}
-                                    <a href="{% url 'reservation_detail' item.pk %}"><img src="{{item.target.photo.url}}" class="img-fluid img-thumbnail float-right" width="100%" height="auto"/></a>
+                                    <a href="{% url 'reservation_detail' item.pk %}"><img src="{{item.target.photo.url}}" class="img-fluid img-thumbnail mx-auto d-block" style="max-height:12rem;" height="100%" width="auto"/></a>
                                   {% endif %}
                                 </div>
                             </div>
+                          </div>
+
+                          <div class="col-md-8">
                             <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>購入者</p>
@@ -110,6 +115,8 @@
                                     </div>
                                 </div>
                             </div>
+                          </div>
+                        </div>
                         </li>
                     {% empty %}
                         <li class="list-group-item">
