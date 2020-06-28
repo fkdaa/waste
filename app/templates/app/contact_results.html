@@ -1,0 +1,13 @@
+<!-- contact/contact_result.html -->
+
+{% extends "./_base.html" %}
+
+{% block content %}
+<div class="container">
+{{ success }}
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">トップページへ戻る</a>
+    </div>
+</div>
+{% endblock %}

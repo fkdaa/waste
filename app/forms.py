@@ -47,3 +47,13 @@ class BookForm(forms.ModelForm):
         self.fields['quontity'].initial = 1
         for field in self.fields.values():
             field.widget.attrs['class'] = 'form-control'
+
+
+class ContactForm(forms.Form):
+    message = forms.CharField(
+        label='',
+        widget=forms.Textarea(attrs={
+            'class' : 'form-control',
+            'placeholder' : "お問い合わせ内容",
+        }),
+    )

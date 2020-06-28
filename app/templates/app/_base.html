@@ -50,10 +50,12 @@ li {
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="Navber">
         <ul class="navbar-nav mr-auto">
+          {% if request.user.is_active %}
           {% if request.user.is_staff %}
                           <li class="navbar-text text-light">{{ request.user.full_name }}でログイン中(農家権限)</li>
           {% else %}
                           <li class="navbar-text text-light">{{ request.user.full_name }}でログイン中 </li>
+          {% endif %}
           {% endif %}
         </ul>
         <ul class="navbar-nav">
@@ -83,7 +85,15 @@ li {
 </nav>
 
 {% block content %}
+
 {% endblock %}
+
+<footer class="footer">
+  <div class="container">
+    <br><br>
+    <p class="text-muted">Copyright © 2019- 東京高専5J社会実装廃棄野菜班 Allright Reserved.</p>
+  </div>
+</footer>
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
