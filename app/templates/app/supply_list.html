@@ -7,7 +7,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title">検索条件</h5>
+                        <h5 class="modal-title">並び替え条件</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -19,18 +19,18 @@
                     </form>
                     <div class="modal-footer">
                         <a class="btn btn-outline-dark" data-dismiss="modal">戻る</a>
-
+                        <button type="submit" class="btn btn-outline-success" form="filter">並び替え</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <a class="btn btn-secondary filtered" style="visibility:hidden" href="/?page=1">検索を解除</a>
+                <a class="btn btn-secondary filtered" style="visibility:hidden" href="?page=1">並び替えを解除</a>
                 <div class="float-right mt-1">
                     <a class="btn btn-outline-dark float-right" href="{% url 'f_index' %}">戻る</a>
-                    <a class="btn btn-outline-dark" href="{% url 'F_create' %}">新規出品</a>
-                    <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
+                    <a class="btn btn-outline-primary" href="{% url 'F_create' %}">新規出品</a>
+                    <a class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" href="#">並び替え</a>
                 </div>
             </div>
         </div>
@@ -111,10 +111,10 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="float-right">
-                                        <a class="btn btn-outline-dark " href="{% url 'item_reservation_list' item.pk %}">注文一覧</a>
+                                        <a class="btn btn-outline-warning " href="{% url 'item_reservation_list' item.pk %}">注文一覧</a>
                                         <a class="btn btn-outline-dark " href="{% url 'detail' item.pk %}">詳細</a>
-                                        <a class="btn btn-outline-dark " href="{% url 'update' item.pk %}">編集</a>
-                                        <a class="btn btn-outline-dark " href="{% url 'delete' item.pk %}">削除</a>
+                                        <a class="btn btn-outline-info " href="{% url 'update' item.pk %}">編集</a>
+                                        <a class="btn btn-outline-danger " href="{% url 'delete' item.pk %}">削除</a>
                                     </div>
                                 </div>
                             </div>
@@ -137,8 +137,8 @@
             <div class="col-12">
                 <div class="float-right mt-1 mb-3">
                     <a class="btn btn-outline-dark float-right" href="{% url 'f_index' %}">戻る</a>
-                    <a class="btn btn-outline-dark" href="{% url 'F_create' %}">新規出品</a>
-                    <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
+                    <a class="btn btn-outline-primary" href="{% url 'F_create' %}">新規出品</a>
+                    <a class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" href="#">並び替え</a>
                 </div>
             </div>
         </div>

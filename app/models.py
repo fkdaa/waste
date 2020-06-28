@@ -231,7 +231,7 @@ class F_Item(models.Model):
 
     #ランク
     RANK = (
-        (1, 'Aランク（販売用良品)'), # 一般流通品
+        (1, 'Aランク（一般流通品)'), # 一般流通品
         (2, 'Bランク（販売用訳あり品）'), # ロス野菜良品
         (3, 'Cランク（販売不適可品）'), # ロス野菜
         (4, 'Dランク（可食品）') # 非食用品
@@ -410,7 +410,7 @@ class Reservation(models.Model):
         """
         リストボックスや管理画面での表示
         """
-        return self.subscriber
+        return self.subscriber.full_name
 
     class Meta:
         """
