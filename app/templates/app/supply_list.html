@@ -27,10 +27,17 @@
         </div>
         <div class="row">
             <div class="col-12">
+                <div class="float-right">
+                    <a class="btn btn-outline-warning " href="{% url 'farmer_reservation_list' user.pk %}">受注一覧</a>
+                    <a class="btn btn-outline-primary" href="{% url 'F_create' %}">新規出品</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
                 <a class="btn btn-secondary filtered" style="visibility:hidden" href="?page=1">並び替えを解除</a>
                 <div class="float-right mt-1">
                     <a class="btn btn-outline-dark float-right" href="{% url 'f_index' %}">戻る</a>
-                    <a class="btn btn-outline-primary" href="{% url 'F_create' %}">新規出品</a>
                     <a class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" href="#">並び替え</a>
                 </div>
             </div>
@@ -50,7 +57,7 @@
                             <div class="row">
                               <div class="col-md-4">
                                 {% if item.photo %}
-                                    <img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" width="100%" height="auto"/>
+                                    <a href="{% url 'detail' item.pk %}"><img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" width="100%" height="auto"/></a>
                                 {% endif %}
                               </div>
                             </div>
@@ -61,14 +68,6 @@
                               <div class="col-7 col-sm-9">
                                   <p>{{ item.vegetable|default_if_none:"未入力" }} ({{item.unit_amount}})</p>
                               </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-5 col-sm-3">
-                                    <p>在庫</p>
-                                </div>
-                                <div class="col-7 col-sm-9">
-                                    <p>{{item.quontity_left}}セット</p>
-                                </div>
                             </div>
 
                             <div class="row">
@@ -101,18 +100,11 @@
                                     </div>
                                 </div>
                             {% endif %}
-                            <div class="row">
-                                <div class="col-5 col-sm-3">
-                                    <p>購入期限</p>
-                                </div>
-                                <div class="col-7 col-sm-9">
-                                    <p>{{ item.deadline|default_if_none:"未入力" }}</p>
-                                </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-12">
                                     <div class="float-right">
-                                        <a class="btn btn-outline-warning " href="{% url 'item_reservation_list' item.pk %}">注文一覧</a>
+                                        <a class="btn btn-outline-warning " href="{% url 'item_reservation_list' item.pk %}">受注一覧</a>
                                         <a class="btn btn-outline-dark " href="{% url 'detail' item.pk %}">詳細</a>
                                         <a class="btn btn-outline-info " href="{% url 'update' item.pk %}">編集</a>
                                         <a class="btn btn-outline-danger " href="{% url 'delete' item.pk %}">出品取り下げ</a>
