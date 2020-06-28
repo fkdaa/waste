@@ -38,6 +38,12 @@ class TopView(TemplateView):
     template_name = "app/index.html"
 
 
+
+class RankView(TemplateView):
+    template_name="app/rank.html"
+
+
+
 class CustomerView(FilterView):
     """
     ビュー：一覧表示画面
