@@ -349,7 +349,7 @@ class F_Item(models.Model):
         """
         リストボックスや管理画面での表示
         """
-        return self.I_name.username
+        return self.vegetable.name
 
     def get_filename(self):
         return os.path.basename(self.photo.name)
@@ -410,7 +410,7 @@ class Reservation(models.Model):
         """
         リストボックスや管理画面での表示
         """
-        return self.subscriber.full_name
+        return self.target.vegetable.name
 
     class Meta:
         """
