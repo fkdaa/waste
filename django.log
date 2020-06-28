@@ -178,3 +178,50 @@
 2020-06-28 21:37:03,397 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
 2020-06-28 21:38:13,109 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
 2020-06-28 21:38:52,538 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-06-28 22:59:52,478 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing BlpImagePlugin
+2020-06-28 22:59:52,479 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing BmpImagePlugin
+2020-06-28 22:59:52,481 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing BufrStubImagePlugin
+2020-06-28 22:59:52,483 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing CurImagePlugin
+2020-06-28 22:59:52,484 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing DcxImagePlugin
+2020-06-28 22:59:52,486 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing DdsImagePlugin
+2020-06-28 22:59:52,487 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing EpsImagePlugin
+2020-06-28 22:59:52,502 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing FitsStubImagePlugin
+2020-06-28 22:59:52,504 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing FliImagePlugin
+2020-06-28 22:59:52,509 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing FpxImagePlugin
+2020-06-28 22:59:52,509 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:407 Image: failed to import FpxImagePlugin: No module named 'olefile'
+2020-06-28 22:59:52,510 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing FtexImagePlugin
+2020-06-28 22:59:52,511 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing GbrImagePlugin
+2020-06-28 22:59:52,521 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing GifImagePlugin
+2020-06-28 22:59:52,523 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing GribStubImagePlugin
+2020-06-28 22:59:52,524 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing Hdf5StubImagePlugin
+2020-06-28 22:59:52,527 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing IcnsImagePlugin
+2020-06-28 22:59:52,528 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing IcoImagePlugin
+2020-06-28 22:59:52,529 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing ImImagePlugin
+2020-06-28 22:59:52,530 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing ImtImagePlugin
+2020-06-28 22:59:52,531 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing IptcImagePlugin
+2020-06-28 22:59:52,532 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing JpegImagePlugin
+2020-06-28 22:59:52,534 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing Jpeg2KImagePlugin
+2020-06-28 22:59:52,534 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing McIdasImagePlugin
+2020-06-28 22:59:52,536 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing MicImagePlugin
+2020-06-28 22:59:52,537 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:407 Image: failed to import MicImagePlugin: No module named 'olefile'
+2020-06-28 22:59:52,538 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing MpegImagePlugin
+2020-06-28 22:59:52,539 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing MpoImagePlugin
+2020-06-28 22:59:52,540 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing MspImagePlugin
+2020-06-28 22:59:52,540 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PalmImagePlugin
+2020-06-28 22:59:52,541 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PcdImagePlugin
+2020-06-28 22:59:52,542 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PcxImagePlugin
+2020-06-28 22:59:52,542 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PdfImagePlugin
+2020-06-28 22:59:52,549 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PixarImagePlugin
+2020-06-28 22:59:52,550 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PngImagePlugin
+2020-06-28 22:59:52,550 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PpmImagePlugin
+2020-06-28 22:59:52,551 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing PsdImagePlugin
+2020-06-28 22:59:52,552 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing SgiImagePlugin
+2020-06-28 22:59:52,553 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing SpiderImagePlugin
+2020-06-28 22:59:52,554 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing SunImagePlugin
+2020-06-28 22:59:52,558 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing TgaImagePlugin
+2020-06-28 22:59:52,559 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing TiffImagePlugin
+2020-06-28 22:59:52,559 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing WebPImagePlugin
+2020-06-28 22:59:52,560 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing WmfImagePlugin
+2020-06-28 22:59:52,561 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing XbmImagePlugin
+2020-06-28 22:59:52,563 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing XpmImagePlugin
+2020-06-28 22:59:52,564 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing XVThumbImagePlugin

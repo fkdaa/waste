@@ -1,67 +1,73 @@
 <div class="row">
   <div class="col-md-4">
-    {% if f_item.photo %}
-        <img src="{{f_item.photo.url}}" class="img-fluid img-thumbnail float-right" width="100%" height="auto"/>
+    <div class="row">
+      <div class="col-md-12">
+        {% if f_item.photo %}
+            <img src="{{f_item.photo.url}}" class="img-fluid img-thumbnail mx-auto d-block" style="max-height:25rem;" height="100%" width="auto"/>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="row">
+        <div class="col-5 col-sm-3">
+            <p>種類</p>
+        </div>
+        <div class="col-7 col-sm-9">
+            <p>{{ f_item.vegetable.name|default_if_none:"未入力" }} ({{f_item.unit_amount}})</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-5 col-sm-3">
+            <p>在庫</p>
+        </div>
+        <div class="col-7 col-sm-9">
+            <p>{{f_item.quontity_left}}セット</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-5 col-sm-3">
+            <p>商品ランク</p>
+        </div>
+        <div class="col-7 col-sm-9">
+            <p>{{ f_item.get_rank_display|default_if_none:"未分類" }}</p>
+        </div>
+    </div>
+
+    {% if item.tags.all%}
+        <div class="row">
+            <div class="col-5 col-sm-3">
+                <p>訳あり理由</p>
+            </div>
+            <div class="col-7 col-sm-9">
+                {% for tag in item.tags.all %}
+                    <p>{{ tag.name }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <div class="col-5 col-sm-3">
+            <p>1セット単価</p>
+        </div>
+        <div class="col-7 col-sm-9">
+            <p>￥{{ f_item.price|default_if_none:"0" }}</p>
+        </div>
+    </div>
+
+    {% if f_item.memo %}
+        <div class="row">
+            <div class="col-5 col-sm-3">
+                <p>備考</p>
+            </div>
+            <div class="col-7 col-sm-9">
+                <p>{{  f_item.memo|default_if_none:"未入力" }}</p>
+            </div>
+        </div>
     {% endif %}
   </div>
 </div>
-
-<div class="row">
-    <div class="col-5 col-sm-3">
-        <p>種類</p>
-    </div>
-    <div class="col-7 col-sm-9">
-        <p>{{ f_item.vegetable.name|default_if_none:"未入力" }} ({{f_item.unit_amount}})</p>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-5 col-sm-3">
-        <p>在庫</p>
-    </div>
-    <div class="col-7 col-sm-9">
-        <p>{{f_item.quontity_left}}セット</p>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-5 col-sm-3">
-        <p>商品ランク</p>
-    </div>
-    <div class="col-7 col-sm-9">
-        <p>{{ f_item.get_rank_display|default_if_none:"未分類" }}</p>
-    </div>
-</div>
-
-{% if item.tags.all%}
-    <div class="row">
-        <div class="col-5 col-sm-3">
-            <p>訳あり理由</p>
-        </div>
-        <div class="col-7 col-sm-9">
-            {% for tag in item.tags.all %}
-                <p>{{ tag.name }}</p>
-            {% endfor %}
-        </div>
-    </div>
-{% endif %}
-
-<div class="row">
-    <div class="col-5 col-sm-3">
-        <p>1セット単価</p>
-    </div>
-    <div class="col-7 col-sm-9">
-        <p>￥{{ f_item.price|default_if_none:"0" }}</p>
-    </div>
-</div>
-
-{% if f_item.memo %}
-    <div class="row">
-        <div class="col-5 col-sm-3">
-            <p>備考</p>
-        </div>
-        <div class="col-7 col-sm-9">
-            <p>{{  f_item.memo|default_if_none:"未入力" }}</p>
-        </div>
-    </div>
-{% endif %}
