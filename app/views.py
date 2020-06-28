@@ -38,10 +38,8 @@ class TopView(TemplateView):
     template_name = "app/index.html"
 
 
-
 class RankView(TemplateView):
     template_name="app/rank.html"
-
 
 
 class CustomerView(FilterView):
@@ -292,8 +290,7 @@ class ItemBookView(LoginRequiredMixin, FormView):
 
                 context_buy = {
                     #テンプレートに渡す項目
-                    "user_name" : user_buy.username,
-                    "item_name" : item.target.title,
+                    "user_name" : user_buy.full_name,
                     "vege_name" : item.target.vegetable.name,
                     "item_unit" : item.target.unit_amount,
                     "item_quantity" : item.quontity,
@@ -302,12 +299,11 @@ class ItemBookView(LoginRequiredMixin, FormView):
                 }
                 context_sell = {
                     #テンプレートに渡す項目
-                    "user_name" : user_sell.username,
-                    "item_name" : item.target.title,
+                    "user_name" : user_sell.farm_name,
                     "vege_name" : item.target.vegetable.name,
                     "item_unit" : item.target.unit_amount,
                     "item_quantity" : item.quontity,
-                    "item_to" : user_buy.username,
+                    "item_to" : user_buy.full_name,
                     "item_fee" : item.total_price
                 }
 
@@ -371,7 +367,6 @@ class ItemBookFailedView(LoginRequiredMixin, CreateView):
         kwargs['pk'] = self.kwargs['pk']
 
         return super().get_context_data(**kwargs)
-
 
 
 class ReservationDetailView(LoginRequiredMixin, DetailView):
@@ -573,23 +568,23 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
 
             context_buy = {
                 #テンプレートに渡す項目
-                "user_name" : user_buy.username,
-                "item_name" : item.target.title,
+                "user_name" : user_buy.full_name,
                 "vege_name" : item.target.vegetable.name,
                 "item_unit" : item.target.unit_amount,
                 "item_quantity" : item.quontity,
                 "item_from" : user_sell.farm_name,
-                "item_fee" : item.total_price
+                "item_fee" : item.total_price,
+                "item_time" : item.created_at,
             }
             context_sell = {
                     #テンプレートに渡す項目
-                "user_name" : user_sell.username,
-                "item_name" : item.target.title,
+                "user_name" : user_sell.farm_name,
                 "vege_name" : item.target.vegetable.name,
                 "item_unit" : item.target.unit_amount,
                 "item_quantity" : item.quontity,
-                "item_to" : user_buy.username,
-                "item_fee" : item.total_price
+                "item_to" : user_buy.full_name,
+                "item_fee" : item.total_price,
+                "item_time" : item.created_at
             }
 
             message_buy = render_to_string('mail/toBuyer_delete.txt', context_buy)
