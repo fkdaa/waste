@@ -50,7 +50,10 @@
                                 <div class="col-md-12">
                                   {% if item.target.photo %}
                                     <a href="{% url 'reservation_detail' item.pk %}"><img src="{{item.target.photo.url}}" class="img-fluid img-thumbnail mx-auto d-block" style="max-height:12rem;" height="100%" width="auto"/></a>
-                                  {% endif %}
+                                    {% else %}
+                                    <a href="{% url 'detail' item.pk %}"><img src="/app/media/f_items/defo.png" class="img-fluid img-thumbnail mx-auto d-block" style="max-height:25rem;" height="30%" width="auto"/></a>
+
+                                    {% endif %}
                                 </div>
                             </div>
                           </div>
