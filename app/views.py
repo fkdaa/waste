@@ -284,7 +284,7 @@ class ItemBookView(LoginRequiredMixin, FormView):
 
                 # メール送信
                 from_email = 'vegebank14@gmail.com'#送信元
-                subject_buy = "【VegiBank】購入内容のご確認（自動送信）" #購入に変えたほうがいいかも
+                subject_buy = "【VegeBank】購入内容のご確認（自動送信）" #購入に変えたほうがいいかも
                 subject_sell= "【VegeBank】出品中の商品が購入されました（自動送信）"
 
                 user_buy = self.request.user
@@ -621,7 +621,7 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
 
             # メール送信
             from_email = 'vegebank14@gmail.com'#送信元
-            subject_buy = "【VegiBank】ご注文キャンセルのご確認（自動送信）" #購入に変えたほうがいいかも
+            subject_buy = "【VegeBank】ご注文キャンセルのご確認（自動送信）" #購入に変えたほうがいいかも
             subject_sell= "【VegeBank】出品中の商品の注文がキャンセルされました（自動送信）"
 
             user_buy = self.request.user

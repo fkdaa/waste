@@ -12,7 +12,7 @@
 ■予約内容
 商品名　　：{{vege_name}} ({{item_unit}})
 数量　　　：{{item_quantity}}セット
-出品元　　：{{item_to}}
+購入者　　：{{item_to}}
 合計金額　：{{item_fee}}円
 
 ーーーーーーーーーーーーーーーーー
