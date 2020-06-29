@@ -84,6 +84,15 @@
                                     <p>商品ランク</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
+                                    {% if 'A' in item.get_rank_display %}
+                                    <img src="/app/media/f_items/RankA.png" width="20%" height="60%"/>
+                                    {% elif 'B' in item.get_rank_display %}
+                                    <img src="/app/media/f_items/RankB.png" width="20%" height="60%"/>
+                                    {% elif 'C' in item.get_rank_display %}
+                                    <img src="/app/media/f_items/RankC.png" width="20%" height="60%"/>
+                                    {% elif 'D' in item.get_rank_display %}
+                                    <img src="/app/media/f_items/RankD.png" width="20%" height="60%"/>
+                                   {% endif %}
                                     <p>{{ item.get_rank_display|default_if_none:"未分類" }}</p>
                                 </div>
                             </div>
