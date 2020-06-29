@@ -207,3 +207,9 @@
 2020-06-29 11:49:01,927 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing XbmImagePlugin
 2020-06-29 11:49:01,928 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing XpmImagePlugin
 2020-06-29 11:49:01,928 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing XVThumbImagePlugin
+2020-06-29 12:35:28,392 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-06-29 13:14:31,306 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-06-29 14:03:45,952 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-06-29 14:43:50,448 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-06-29 14:44:01,642 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-06-29 14:44:09,121 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
