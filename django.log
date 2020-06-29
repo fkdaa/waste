@@ -225,3 +225,5 @@
 2020-06-28 22:59:52,561 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing XbmImagePlugin
 2020-06-28 22:59:52,563 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing XpmImagePlugin
 2020-06-28 22:59:52,564 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing XVThumbImagePlugin
+2020-06-29 13:20:42,198 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-06-29 13:20:47,805 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
