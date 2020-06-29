@@ -2,6 +2,7 @@
 {% block content %}
     {% load crispy_forms_tags %}
     <div class="container">
+      <br><br>
         <h2 class="text-center">商品一覧</h2>
         <div id="myModal" class="modal fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -26,12 +27,12 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <a class="btn btn-secondary filtered" style="visibility:hidden" href="/?page=1">検索を解除</a>
+                <a class="btn btn-secondary filtered" style="visibility:hidden" href="?page=1">検索を解除</a>
                 <div class="float-right mt-1">
                     <a class="btn btn-outline-dark" href="{% url 'C_View' %}">消費者データ</a>
                     <a class="btn btn-outline-dark" href="{% url 'supply_list' %}">農家データ</a>
                     <a class="btn btn-outline-dark" href="{% url 'reservation_list' %}">購入データ</a>
-                    
+
                     <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
                 </div>
             </div>
@@ -93,7 +94,7 @@
                                         <a class="btn btn-outline-dark " href="{% url 'detail' item.pk %}">詳細</a>
                                         <a class="btn btn-outline-dark " href="{% url 'update' item.pk %}">編集</a>
                                         <a class="btn btn-outline-dark " href="{% url 'delete' item.pk %}">削除</a>
-                                        
+
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +117,7 @@
                 <div class="float-right mt-1 mb-3">
                     <a class="btn btn-outline-dark" href="{% url 'create' %}">新規需要</a>
                     <a class="btn btn-outline-dark" href="{% url 'F_create' %}">新規供給</a>
-                    
+
 
                     <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
                 </div>

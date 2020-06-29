@@ -9,6 +9,7 @@ from django.views.generic import DetailView, TemplateView, FormView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django_filters.views import FilterView
 from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
 
 from .filters import ItemFilterSet
 from .filters import ReservationFilterSet
@@ -16,6 +17,7 @@ from .filters import ReservationFilterSet
 from .forms import ItemForm
 from .forms import F_ItemForm
 from .forms import BookForm
+from .forms import ContactForm
 
 from .models import Item
 from .models import F_Item
@@ -238,13 +240,13 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
 
 class ItemDeleteView(LoginRequiredMixin, DeleteView):
     """
-    ビュー：削除画面
+    ビュー：取り消し画面
     """
     model = F_Item
 
     def delete(self, request, *args, **kwargs):
         """
-        削除処理
+        取り消し処理
         """
         item = self.get_object()
         item.delete()
@@ -422,7 +424,7 @@ class SupplyList(LoginRequiredMixin, FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        return F_Item.objects.filter(created_by=self.request.user, deadline__gt=timezone.datetime.now(),quontity_left__gte=1).order_by('-created_at')
+        return F_Item.objects.filter(created_by=self.request.user, deadline__gt=timezone.datetime.now()).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -430,7 +432,9 @@ class SupplyList(LoginRequiredMixin, FilterView):
         """
         # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
         # 例：kwargs['sample'] = 'sample'
+        kwargs['user'] = self.request.user
         return super().get_context_data(object_list=object_list, **kwargs)
+
 
 class ItemReservationList(LoginRequiredMixin, FilterView):
     """
@@ -486,6 +490,63 @@ class ItemReservationList(LoginRequiredMixin, FilterView):
         kwargs['pk'] = self.kwargs['pk']
 
         return super().get_context_data(object_list=object_list, **kwargs)
+
+
+class FarmerReservationList(LoginRequiredMixin, FilterView):
+    """
+    ビュー：一覧表示画面
+
+    以下のパッケージを使用
+    ・django-filter 一覧画面(ListView)に検索機能を追加
+    https://django-filter.readthedocs.io/en/master/
+    """
+    model = Reservation
+
+    # django-filter 設定
+    filterset_class = ReservationFilterSet
+    # django-filter ver2.0対応 クエリ未設定時に全件表示する設定
+    strict = False
+
+    # 1ページの表示
+    paginate_by = 10
+
+    def get(self, request, **kwargs):
+        """
+        リクエスト受付
+        セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
+        """
+
+        # 一覧画面内の遷移(GETクエリがある)ならクエリを出品・編集を確定する
+        if request.GET:
+            request.session['query'] = request.GET
+        # 詳細画面・登録画面からの遷移(GETクエリはない)ならクエリを復元する
+        else:
+            request.GET = request.GET.copy()
+            if 'query' in request.session.keys():
+                for key in request.session['query'].keys():
+                    request.GET[key] = request.session['query'][key]
+
+        return super().get(request, **kwargs)
+
+    def get_queryset(self):
+        """
+        ソート順・デフォルトの絞り込みを指定
+        """
+        # デフォルトの並び順として、登録時間（降順）をセットする。
+
+        return Reservation.objects.filter(target__I_name_id=self.kwargs['pk']).order_by('-created_at')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        """
+        表示データの設定
+        """
+        # 表示データを追加したい場合は、ここでキーを追加しテンプレート上で表示する
+        # 例：kwargs['sample'] = 'sample'
+
+        kwargs['pk'] = self.kwargs['pk']
+
+        return super().get_context_data(object_list=object_list, **kwargs)
+
 
 class ReservationList(LoginRequiredMixin, FilterView):
     """
@@ -543,16 +604,16 @@ class ReservationList(LoginRequiredMixin, FilterView):
 
 class ReservationDeleteView(LoginRequiredMixin, DeleteView):
     """
-    ビュー：削除画面
+    ビュー：取り消し画面
     """
     model = Reservation
 
     def delete(self, request, *args, **kwargs):
         """
-        削除処理
+        取り消し処理
         """
         item = self.get_object()
-        if timezone.now() < item.created_at + timedelta(hours=24) and date.today() < item.target.deadline:#注文から２４時間以内かつ出品期限を過ぎていなければ削除可能
+        if timezone.now() < item.created_at + timedelta(hours=24) and date.today() < item.target.deadline:#注文から２４時間以内かつ出品期限を過ぎていなければ取り消し可能
 
             if item.created_at > item.target.updated_at: #在庫数を戻すか否か
                 item.target.quontity_left += item.quontity
@@ -623,3 +684,32 @@ class ReservationDeleteFailedView(LoginRequiredMixin, TemplateView):
         kwargs['pk'] = self.kwargs['pk']
 
         return super().get_context_data(**kwargs)
+
+
+class ContactFromView(LoginRequiredMixin, FormView):
+    form_class = ContactForm
+
+    def form_valid(self, form):
+        context = {
+            "user_name" : self.request.user.full_name,
+            "user_id" : self.request.user.username,
+            "contact_time" : timezone.now(),
+            "contact_body" : form.cleaned_data['message'],
+        }
+        message = render_to_string('mail/contact.txt', context)
+        EmailMessage(
+            subject = "【vegebank】お問い合わせ内容のご確認",
+            body = message,
+            from_email = 'vegebank14@gmail.com',
+            to = [self.request.user.email],
+            bcc = ['s16073@tokyo.kosen-ac.jp','s16164@tokyo.kosen-ac.jp'],
+        ).send()
+
+        return HttpResponseRedirect(reverse_lazy('contact_result',))
+
+
+class ContactReultView(LoginRequiredMixin, TemplateView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['success'] = "お問い合わせは正常に送信されました。"
+        return context

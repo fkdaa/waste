@@ -1,36 +1,33 @@
-
 {% extends "./_base.html" %}
 {% block content %}
     {% load crispy_forms_tags %}
     <div class="container">
-        <h2 class="text-center">注文一覧</h2>
+        <h2 class="text-center">受注一覧（全体）</h2>
         <div id="myModal" class="modal fade" tabc_index="-1" role="dialog">
             <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">検索条件</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                <div class="modal-header">
+                    <h5 class="modal-title">並び替え条件</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="filter" method="get">
+                    <div class="modal-body">
+                        {{ filter.form|crispy }}
                     </div>
-                    <form id="filter" method="get">
-                        <div class="modal-body">
-                            {{ filter.form|crispy }}
-                        </div>
-                    </form>
-                    <div class="modal-footer">
-                        <a class="btn btn-outline-dark" data-dismiss="modal">戻る</a>
-                        <button type="submit" class="btn btn-outline-dark" form="filter">検索</button>
-                    </div>
+                </form>
+                <div class="modal-footer">
+                    <a class="btn btn-outline-dark" data-dismiss="modal">戻る</a>
+                    <button type="submit" class="btn btn-outline-dark" form="filter">並び替え</button>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <a class="btn btn-secondary filtered" style="visibility:hidden" href="item_reservation_list">検索を解除</a>
+                <a class="btn btn-secondary filtered" style="visibility:hidden" href="?page=1">並び替えを解除</a>
                 <div class="float-right mt-1">
                     <a class="btn btn-outline-dark float-right" href="{% url 'supply_list' pk %}">戻る</a>
-                    <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
+                    <a class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" href="#">並び替え</a>
                 </div>
             </div>
         </div>
@@ -46,6 +43,18 @@
                     {% for item in object_list %}
                         <li class="list-group-item">
                             {# item_detail_contents.html を参考に必要な項目を追加してください #}
+                        <div class="row">
+                          <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-12">
+                                  {% if item.target.photo %}
+                                    <a href="{% url 'reservation_detail' item.pk %}"><img src="{{item.target.photo.url}}" class="img-fluid img-thumbnail mx-auto d-block" style="max-height:12rem;" height="100%" width="auto"/></a>
+                                  {% endif %}
+                                </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-8">
                             <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>購入者</p>
@@ -55,18 +64,11 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
-                                  {% if item.photo %}
-                                      <img src="{{item.target.photo.url}}" class="img-fluid img-thumbnail float-right" width="100%" height="auto"/>
-                                  {% endif %}
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>購入数量</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{item.quontity}}セット</p>
+                                    <p>{{item.target.unit_amount}}　×　{{item.quontity}}セット</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -74,7 +76,7 @@
                                     <p>購入金額</p>
                                 </div>
                                 <div class="col-7 col-sm-9">
-                                    <p>{{item.total_price}}セット</p>
+                                    <p>￥ {{item.total_price}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -113,6 +115,8 @@
                                     </div>
                                 </div>
                             </div>
+                          </div>
+                        </div>
                         </li>
                     {% empty %}
                         <li class="list-group-item">
@@ -126,13 +130,12 @@
             <div class="col-10 mx-auto">
                 {% include "./_pagination.html" %}
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="float-right mt-1 mb-3">
-                        <!--<a class="btn btn-outline-dark" href="{% url 'create' %}">新規需要</a>-->
-                        <a class="btn btn-outline-dark float-right" href="{% url 'supply_list' pk %}">戻る</a>
-                        <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
-                    </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="float-right mt-1 mb-3"></div>
+                    <a class="btn btn-outline-dark float-right" href="{% url 'supply_list' pk %}">戻る</a>
+                    <a class="btn btn-outline-success float-right" data-toggle="modal" data-target="#myModal" href="#">並び替え</a>
                 </div>
             </div>
         </div>

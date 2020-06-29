@@ -4,6 +4,7 @@
     {% if request.user.is_staff %}
 
     <div class="container">
+        <br><br>
         <h2 class="text-center">商品一覧</h2>
         <div id="myModal" class="modal fade" tabc_index="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -20,7 +21,7 @@
                         </div>
                     </form>
                     <div class="modal-footer">
-                        <a class="btn btn-outline-dark" data-dismiss="modal">戻る</a>
+                        <a class="btn btn-outline-dark" data-dismiss="modal" href="{{request.META.HTTP_REFERER}}">戻る</a>
                         <button type="submit" class="btn btn-outline-dark" form="filter">検索</button>
                     </div>
                 </div>
@@ -30,11 +31,17 @@
             <div class="col-12">
                 <a class="btn btn-secondary filtered" style="visibility:hidden" href="?page=1">検索を解除</a>
                 <div class="float-right mt-1">
+                    <a class="btn btn-outline-primary" href="{% url 'F_create' %}">新規出品</a>
+                    <a class="btn btn-outline-info" href="{% url 'supply_list' user.id %}">出品一覧</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="float-right mt-1">
                     <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
-                    <a class="btn btn-outline-dark" href="{% url 'F_create' %}">新規出品</a>
-                    <a class="btn btn-outline-dark" href="{% url 'supply_list' user.id %}">出品一覧</a>
 
-                    <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
+                    <a class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" href="#">検索</a>
                 </div>
             </div>
         </div>
@@ -49,14 +56,17 @@
                     {% for item in object_list %}
                         <li class="list-group-item">
                             {# item_detail_contents.html を参考に必要な項目を追加してください #}
-
+                          <div class="row">
+                            <div class="col-md-4">
                               <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-12">
                                   {% if item.photo %}
-                                      <img src="{{item.photo.url}}" class="img-fluid img-thumbnail float-right" width="100%" height="auto"/>
+                                    <a href="{% url 'detail' item.pk %}"><img src="{{item.photo.url}}" class="img-fluid img-thumbnail mx-auto d-block" style="max-height:12rem;" height="100%" width="auto"/></a>
                                   {% endif %}
                                 </div>
                               </div>
+                            </div>
+                            <div class="col-md-8">
                               <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>種類</p>
@@ -65,15 +75,6 @@
                                     <p>{{ item.vegetable|default_if_none:"未入力" }} ({{item.unit_amount}})</p>
                                 </div>
                               </div>
-                            <div class="row">
-                                <div class="col-5 col-sm-3">
-                                    <p>在庫</p>
-                                </div>
-                                <div class="col-7 col-sm-9">
-                                    <p>{{item.quontity_left}}セット</p>
-                                </div>
-                            </div>
-
                             <div class="row">
                                 <div class="col-5 col-sm-3">
                                     <p>商品ランク</p>
@@ -107,29 +108,14 @@
 
 
                             <div class="row">
-                                <div class="col-5 col-sm-3">
-
-                                    <p>販売元</p>
-                                </div>
-                                <div class="col-7 col-sm-9">
-                                    <p>{{ item.I_name.farm_name|default_if_none:"未入力" }}</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-5 col-sm-3">
-                                    <p>購入期限</p>
-                                </div>
-                                <div class="col-7 col-sm-9">
-                                    <p>{{ item.deadline|default_if_none:"未入力" }}</p>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-12">
                                     <div class="float-right">
                                         <a class="btn btn-outline-dark " href="{% url 'detail' item.pk %}">詳細</a>
                                     </div>
                                 </div>
                             </div>
+                          </div>
+                        </div>
                         </li>
                     {% empty %}
                         <li class="list-group-item">
@@ -148,14 +134,14 @@
             <div class="col-12">
                 <div class="float-right mt-1 mb-3">
                     <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
-                    <a class="btn btn-outline-dark" href="{% url 'F_create' %}">新規出品</a>
-                    <a class="btn btn-outline-dark" data-toggle="modal" data-target="#myModal" href="#">検索</a>
+                    <a class="btn btn-outline-primary" href="{% url 'F_create' %}">新規出品</a>
+                    <a class="btn btn-outline-success" data-toggle="modal" data-target="#myModal" href="#">検索</a>
                 </div>
             </div>
         </div>
     </div>
     {% else %}
-    <h1>農家アカウントではないため、ページを表示できません。</h1>
-    <a class="btn btn-outline-dark float-right" href="{% url 'index' %}">戻る</a>
+        <h1>農家アカウントではないため、ページを表示できません。</h1>
+        <a class="btn btn-outline-success float-right" href="{% url 'index' %}">戻る</a>
     {% endif %}
 {% endblock %}

@@ -1,11 +1,3 @@
-<div class="row">
-    <div class="col-5 col-sm-3">
-        <p>注文時間</p>
-    </div>
-    <div class="col-7 col-sm-9">
-        <p>{{ reservation.created_at|date:"Y/m/d G:i:s" }}</p>
-    </div>
-</div>
 
 <div class="row">
     <div class="col-5 col-sm-3">
@@ -13,6 +5,15 @@
     </div>
     <div class="col-7 col-sm-9">
         <p>{{  reservation.quontity }}セット</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-5 col-sm-3">
+        <p>注文時間</p>
+    </div>
+    <div class="col-7 col-sm-9">
+        <p>{{ reservation.created_at|date:"Y/m/d G:i:s" }}</p>
     </div>
 </div>
 <!--
