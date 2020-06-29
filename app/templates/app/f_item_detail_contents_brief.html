@@ -4,6 +4,10 @@
       <div class="col-md-12">
         {% if f_item.photo %}
             <img src="{{f_item.photo.url}}" class="img-fluid img-thumbnail mx-auto d-block" style="max-height:25rem;" height="100%" width="auto"/>
+        {% else %}
+        
+        <img src="/app/media/f_items/defo.png" class="img-fluid img-thumbnail mx-auto d-block" style="max-height:25rem;" height="30%" width="auto"/>
+        
         {% endif %}
       </div>
     </div>
