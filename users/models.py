@@ -85,21 +85,18 @@ class UserLog(models.Model):
         editable=False,
     )
 
-    
+
 
 
     def __str__(self):
         """
         リストボックスや管理画面での表示
         """
-        return self.target.name
-
-    def get_filename(self):
-        return os.path.basename(self.photo.name)
+        return self.target.full_name
 
     class Meta:
         """
         管理画面でのタイトル表示
         """
-        verbose_name = '商品'
-        verbose_name_plural = '商品'
+        verbose_name = 'ユーザーログ'
+        verbose_name_plural = 'ユーザーログ'
