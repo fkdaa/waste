@@ -101,5 +101,5 @@ class UserLog(models.Model):
         """
         管理画面でのタイトル表示
         """
-        verbose_name = '商品'
-        verbose_name_plural = '商品'
+        verbose_name = 'ログ'
+        verbose_name_plural = 'ログ'
