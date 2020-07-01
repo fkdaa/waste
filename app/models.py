@@ -309,7 +309,7 @@ class F_Item(models.Model):
         verbose_name='削除済み',
         blank=False,
         null=False,
-        editable=False,
+        #editable=False,
         default=False,
     )
 
@@ -348,6 +348,13 @@ class F_Item(models.Model):
     # 更新時間
     updated_at = models.DateTimeField(
         verbose_name='更新時間',
+        blank=True,
+        null=True,
+        editable=False,
+    )
+
+    deleted_at = models.DateTimeField(
+        verbose_name='削除時間',
         blank=True,
         null=True,
         editable=False,
@@ -418,8 +425,14 @@ class Reservation(models.Model):
         blank=False,
         null=False,
         default=False,
+        #default=False,
     )
-
+    deleted_at = models.DateTimeField(
+        verbose_name='削除時間',
+        blank=True,
+        null=True,
+        editable=False,
+    )
     def __str__(self):
         """
         リストボックスや管理画面での表示

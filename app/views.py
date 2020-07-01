@@ -279,6 +279,7 @@ class ItemDeleteView(LoginRequiredMixin, DeleteView):
         """
         item = self.get_object()
         item.delete=True
+        item.deleted_at=timezone.datetime.now()
         item.save()
 
         UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="delete_post")
@@ -694,6 +695,7 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
             user_sell.email_user(subject_sell, message_sell, from_email)
 
             item.delete=True
+            item.deleted_at=timezone.datetime.now()
             item.save()
 
             UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="reservation_delete_post")
