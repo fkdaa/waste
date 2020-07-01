@@ -23,9 +23,9 @@ from .models import Item
 from .models import F_Item
 from .models import Reservation
 from .models import User
+from .models import UserLog
 
 from django.conf import settings
-import csv
 
 
 # 未ログインのユーザーにアクセスを許可する場合は、LoginRequiredMixinを継承から外してください。
@@ -43,8 +43,18 @@ class TopView(TemplateView):
 class RankView(TemplateView):
     template_name="app/rank.html"
 
+    def get(self, request, **kwargs):
+        """
+        リクエスト受付
+        セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
+        """
 
-class CustomerView(FilterView):
+        UserLog.objects.create(timestamp=timezone.datetime.now(),label="rank")
+
+        return super().get(request, **kwargs)
+
+
+class CustomerView(LoginRequiredMixin,FilterView):
     """
     ビュー：一覧表示画面
 
@@ -67,6 +77,8 @@ class CustomerView(FilterView):
         リクエスト受付
         セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
         """
+
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="c_index")
 
         # 一覧画面内の遷移(GETクエリがある)ならクエリを出品・編集を確定する
         if request.GET:
@@ -122,6 +134,8 @@ class FarmerView(LoginRequiredMixin, FilterView):
         セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
         """
 
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="f_index")
+
         # 一覧画面内の遷移(GETクエリがある)ならクエリを出品・編集を確定する
         if request.GET:
             request.session['query'] = request.GET
@@ -165,29 +179,9 @@ class ItemDetailView(DetailView):
         """
         kwargs['user'] = self.request.user
 
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="detail")
+
         return super().get_context_data(**kwargs)
-
-
-class ItemCreateView(LoginRequiredMixin, CreateView):
-    """
-    #ビュー：需要登録画面
-    """
-    model = Item
-    form_class = ItemForm
-    success_url = reverse_lazy('index')
-
-    def form_valid(self, form):
-        """
-        #登録処理
-        """
-        item = form.save(commit=False)
-        item.created_by = self.request.user
-        item.created_at = timezone.datetime.now()
-        item.updated_by = self.request.user
-        item.updated_at = timezone.datetime.now()
-        item.save()
-
-        return HttpResponseRedirect(self.success_url)
 
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
@@ -196,6 +190,16 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
     """
     model = F_Item
     form_class = F_ItemForm
+
+    def get(self, request, **kwargs):
+        """
+        リクエスト受付
+        セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
+        """
+
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="create_get")
+
+        return super().get(request, **kwargs)
 
     def form_valid(self, form):
         """
@@ -211,6 +215,8 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         item.save()
         form.save_m2m()
 
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="create_post")
+
         return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
     def get_initial(self):
@@ -225,6 +231,16 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
     model = F_Item
     form_class = F_ItemForm
 
+    def get(self, request, **kwargs):
+        """
+        リクエスト受付
+        セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
+        """
+
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="update_get")
+
+        return super().get(request, **kwargs)
+
     def form_valid(self, form):
         """
         更新処理
@@ -235,6 +251,8 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         item.updated_at = timezone.datetime.now()
         item.save()
 
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="update_post")
+
         return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
 
@@ -244,12 +262,24 @@ class ItemDeleteView(LoginRequiredMixin, DeleteView):
     """
     model = F_Item
 
+    def get(self, request, **kwargs):
+        """
+        リクエスト受付
+        セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
+        """
+
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="delete_get")
+
+        return super().get(request, **kwargs)
+
     def delete(self, request, *args, **kwargs):
         """
         取り消し処理
         """
         item = self.get_object()
         item.delete()
+
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="delete_post")
 
         return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
 
@@ -315,6 +345,8 @@ class ItemBookView(LoginRequiredMixin, FormView):
                 user_buy.email_user(subject_buy, message_buy, from_email)
                 user_sell.email_user(subject_sell, message_sell, from_email)
 
+                UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="book_post")
+
                 return HttpResponseRedirect(reverse_lazy('book_complete',args=(self.request.user.id,)))
 
         else:
@@ -328,15 +360,9 @@ class ItemBookView(LoginRequiredMixin, FormView):
         context["f_item"] = F_Item.objects.get(pk=self.kwargs['pk'])
         context['user'] = self.request.user
 
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="book_get")
+
         return context
-
-
-class ItemBookConfirmView(LoginRequiredMixin, DetailView):
-    """
-    ボツ
-    """
-    def get_queryset(self):
-        return Reservation.objects.filter(target_id=self.kwargs['pk'])
 
 
 class ItemBookCompleteView(LoginRequiredMixin, CreateView):
@@ -351,6 +377,7 @@ class ItemBookCompleteView(LoginRequiredMixin, CreateView):
         表示データの設定
         """
         kwargs['user'] = self.request.user
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="book_complete")
 
         return super().get_context_data(**kwargs)
 
@@ -367,6 +394,7 @@ class ItemBookFailedView(LoginRequiredMixin, CreateView):
         表示データの設定
         """
         kwargs['pk'] = self.kwargs['pk']
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="book_failed")
 
         return super().get_context_data(**kwargs)
 
@@ -387,6 +415,8 @@ class ReservationDetailView(LoginRequiredMixin, DetailView):
         context["f_item"] = F_Item.objects.get(pk=reservation.target_id)
         context['user'] = self.request.user
 
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="reservation_detail")
+
         return context
 
 
@@ -406,6 +436,8 @@ class SupplyList(LoginRequiredMixin, FilterView):
         リクエスト受付
         セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
         """
+
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="supply_list")
 
         # 一覧画面内の遷移(GETクエリがある)ならクエリを出品・編集を確定する
         if request.GET:
@@ -459,6 +491,8 @@ class ItemReservationList(LoginRequiredMixin, FilterView):
         リクエスト受付
         セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
         """
+
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="item_reservation_list")
 
         # 一覧画面内の遷移(GETクエリがある)ならクエリを出品・編集を確定する
         if request.GET:
@@ -516,6 +550,8 @@ class FarmerReservationList(LoginRequiredMixin, FilterView):
         セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
         """
 
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="farmer_reservation_list")
+
         # 一覧画面内の遷移(GETクエリがある)ならクエリを出品・編集を確定する
         if request.GET:
             request.session['query'] = request.GET
@@ -571,6 +607,7 @@ class ReservationList(LoginRequiredMixin, FilterView):
         リクエスト受付
         セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
         """
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="reservation_list")
 
         # 一覧画面内の遷移(GETクエリがある)ならクエリを出品・編集を確定する
         if request.GET:
@@ -655,9 +692,11 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
             user_sell.email_user(subject_sell, message_sell, from_email)
 
             item.delete()
+            UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="reservation_delete_post")
 
         else:
             #このご注文はキャンセルできません
+            
             return HttpResponseRedirect(reverse_lazy('reservation_delete_failed',args=(self.kwargs['pk'],)))
 
         return HttpResponseRedirect(reverse_lazy('reservation_list',args=(self.request.user.id,)))
@@ -669,6 +708,7 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
         reservation = Reservation.objects.get(pk=self.kwargs['pk'])
         context = super().get_context_data(**kwargs)
         context["f_item"] = F_Item.objects.get(pk=reservation.target_id)
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="reservation_delete_get")
 
         return context
 
@@ -682,12 +722,23 @@ class ReservationDeleteFailedView(LoginRequiredMixin, TemplateView):
         表示データの設定
         """
         kwargs['pk'] = self.kwargs['pk']
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="reservation_delete_failed")
 
         return super().get_context_data(**kwargs)
 
 
 class ContactFromView(LoginRequiredMixin, FormView):
     form_class = ContactForm
+
+    def get(self, request, **kwargs):
+        """
+        リクエスト受付
+        セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
+        """
+
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="contact_post")
+
+        return super().get(request, **kwargs)
 
     def form_valid(self, form):
         context = {
@@ -705,11 +756,15 @@ class ContactFromView(LoginRequiredMixin, FormView):
             bcc = ['s16073@tokyo.kosen-ac.jp','s16164@tokyo.kosen-ac.jp'],
         ).send()
 
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="contact_post")
+
         return HttpResponseRedirect(reverse_lazy('contact_result',))
 
 
-class ContactReultView(LoginRequiredMixin, TemplateView):
+class ContactResultView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['success'] = "お問い合わせは正常に送信されました。"
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="contact_result")
+
         return context

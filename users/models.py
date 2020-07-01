@@ -50,3 +50,56 @@ class User(AbstractUser):
             return self.username + '（農場名未登録）'
 
     # 選択リストでの表示
+
+class UserLog(models.Model):
+
+    # 作成者(ユーザー)
+    target = models.ForeignKey(
+        User,
+        verbose_name='ユーザー',
+        blank=True,
+        null=True,
+        related_name='user',
+        on_delete=models.SET_NULL,
+        editable=False,
+    )
+
+    # 作成時間
+    timestamp = models.DateTimeField(
+        verbose_name='タイムスタンプ',
+        blank=True,
+        null=True,
+        editable=False,
+    )
+
+    label = models.CharField(
+        verbose_name='アクセス先',
+        max_length=100,
+        blank=True,
+    )
+
+    purchase_time = models.DurationField(
+        verbose_name='所要時間',
+        blank=True,
+        null=True,
+        editable=False,
+    )
+
+    
+
+
+    def __str__(self):
+        """
+        リストボックスや管理画面での表示
+        """
+        return self.target.name
+
+    def get_filename(self):
+        return os.path.basename(self.photo.name)
+
+    class Meta:
+        """
+        管理画面でのタイトル表示
+        """
+        verbose_name = '商品'
+        verbose_name_plural = '商品'
