@@ -377,37 +377,6 @@ class F_Item(models.Model):
         verbose_name_plural = '商品'
 
 
-class F_item_update(models.Model):
-
-    timestamp = models.DateTimeField(
-        verbose_name='変更時間',
-        blank=True,
-        null=False,
-    #    edotable=False,
-    )
-    target = models.ForeignKey(
-        F_Item,
-        verbose_name='編集したアイテム',
-        blank=True,
-        null=False,
-        on_delete=models.PROTECT,
-    #    editable=False,
-        related_name='update'
-    )
-
-    def __str__(self):
-        """
-        リストボックスや管理画面での表示
-        """
-        return self.target.I_name.farm_name
-
-    class Meta:
-        """
-        管理画面でのタイトル表示
-        """
-        verbose_name = '商品編集ログ'
-        verbose_name_plural = '商品編集ログ'
-
 
 class Reservation(models.Model):
 
@@ -510,3 +479,178 @@ class ContactLog(models.Model):
         """
         verbose_name = 'お問い合わせログ'
         verbose_name_plural = 'お問い合わせログ'
+
+
+
+
+class F_Item_Edit(models.Model):
+    """
+    データ定義クラス
+      各フィールドを定義する
+    参考：
+    ・公式 モデルフィールドリファレンス
+    https://docs.djangoproject.com/ja/2.1/ref/models/fields/
+    """
+
+    # 出品者（農場名をリレーション先からもってこられるようにしたい）
+    I_name = models.ForeignKey(
+        User,
+        verbose_name='出品者',
+        max_length=20,
+        blank=True,
+        null=False,
+        on_delete=models.PROTECT,
+    #    editable=False,
+        related_name='F_Edit'
+    )
+
+
+    # 商品名
+    title = models.CharField(
+        verbose_name='商品名',
+        max_length=25,
+        blank=True,
+        null=True,
+    )
+
+    # 販売単位
+    unit_amount = models.CharField(
+        verbose_name='１セット内容量',
+        max_length=10,
+        blank=False,
+        null=False,
+    )
+
+     #ランク
+    RANK = (
+        (1, 'Aランク（一般流通品)'), # 一般流通品
+        (2, 'Bランク（販売用訳あり品）'), # ロス野菜良品
+        (3, 'Cランク（販売不適可品）'), # ロス野菜
+        (4, 'Dランク（可食品）') # 非食用品
+    )
+
+    rank = models.IntegerField(
+        choices = RANK,
+        verbose_name = 'ランク',
+        null=True
+
+    )
+
+    # 訳あり理由（野菜の状態）
+    tags = models.ManyToManyField(
+        Tags,
+        verbose_name='訳あり理由',
+        blank=True,
+        null=True,
+    )
+
+    # 商品詳細（任意）
+    memo = models.TextField(
+        verbose_name='備考',
+        blank=True,
+        null=True,
+    )
+
+    # 出品セット数
+    quontity = models.PositiveIntegerField(
+        verbose_name='出品セット数',
+        blank=False,
+        null=False,
+        validators=[MinValueValidator(1,"1セット以上の出品をしてください")],
+    )
+
+    quontity_left = models.PositiveIntegerField(
+        verbose_name='在庫',
+        blank=True,
+        null=True,
+    #    editable=False,
+    )
+
+    price = models.PositiveIntegerField(
+        verbose_name='セット単価（￥）',
+        blank=False,
+        null=False,
+        default=0,
+        editable=True, # 実験用
+    )
+
+    # 購入期限
+    deadline = models.DateField(
+        verbose_name='購入期限',
+        blank=True,
+        null=True,
+        default=datetime.datetime.now() + datetime.timedelta(weeks=1)
+    )
+
+    vegetable = models.ForeignKey(
+        Vegetable,
+        verbose_name='野菜の種類',
+        blank=False,
+        null=False,
+        on_delete=models.PROTECT,
+    )
+
+    photo = models.ImageField(
+        verbose_name='写真（任意）',
+        upload_to='f_items/',
+        default=None,
+        blank=True,
+        null=True,
+    )
+
+    delete = models.BooleanField(
+        verbose_name='削除済み',
+        blank=False,
+        null=False,
+        #editable=False,
+        default=False,
+    )
+
+    # 以下、管理項目
+
+    # 作成時間
+    created_at = models.DateTimeField(
+        verbose_name='出品時間',
+        blank=True,
+        null=True,
+        editable=False,
+    )
+
+    # 更新者(ユーザー)
+    updated_by = models.ForeignKey(
+        User,
+        verbose_name='更新者',
+        blank=True,
+        null=True,
+        related_name='F_EditedBy',
+        on_delete=models.SET_NULL,
+        editable=False,
+    )
+
+    # 更新時間
+    updated_at = models.DateTimeField(
+        verbose_name='更新時間',
+        blank=True,
+        null=True,
+        editable=False,
+    )
+
+    deleted_at = models.DateTimeField(
+        verbose_name='削除時間',
+        blank=True,
+        null=True,
+        editable=False,
+    )
+
+    def __str__(self):
+        """
+        リストボックスや管理画面での表示
+        """
+        return self.I_name.full_name
+
+    class Meta:
+        """
+        管理画面でのタイトル表示
+        """
+        verbose_name = '商品編集ログ'
+        verbose_name_plural = '商品編集ログ'
