@@ -61,7 +61,7 @@ class UserLog(models.Model):
         null=True,
         related_name='user',
         on_delete=models.SET_NULL,
-        editable=False,
+        #editable=False,
     )
 
     # 作成時間
@@ -69,7 +69,7 @@ class UserLog(models.Model):
         verbose_name='タイムスタンプ',
         blank=True,
         null=True,
-        editable=False,
+        #editable=False,
     )
 
     label = models.CharField(
@@ -82,20 +82,18 @@ class UserLog(models.Model):
         verbose_name='所要時間',
         blank=True,
         null=True,
-        editable=False,
+        #editable=False,
     )
 
-    
+
 
 
     def __str__(self):
         """
         リストボックスや管理画面での表示
         """
-        return self.target.name
+        return self.target.full_name
 
-    def get_filename(self):
-        return os.path.basename(self.photo.name)
 
     class Meta:
         """

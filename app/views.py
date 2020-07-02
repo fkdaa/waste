@@ -24,6 +24,7 @@ from .models import F_Item
 from .models import Reservation
 from .models import User
 from .models import UserLog
+from .models import F_item_update
 
 from django.conf import settings
 
@@ -72,9 +73,9 @@ class CustomerView(LoginRequiredMixin,FilterView):
     # 1ページの表示
     paginate_by = 10
 
-    def get(self, request, **kwargs):        
+    def get(self, request, **kwargs):
         UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="c_index")
-        
+
         if request.GET:
             request.session['query'] = request.GET
         # 詳細画面・登録画面からの遷移(GETクエリはない)ならクエリを復元する
@@ -243,7 +244,9 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         item.quontity_left = item.quontity
         item.updated_by = self.request.user
         item.updated_at = timezone.datetime.now()
+        F_item_update.objects.create(timestamp=timezone.datetime.now(),target=item)
         item.save()
+
 
         UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="update_post")
 
@@ -690,7 +693,7 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
 
         else:
             #このご注文はキャンセルできません
-            
+
             return HttpResponseRedirect(reverse_lazy('reservation_delete_failed',args=(self.kwargs['pk'],)))
 
         return HttpResponseRedirect(reverse_lazy('reservation_list',args=(self.request.user.id,)))

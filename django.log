@@ -227,3 +227,16 @@
 2020-06-28 22:59:52,564 [DEBUG] C:\Users\yu10wa\Envs\my_django_environment\lib\site-packages\PIL\Image.py:404 Importing XVThumbImagePlugin
 2020-06-29 13:20:42,198 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
 2020-06-29 13:20:47,805 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-07-02 13:38:33,450 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-07-02 13:38:44,683 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-07-02 13:41:03,278 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-07-02 13:51:25,169 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-07-02 13:54:21,935 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-07-02 13:54:22,176 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-07-02 14:00:14,165 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-07-02 14:00:18,215 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-07-02 14:01:17,583 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-07-02 14:01:59,888 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-07-02 14:03:26,878 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-07-02 14:04:25,605 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor
+2020-07-02 14:05:04,574 [DEBUG] c:\users\yu10wa\appdata\local\programs\python\python38\lib\asyncio\proactor_events.py:623 Using proactor: IocpProactor

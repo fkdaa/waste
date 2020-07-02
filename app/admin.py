@@ -5,11 +5,15 @@ from .models import F_Item
 from .models import Reservation
 from .models import Tags
 from .models import Vegetable
+from .models import F_item_update
+from .models import UserLog
 
 admin.site.register(F_Item)
+admin.site.register(F_item_update)
 admin.site.register(Reservation)
 admin.site.register(Tags)
 admin.site.register(Vegetable)
+admin.site.register(UserLog)
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
