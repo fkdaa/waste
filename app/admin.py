@@ -5,10 +5,12 @@ from .models import F_Item
 from .models import Reservation
 from .models import Tags
 from .models import Vegetable
-from .models import ContactLog
+from .models import F_item_update
 from .models import UserLog
+from .models import ContactLog
 
 admin.site.register(F_Item)
+admin.site.register(F_item_update)
 admin.site.register(Reservation)
 admin.site.register(Tags)
 admin.site.register(Vegetable)

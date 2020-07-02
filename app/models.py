@@ -377,6 +377,38 @@ class F_Item(models.Model):
         verbose_name_plural = '商品'
 
 
+class F_item_update(models.Model):
+
+    timestamp = models.DateTimeField(
+        verbose_name='変更時間',
+        blank=True,
+        null=False,
+    #    edotable=False,
+    )
+    target = models.ForeignKey(
+        F_Item,
+        verbose_name='編集したアイテム',
+        blank=True,
+        null=False,
+        on_delete=models.PROTECT,
+    #    editable=False,
+        related_name='update'
+    )
+
+    def __str__(self):
+        """
+        リストボックスや管理画面での表示
+        """
+        return self.target.I_name.farm_name
+
+    class Meta:
+        """
+        管理画面でのタイトル表示
+        """
+        verbose_name = '商品編集ログ'
+        verbose_name_plural = '商品編集ログ'
+
+
 class Reservation(models.Model):
 
     subscriber = models.ForeignKey(

@@ -24,6 +24,7 @@ from .models import F_Item
 from .models import Reservation
 from .models import User
 from .models import UserLog
+from .models import F_item_update
 from .models import ContactLog
 
 from django.conf import settings
@@ -74,14 +75,8 @@ class CustomerView(LoginRequiredMixin,FilterView):
     paginate_by = 10
 
     def get(self, request, **kwargs):
-        """
-        リクエスト受付
-        セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
-        """
-
         UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="c_index")
 
-        # 一覧画面内の遷移(GETクエリがある)ならクエリを出品・編集を確定する
         if request.GET:
             request.session['query'] = request.GET
         # 詳細画面・登録画面からの遷移(GETクエリはない)ならクエリを復元する
@@ -250,7 +245,9 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         item.quontity_left = item.quontity
         item.updated_by = self.request.user
         item.updated_at = timezone.datetime.now()
+        F_item_update.objects.create(timestamp=timezone.datetime.now(),target=item)
         item.save()
+
 
         UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="update_post")
 
