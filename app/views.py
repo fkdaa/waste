@@ -218,11 +218,16 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         item.save()
         form.save_m2m()
 
+        
+
         Edit_item = F_Item_Edit()
         Edit_item.I_name = self.request.user
         Edit_item.title = item.title
         Edit_item.unit_amount=item.unit_amount
-#        Edit_item.tags= item.tags.set([])
+
+        for tag in item.tags.all() :
+            Edit_item.tags.add(tag)
+        
         Edit_item.memo=item.memo
         Edit_item.price=item.price
         Edit_item.photo=item.photo
@@ -272,6 +277,29 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         item.updated_by = self.request.user
         item.updated_at = timezone.datetime.now()
         item.save()
+
+        Edit_item = F_Item_Edit()
+        Edit_item.I_name = self.request.user
+        Edit_item.title = item.title
+        Edit_item.unit_amount=item.unit_amount
+
+        for tag in item.tags.all() :
+            Edit_item.tags.add(tag)
+        
+        Edit_item.memo=item.memo
+        Edit_item.price=item.price
+        Edit_item.photo=item.photo
+        Edit_item.quontity = item.quontity
+        Edit_item.quontity_left = item.quontity_left
+        Edit_item.vegetable=item.vegetable
+        Edit_item.rank= item.rank
+        Edit_item.created_at = timezone.datetime.now()
+        Edit_item.updated_by = self.request.user
+        Edit_item.updated_at = timezone.datetime.now()
+        Edit_item.save()
+        
+
+
 
 #        F_Item_Edit.objects.create()
 
