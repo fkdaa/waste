@@ -4,7 +4,7 @@ from django.contrib.staticfiles.urls import static
 from django.conf import settings
 
 from .models import Item,F_Item,Reservation
-from .views import TopView,SupplyList,ReservationList,ItemReservationList,FarmerReservationList,CustomerView,FarmerView,ItemCreateView, ItemDetailView, ItemBookView, ItemBookConfirmView, ItemBookCompleteView, ItemCreateView, ItemUpdateView, ItemDeleteView, ReservationDetailView, ReservationDeleteView,ItemBookFailedView, ReservationDeleteFailedView,RankView, ContactFromView, ContactReultView
+from .views import TopView,SupplyList,ReservationList,ItemReservationList,FarmerReservationList,CustomerView,FarmerView,ItemCreateView, ItemDetailView, ItemBookView, ItemBookCompleteView, ItemCreateView, ItemUpdateView, ItemDeleteView, ReservationDetailView, ReservationDeleteView,ItemBookFailedView, ReservationDeleteFailedView,RankView, ContactFromView, ContactResultView
 
 # アプリケーションのルーティング設定
 
@@ -14,7 +14,6 @@ urlpatterns = [
     path('f_index/', FarmerView.as_view(template_name='app/f_index.html'), name='f_index'),
     path('detail/<int:pk>/', ItemDetailView.as_view(template_name='app/f_item_detail.html'), name='detail'),
     path('detail/<int:pk>/book/', ItemBookView.as_view(template_name='app/f_item_book.html'), name='book'),
-    path('detail/<int:pk>/book/confirm', ItemBookConfirmView.as_view(template_name='app/f_item_book_confirm.html'), name='book_confirm'),
     path('detail/<int:pk>/book/complete', ItemBookCompleteView.as_view(template_name='app/f_item_book_complete.html'), name='book_complete'),
     path('detail/<int:pk>/book/failed', ItemBookFailedView.as_view(template_name='app/f_item_book_failed.html'), name='book_failed'),
     path('ItemReservationList/<int:pk>/',ItemReservationList.as_view(template_name='app/item_reservation_list.html'),name = 'item_reservation_list'),
@@ -33,7 +32,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')), # [追加]
     path('rank/',RankView.as_view(),name='rank'),
     path('contact/', ContactFromView.as_view(template_name='app/contact.html'), name='contact'),
-    path('contact_result', ContactReultView.as_view(template_name='app/contact_results.html'), name='contact_result'),
+    path('contact_result', ContactResultView.as_view(template_name='app/contact_results.html'), name='contact_result'),
 ]
 
 

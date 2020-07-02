@@ -5,11 +5,17 @@ from .models import F_Item
 from .models import Reservation
 from .models import Tags
 from .models import Vegetable
+from .models import F_item_update
+from .models import UserLog
+from .models import ContactLog
 
 admin.site.register(F_Item)
+admin.site.register(F_item_update)
 admin.site.register(Reservation)
 admin.site.register(Tags)
 admin.site.register(Vegetable)
+admin.site.register(ContactLog)
+admin.site.register(UserLog)
 
 @admin.register(Item)
 class ItemAdmin(admin.ModelAdmin):
@@ -24,5 +30,10 @@ class ItemAdmin(admin.ModelAdmin):
     ・ModelAdminをカスタマイズする方法
     https://qiita.com/cnloni/items/9d3ed9394c2ad935d1f7#modeladmin%E3%82%92%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95
     """
+
     class Meta:
         pass
+
+
+class MyModelAdmin(admin.ModelAdmin):
+    readonly_fields = ('person','timestamp','message',)

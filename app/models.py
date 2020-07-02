@@ -2,7 +2,7 @@ import datetime
 
 from django.db import models
 
-from users.models import User
+from users.models import User,UserLog
 
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
@@ -305,6 +305,14 @@ class F_Item(models.Model):
         null=True,
     )
 
+    delete = models.BooleanField(
+        verbose_name='削除済み',
+        blank=False,
+        null=False,
+        #editable=False,
+        default=False,
+    )
+
     # 以下、管理項目
 
     # 作成者(ユーザー)
@@ -345,6 +353,13 @@ class F_Item(models.Model):
         editable=False,
     )
 
+    deleted_at = models.DateTimeField(
+        verbose_name='削除時間',
+        blank=True,
+        null=True,
+        editable=False,
+    )
+
     def __str__(self):
         """
         リストボックスや管理画面での表示
@@ -360,6 +375,38 @@ class F_Item(models.Model):
         """
         verbose_name = '商品'
         verbose_name_plural = '商品'
+
+
+class F_item_update(models.Model):
+
+    timestamp = models.DateTimeField(
+        verbose_name='変更時間',
+        blank=True,
+        null=False,
+    #    edotable=False,
+    )
+    target = models.ForeignKey(
+        F_Item,
+        verbose_name='編集したアイテム',
+        blank=True,
+        null=False,
+        on_delete=models.PROTECT,
+    #    editable=False,
+        related_name='update'
+    )
+
+    def __str__(self):
+        """
+        リストボックスや管理画面での表示
+        """
+        return self.target.I_name.farm_name
+
+    class Meta:
+        """
+        管理画面でのタイトル表示
+        """
+        verbose_name = '商品編集ログ'
+        verbose_name_plural = '商品編集ログ'
 
 
 class Reservation(models.Model):
@@ -405,7 +452,19 @@ class Reservation(models.Model):
         blank=True,
         null=True,
     )
-
+    delete = models.BooleanField(
+        verbose_name='削除済み',
+        blank=False,
+        null=False,
+        default=False,
+        #default=False,
+    )
+    deleted_at = models.DateTimeField(
+        verbose_name='削除時間',
+        blank=True,
+        null=True,
+        editable=False,
+    )
     def __str__(self):
         """
         リストボックスや管理画面での表示
@@ -418,3 +477,36 @@ class Reservation(models.Model):
         """
         verbose_name = '予約'
         verbose_name_plural = '予約'
+
+
+class ContactLog(models.Model):
+    person = models.ForeignKey(
+        User,
+        verbose_name='ユーザー',
+        related_name='contact_person',
+        on_delete=models.PROTECT,
+        editable=False,
+    )
+
+    timestamp = models.DateTimeField(
+        verbose_name='送信時間',
+        editable=False,
+    )
+
+    message = models.TextField(
+        verbose_name='お問い合わせ内容',
+        editable=False,
+    )
+
+    def __str__(self):
+        """
+        リストボックスや管理画面での表示
+        """
+        return self.person.full_name
+
+    class Meta:
+        """
+        管理画面でのタイトル表示
+        """
+        verbose_name = 'お問い合わせログ'
+        verbose_name_plural = 'お問い合わせログ'

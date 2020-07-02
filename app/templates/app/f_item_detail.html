@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12">
                 {% if  user.is_staff %}
-                    <a class="btn btn-outline-dark float-right" href="{% url 'f_index' %}">戻る</a>
+                    <a class="btn btn-outline-dark float-right" href="{{request.META.HTTP_REFERER}}">戻る</a>
                 {% else %}
                     <a class="btn btn-outline-dark float-right" href="{% url 'c_index' %}">戻る</a>
                 {% endif %}
@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-12">
                 {% if  user.is_staff %}
-                    <a class="btn btn-outline-dark float-right" href="{% url 'f_index' %}">戻る</a>
+                    <a class="btn btn-outline-dark float-right" href="{{request.META.HTTP_REFERER}}">戻る</a>
                 {% else %}
                     <a class="btn btn-outline-dark float-right" href="{% url 'c_index' %}">戻る</a>
                 {% endif %}
