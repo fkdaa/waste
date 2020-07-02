@@ -92,7 +92,7 @@ class UserLog(models.Model):
         """
         リストボックスや管理画面での表示
         """
-        return self.target.full_name
+        return self.timestamp
 
     class Meta:
         """
