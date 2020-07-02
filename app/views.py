@@ -25,6 +25,8 @@ from .models import Reservation
 from .models import User
 from .models import UserLog
 from .models import ContactLog
+from .models import F_Item_Edit
+
 
 from django.conf import settings
 
@@ -216,6 +218,25 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         item.save()
         form.save_m2m()
 
+        Edit_item = F_Item_Edit()
+        Edit_item.I_name = self.request.user
+        Edit_item.title = item.title
+        Edit_item.unit_amount=item.unit_amount
+#        Edit_item.tags= item.tags.set([])
+        Edit_item.memo=item.memo
+        Edit_item.price=item.price
+        Edit_item.photo=item.photo
+        Edit_item.quontity = item.quontity
+        Edit_item.quontity_left = item.quontity_left
+        Edit_item.vegetable=item.vegetable
+        Edit_item.rank= item.rank
+        Edit_item.created_at = timezone.datetime.now()
+        Edit_item.updated_by = self.request.user
+        Edit_item.updated_at = timezone.datetime.now()
+        Edit_item.save()
+        
+
+
         UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="create_post")
 
         return HttpResponseRedirect(reverse_lazy('supply_list',args=(self.request.user.id,)))
@@ -251,6 +272,9 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         item.updated_by = self.request.user
         item.updated_at = timezone.datetime.now()
         item.save()
+
+#        F_Item_Edit.objects.create()
+
 
         UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="update_post")
 
