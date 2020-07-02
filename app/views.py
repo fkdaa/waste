@@ -25,6 +25,7 @@ from .models import Reservation
 from .models import User
 from .models import UserLog
 from .models import F_item_update
+from .models import ContactLog
 
 from django.conf import settings
 
@@ -92,7 +93,7 @@ class CustomerView(LoginRequiredMixin,FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        return F_Item.objects.filter(deadline__gt=timezone.datetime.now(), quontity_left__gte=1).order_by('-created_at')
+        return F_Item.objects.filter(deadline__gt=timezone.datetime.now(), quontity_left__gte=1, delete=False).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -148,7 +149,7 @@ class FarmerView(LoginRequiredMixin, FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        return F_Item.objects.filter(deadline__gt=timezone.datetime.now(), quontity_left__gte=1).order_by('-created_at')
+        return F_Item.objects.filter(deadline__gt=timezone.datetime.now(), quontity_left__gte=1, delete=False).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -274,7 +275,9 @@ class ItemDeleteView(LoginRequiredMixin, DeleteView):
         取り消し処理
         """
         item = self.get_object()
-        item.delete()
+        item.delete=True
+        item.deleted_at=timezone.datetime.now()
+        item.save()
 
         UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="delete_post")
 
@@ -453,7 +456,7 @@ class SupplyList(LoginRequiredMixin, FilterView):
         ソート順・デフォルトの絞り込みを指定
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
-        return F_Item.objects.filter(created_by=self.request.user, deadline__gt=timezone.datetime.now()).order_by('-created_at')
+        return F_Item.objects.filter(created_by=self.request.user, deadline__gt=timezone.datetime.now(), delete=False).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -509,7 +512,7 @@ class ItemReservationList(LoginRequiredMixin, FilterView):
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
 
-        return Reservation.objects.filter(target=F_Item.objects.get(pk=self.kwargs['pk'])).order_by('-created_at')
+        return Reservation.objects.filter(target=F_Item.objects.get(pk=self.kwargs['pk']), delete=False).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -567,7 +570,7 @@ class FarmerReservationList(LoginRequiredMixin, FilterView):
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
 
-        return Reservation.objects.filter(target__I_name_id=self.kwargs['pk']).order_by('-created_at')
+        return Reservation.objects.filter(target__I_name_id=self.kwargs['pk'], delete=False).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -624,7 +627,7 @@ class ReservationList(LoginRequiredMixin, FilterView):
         """
         # デフォルトの並び順として、登録時間（降順）をセットする。
 
-        return Reservation.objects.filter(subscriber=self.request.user, target__deadline__gt=timezone.datetime.now()).order_by('-created_at')
+        return Reservation.objects.filter(subscriber=self.request.user, target__deadline__gt=timezone.datetime.now(),delete=False).order_by('-created_at')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """
@@ -688,7 +691,10 @@ class ReservationDeleteView(LoginRequiredMixin, DeleteView):
             user_buy.email_user(subject_buy, message_buy, from_email)
             user_sell.email_user(subject_sell, message_sell, from_email)
 
-            item.delete()
+            item.delete=True
+            item.deleted_at=timezone.datetime.now()
+            item.save()
+
             UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="reservation_delete_post")
 
         else:
@@ -733,7 +739,7 @@ class ContactFromView(LoginRequiredMixin, FormView):
         セッション変数の管理:一覧画面と詳細画面間の移動時に検索条件が維持されるようにする。
         """
 
-        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="contact_post")
+        UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="contact_form")
 
         return super().get(request, **kwargs)
 
@@ -753,6 +759,7 @@ class ContactFromView(LoginRequiredMixin, FormView):
             bcc = ['s16073@tokyo.kosen-ac.jp','s16164@tokyo.kosen-ac.jp'],
         ).send()
 
+        ContactLog.objects.create(person=self.request.user,timestamp=timezone.datetime.now(),message=form.cleaned_data['message'])
         UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="contact_post")
 
         return HttpResponseRedirect(reverse_lazy('contact_result',))

@@ -94,10 +94,9 @@ class UserLog(models.Model):
         """
         return self.target.full_name
 
-
     class Meta:
         """
         管理画面でのタイトル表示
         """
-        verbose_name = 'ログ'
-        verbose_name_plural = 'ログ'
+        verbose_name = 'ユーザーログ'
+        verbose_name_plural = 'ユーザーログ'

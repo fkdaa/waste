@@ -305,6 +305,14 @@ class F_Item(models.Model):
         null=True,
     )
 
+    delete = models.BooleanField(
+        verbose_name='削除済み',
+        blank=False,
+        null=False,
+        #editable=False,
+        default=False,
+    )
+
     # 以下、管理項目
 
     # 作成者(ユーザー)
@@ -340,6 +348,13 @@ class F_Item(models.Model):
     # 更新時間
     updated_at = models.DateTimeField(
         verbose_name='更新時間',
+        blank=True,
+        null=True,
+        editable=False,
+    )
+
+    deleted_at = models.DateTimeField(
+        verbose_name='削除時間',
         blank=True,
         null=True,
         editable=False,
@@ -437,7 +452,19 @@ class Reservation(models.Model):
         blank=True,
         null=True,
     )
-
+    delete = models.BooleanField(
+        verbose_name='削除済み',
+        blank=False,
+        null=False,
+        default=False,
+        #default=False,
+    )
+    deleted_at = models.DateTimeField(
+        verbose_name='削除時間',
+        blank=True,
+        null=True,
+        editable=False,
+    )
     def __str__(self):
         """
         リストボックスや管理画面での表示
@@ -450,3 +477,36 @@ class Reservation(models.Model):
         """
         verbose_name = '予約'
         verbose_name_plural = '予約'
+
+
+class ContactLog(models.Model):
+    person = models.ForeignKey(
+        User,
+        verbose_name='ユーザー',
+        related_name='contact_person',
+        on_delete=models.PROTECT,
+        editable=False,
+    )
+
+    timestamp = models.DateTimeField(
+        verbose_name='送信時間',
+        editable=False,
+    )
+
+    message = models.TextField(
+        verbose_name='お問い合わせ内容',
+        editable=False,
+    )
+
+    def __str__(self):
+        """
+        リストボックスや管理画面での表示
+        """
+        return self.person.full_name
+
+    class Meta:
+        """
+        管理画面でのタイトル表示
+        """
+        verbose_name = 'お問い合わせログ'
+        verbose_name_plural = 'お問い合わせログ'
