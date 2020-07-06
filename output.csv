@@ -1,5 +1,32 @@
-id,title,unit_amount,rank,memo,quontity,quontity_left,price,photo,created_at,updated_at,I_name_id,created_by_id,updated_by_id,vegetable_id,delete,deleted_at,deadline
-5,,"５本",2,"味に影響のない範囲での湾曲、またサイズが不揃いですが、おいしいきゅうりです。",12,12,120,f_items/cucumber_pic01_Qka8gwG.jpg,"2020-06-29 03:25:10.778628","2020-06-29 03:25:10.778642",1,1,1,14,0,,2020-07-05
-6,,"500ｇ",2,"市販のものより大きく育っています。",20,20,110,"f_items/ダウンロード.jpg","2020-06-29 03:27:01.421166","2020-06-29 03:27:01.421184",1,1,1,2,0,,2020-07-04
-7,,1kg,2,"小さいもの、大きいものが混ざっています。サイズはこちらにおまかせください。",14,14,320,"f_items/ダウンロード_1.jpg","2020-06-29 03:28:57.013572","2020-06-29 03:28:57.013586",1,1,1,10,0,,2020-07-03
-8,,10kg,3,"キズの有無、大きさともにばらつきがあります。",7,7,2000,f_items/images.jpg,"2020-06-29 03:30:30.499488","2020-06-29 03:30:30.499505",1,1,1,13,0,,2020-07-07
+id,password,last_login,is_superuser,username,first_name,last_name,email,is_active,date_joined,full_name,is_staff,farm_name
+1,pbkdf2_sha256$180000$TzYVj2oTDYiE$r7lW5uT9xcqNXJNU/y7jSkI0XeaMu0E2d3a9dzDUsCw=,"2020-07-05 03:59:54.288436",1,admin,"","",vegebank14@gmail.com,1,"2020-06-27 09:18:35","管理者",1,"admin農場"
+2,pbkdf2_sha256$180000$wGfmjYmcrnkC$pMFyqKwIoAsIKy2MLzfyX7mWp4Y+rOcwS6EpoGH3O6o=,"2020-07-03 20:41:12.424757",0,shouhisya,"","",vegebank14@gmail.com,1,"2020-06-29 02:42:17","消費者",0,""
+3,pbkdf2_sha256$180000$aV1nfq8tlCil$1JhiCp6Q2beJm7FMAkJxkyPtmo3vp8W8+5bsWcBoK8o=,"2020-07-05 13:58:01.346807",0,user1,"","",peko2004@ezweb.ne.jp,1,"2020-06-29 02:43:04","もっしぃ",0,""
+4,pbkdf2_sha256$180000$L8u75XR766Fu$NsmdNLDEq9DQe2cWnhaQ+Ue9Iwml/q2Af3FfvZOKox4=,,0,user2,"","",tamaki7373@gmail.com,1,"2020-06-29 02:43:31","ユーザー２",0,""
+5,pbkdf2_sha256$180000$O7i8lDfRfGf3$5aoZVOYB7Ew+NEMXViZOy5+WP30PYqrJ0kMMYGhF7bw=,,0,user3,"","",shiranui.ten@gmail.com,1,"2020-06-29 02:43:53","クッキー",0,""
+6,pbkdf2_sha256$180000$OE0OFhbqsieH$h79zwKoe1yYfDXxkhaRkwm320AaErAlSm0m296zi/Cw=,"2020-07-02 20:50:30.108843",0,user4,"","",ureybox@gmail.com,1,"2020-06-29 02:44:14",Uri,0,""
+7,pbkdf2_sha256$180000$xlVLopacLWX0$0A7A0GPLxQigI671gdMa2GAG1Z2NDMq60Cz4Q2kEShk=,"2020-07-03 09:31:06.909620",0,user5,"","",koi339.0827@gmail.com,1,"2020-06-29 02:44:35","こいママ",0,""
+8,pbkdf2_sha256$180000$Us6VX17pF1GU$efPaDYEMhCklogiPkr2BYFIpec8ZsklTERg81/DKjLw=,"2020-07-05 14:38:31.250160",0,user6,"","",takuya.ito27@gmail.com,1,"2020-06-29 02:44:54",takitou,0,""
+9,pbkdf2_sha256$180000$sXYB70PyrzNh$/WxoScSuJ1YTR7gmj6aCnUbg0HuIfd9E855z86QPK8M=,,0,user7,"","",spring.0402@k.vodafone.ne.jp,1,"2020-06-29 02:45:25","にしやん",0,""
+10,pbkdf2_sha256$180000$3104j32Ft9Rs$FwSwkMgYLguGwj6lRLPb3FsLunKdpc7AWv6ORav+YfU=,"2020-07-03 02:02:04.133949",0,user8,"","",s16015@tokyo.kosen-ac.jp,1,"2020-06-29 02:45:45","いがちゃん",0,""
+11,pbkdf2_sha256$180000$0akDtWA00NCQ$Sbjc4ooBG/V6pE6gItF2F0uNT+a/UssKPc0yXwuvYdQ=,"2020-07-02 23:26:07.676247",0,user9,"","",anakinleia20191226@gmail.com,1,"2020-06-29 02:46:09",marimari,0,""
+12,pbkdf2_sha256$180000$YD0K8f659Aee$exEUULR5wHhR0i3lXvQU8XbNjwmPAuH9sEDi8ionOk0=,"2020-07-05 08:39:44.934207",0,user10,"","",fukuro.0804@gmail.com,1,"2020-06-29 03:07:29","ふくろうはうす",0,""
+13,pbkdf2_sha256$180000$JLvEE2VUzemO$VQi5mYjJYC2dMZchy9h44Mp687/SSpOAY6Kokdyywm8=,"2020-07-03 12:26:10.787973",0,user11,"","",neko.k.m1122@icloud.com,1,"2020-06-29 03:07:53","りーママ",0,""
+14,pbkdf2_sha256$180000$A7iEuP58d0Kn$fW/PvGovuKAwSS1JdBrxJ5726frG9Lr0176wAOHo1tQ=,"2020-07-04 12:51:49.925316",0,user12,"","",sun-spring1000@au.com,1,"2020-06-29 03:08:20","ちい",0,""
+15,pbkdf2_sha256$180000$jpTMkgWC2zvr$dQW9JzamzybgSRDVmMrl8nT3JAQCbJUA6yr35sJizZs=,"2020-07-02 22:46:27.652050",0,user13,"","",mizuno.s@ufh.tokyo,1,"2020-06-29 03:08:38","アーバン水野",0,""
+16,pbkdf2_sha256$180000$R4TjOIuSfdph$JudZOLJCMo0EB3cSjqJ6VoHEjDRU5WkIrJ0HunSyUhU=,"2020-07-03 06:21:45.630720",0,user14,"","",mail@cafe-choco.com,1,"2020-06-29 03:09:00",chocolate,0,""
+17,pbkdf2_sha256$180000$nqeuCZvQ9V9J$OBA4gQlhZRbHUUJSAB9cHjD4a63I1vjIMa0bpzCM01E=,"2020-07-05 08:32:39.029002",0,user15,"","",kumiko-ishikawa-m@ezweb.ne.jp,1,"2020-06-29 03:09:40",Kumiko,0,""
+18,pbkdf2_sha256$180000$xcvwGi9W7g3b$xvSIQenPCq+o/MEBixBEh9jxnONKntC5YxBuTW9T58M=,"2020-07-04 00:19:46.884832",0,user16,"","",dattochi28@gmail.com,1,"2020-06-29 03:09:59","あに",0,""
+19,pbkdf2_sha256$180000$c3D4S2o4DVQr$gG2ngkFbA+BF16Lx1s7DGA5nopbfqONOUmi1qaCJptY=,,0,user17,"","",kumi.527kkky@docomo.ne.jp,1,"2020-06-29 03:10:17",kumi,0,""
+20,pbkdf2_sha256$180000$0SW7eZfGXcRz$c6EVxecqDMl7RndrBobNWFqb2L3JyekmOaFTzAfqXZA=,"2020-07-03 10:48:07.281629",0,user18,"","",qclinghayashi@yahoo.co.jp,1,"2020-06-29 03:10:39","仔猫",0,""
+21,pbkdf2_sha256$180000$sNhZLpN5zjMP$2er9OEOjRc+Lp5TIb7iOGhQUIyRp5GXvHaz3SPXRG+4=,"2020-07-02 22:12:57.688898",0,user19,"","",madogiwano.todo@gmail.com,1,"2020-06-29 03:10:58","小鈴母",0,""
+22,pbkdf2_sha256$180000$3EU4iKpuc8Yz$wmzpp55/uhV09JCd0UdwBBcl3QnOcKS61OJVy3h6Rs4=,,0,user20,"","",kunimoto@foodbank8.tokyo,1,"2020-06-29 03:11:13","國本",0,""
+23,pbkdf2_sha256$180000$WBdvFc5hsqnZ$sfIxnvHUTrfvq+g6WKUMq/ZiTZFdNDTiXDGGwI5Z04I=,"2020-06-29 05:04:19.861312",0,user21,"","",yajiabanben6@gmail.com,1,"2020-06-29 03:11:30","坂本",0,""
+24,pbkdf2_sha256$180000$5XLOKtjU9TOG$LlObbwhio+ZgJwMIqCYdsfmWI3EDb3eni8lBTD2Xxcc=,"2020-06-29 04:52:40.800404",0,user22,"","",daisuke@foodbank8.tokyo,1,"2020-06-29 03:11:46",daisuke.fb8,0,""
+25,pbkdf2_sha256$180000$NEHbmaTrkTnl$zk7klrUMD+lXkZhDuNIlZTuY5xGRqA9Ul9iJ3/5ZhSQ=,"2020-06-29 05:20:29.858957",0,user23,"","",diveandzoom38@gmail.com,1,"2020-06-29 03:12:13","黒光りぶなしめじ",0,""
+27,pbkdf2_sha256$180000$N2OWKDL1Jw95$eAwkHuqnTmihWqna1WWfM32JugjlIHw0Qkp6R3vo7G0=,"2020-07-04 03:35:01.362588",0,farm1,"","",mizuno.s@ufh.tokyo,1,"2020-07-02 10:07:35","水野A",1,"A農園"
+28,pbkdf2_sha256$180000$xW4l0U4zMYfe$xOvaa6ELrx7egMVJBR3DBsIo8/0AvgYEiIbGMuHdzv8=,"2020-07-04 03:38:30.725226",0,farm2,"","",mizuno.s@ufh.tokyo,1,"2020-07-02 10:08:12","水野B",1,"B農園"
+29,pbkdf2_sha256$180000$JLKitgLQolBO$QmfytrCyXsR6IURvxeiUuW48p52DZAsLVExR/jtc2lI=,"2020-07-05 03:55:05.093030",0,farm3,"","",mizuno.s@ufh.tokyo,1,"2020-07-02 10:08:43","水野C",1,"C農園"
+30,pbkdf2_sha256$180000$mTU8LkqEAzQ7$A3rKvD1L0F70gRgJ3T3wjlonY1B6YetosXJpnt0ujnI=,"2020-07-05 03:54:35.347620",0,farm4,"","",mizuno.s@ufh.tokyo,1,"2020-07-02 10:09:03","水野D",1,"D農園"
+31,pbkdf2_sha256$180000$VUwCl7KFARd7$8F+9PPXdUc26au/1sVnnE79gamSWRlracvOAz/6ZyU4=,"2020-07-03 00:40:42.379097",0,farm5,"","",tsuzukibashi.m@ufh.tokyo,1,"2020-07-02 10:09:28","続橋",1,"アーバンファーム八王子"
+32,pbkdf2_sha256$180000$OzOiQfGnxPE7$CUh6POssmkBX2FsqXNLsj7nf9Yg4jw9mtPvWqNB2AJE=,,0,kitakoshi,"","","",1,"2020-07-02 14:30:56","先生",0,""

@@ -400,3 +400,67 @@
 2020-07-03 00:26:37,347 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
 2020-07-03 00:26:46,299 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
 2020-07-03 00:27:03,152 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-07-03 00:31:31,588 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-07-03 00:31:42,095 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-07-03 00:33:36,698 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-07-03 09:54:22,755 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-07-03 09:59:42,563 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-07-03 10:19:09,672 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-07-03 10:24:35,661 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-07-04 12:42:59,099 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing BlpImagePlugin
+2020-07-04 12:42:59,100 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing BmpImagePlugin
+2020-07-04 12:42:59,100 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing BufrStubImagePlugin
+2020-07-04 12:42:59,101 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing CurImagePlugin
+2020-07-04 12:42:59,102 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing DcxImagePlugin
+2020-07-04 12:42:59,103 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing DdsImagePlugin
+2020-07-04 12:42:59,104 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing EpsImagePlugin
+2020-07-04 12:42:59,105 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing FitsStubImagePlugin
+2020-07-04 12:42:59,106 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing FliImagePlugin
+2020-07-04 12:42:59,107 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing FpxImagePlugin
+2020-07-04 12:42:59,108 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:407 Image: failed to import FpxImagePlugin: No module named 'olefile'
+2020-07-04 12:42:59,108 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing FtexImagePlugin
+2020-07-04 12:42:59,109 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing GbrImagePlugin
+2020-07-04 12:42:59,110 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing GifImagePlugin
+2020-07-04 12:42:59,110 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing GribStubImagePlugin
+2020-07-04 12:42:59,111 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing Hdf5StubImagePlugin
+2020-07-04 12:42:59,111 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing IcnsImagePlugin
+2020-07-04 12:42:59,113 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing IcoImagePlugin
+2020-07-04 12:42:59,114 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing ImImagePlugin
+2020-07-04 12:42:59,115 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing ImtImagePlugin
+2020-07-04 12:42:59,116 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing IptcImagePlugin
+2020-07-04 12:42:59,117 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing JpegImagePlugin
+2020-07-04 12:42:59,117 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing Jpeg2KImagePlugin
+2020-07-04 12:42:59,117 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing McIdasImagePlugin
+2020-07-04 12:42:59,118 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing MicImagePlugin
+2020-07-04 12:42:59,119 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:407 Image: failed to import MicImagePlugin: No module named 'olefile'
+2020-07-04 12:42:59,119 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing MpegImagePlugin
+2020-07-04 12:42:59,120 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing MpoImagePlugin
+2020-07-04 12:42:59,121 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing MspImagePlugin
+2020-07-04 12:42:59,121 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing PalmImagePlugin
+2020-07-04 12:42:59,124 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing PcdImagePlugin
+2020-07-04 12:42:59,125 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing PcxImagePlugin
+2020-07-04 12:42:59,125 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing PdfImagePlugin
+2020-07-04 12:42:59,134 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing PixarImagePlugin
+2020-07-04 12:42:59,134 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing PngImagePlugin
+2020-07-04 12:42:59,134 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing PpmImagePlugin
+2020-07-04 12:42:59,135 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing PsdImagePlugin
+2020-07-04 12:42:59,135 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing SgiImagePlugin
+2020-07-04 12:42:59,136 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing SpiderImagePlugin
+2020-07-04 12:42:59,137 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing SunImagePlugin
+2020-07-04 12:42:59,138 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing TgaImagePlugin
+2020-07-04 12:42:59,139 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing TiffImagePlugin
+2020-07-04 12:42:59,139 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing WebPImagePlugin
+2020-07-04 12:42:59,148 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing WmfImagePlugin
+2020-07-04 12:42:59,149 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing XbmImagePlugin
+2020-07-04 12:42:59,151 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing XpmImagePlugin
+2020-07-04 12:42:59,152 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/Image.py:404 Importing XVThumbImagePlugin
+2020-07-05 12:40:09,634 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/PngImagePlugin.py:153 STREAM b'IHDR' 16 13
+2020-07-05 12:40:09,635 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/PngImagePlugin.py:153 STREAM b'sRGB' 41 1
+2020-07-05 12:40:09,635 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/PngImagePlugin.py:153 STREAM b'gAMA' 54 4
+2020-07-05 12:40:09,635 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/PngImagePlugin.py:153 STREAM b'pHYs' 70 9
+2020-07-05 12:40:09,635 [DEBUG] /home/ubuntu/vegebank/lib/python3.8/site-packages/PIL/PngImagePlugin.py:153 STREAM b'IDAT' 91 3672
+2020-07-05 23:24:52,665 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-07-05 23:49:03,967 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-07-06 03:31:56,725 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-07-06 03:32:57,639 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
+2020-07-06 03:33:54,807 [DEBUG] /usr/lib/python3.8/asyncio/selector_events.py:59 Using selector: EpollSelector
