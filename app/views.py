@@ -72,7 +72,7 @@ class CustomerView(LoginRequiredMixin,FilterView):
     strict = False
 
     # 1ページの表示
-    paginate_by = 10
+    #paginate_by = 10
 
     def get(self, request, **kwargs):
         UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="c_index")
@@ -122,7 +122,7 @@ class FarmerView(LoginRequiredMixin, FilterView):
     strict = False
 
     # 1ページの表示
-    paginate_by = 10
+    #paginate_by = 10
 
     def get(self, request, **kwargs):
         """
@@ -218,7 +218,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 
         for tag in item.tags.all() :
             Edit_item.tags.add(tag)
-            
+
         Edit_item.memo=item.memo
         Edit_item.price=item.price
         Edit_item.photo=item.photo
@@ -230,7 +230,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         Edit_item.updated_by = self.request.user
         Edit_item.updated_at = timezone.datetime.now()
         Edit_item.save()
-        
+
 
 
         UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="create_post")
@@ -276,7 +276,7 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
 
         for tag in item.tags.all() :
             Edit_item.tags.add(tag)
-        
+
         Edit_item.memo=item.memo
         Edit_item.price=item.price
         Edit_item.photo=item.photo
@@ -288,7 +288,7 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         Edit_item.updated_by = self.request.user
         Edit_item.updated_at = timezone.datetime.now()
         Edit_item.save()
-        
+
 
 
 
@@ -472,7 +472,7 @@ class SupplyList(LoginRequiredMixin, FilterView):
     strict = False
 
     # 1ページの表示
-    paginate_by = 10
+    #paginate_by = 10
 
     def get(self, request, **kwargs):
         """
@@ -527,7 +527,7 @@ class ItemReservationList(LoginRequiredMixin, FilterView):
     strict = False
 
     # 1ページの表示
-    paginate_by = 10
+    #paginate_by = 10
 
     def get(self, request, **kwargs):
         """
@@ -585,7 +585,7 @@ class FarmerReservationList(LoginRequiredMixin, FilterView):
     strict = False
 
     # 1ページの表示
-    paginate_by = 10
+    #paginate_by = 10
 
     def get(self, request, **kwargs):
         """
@@ -643,7 +643,7 @@ class ReservationList(LoginRequiredMixin, FilterView):
     strict = False
 
     # 1ページの表示
-    paginate_by = 10
+    #paginate_by = 10
 
     def get(self, request, **kwargs):
         """
