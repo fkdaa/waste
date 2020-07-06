@@ -162,7 +162,7 @@ class FarmerView(LoginRequiredMixin, FilterView):
         return super().get_context_data(object_list=object_list, **kwargs)
 
 
-class ItemDetailView(DetailView):
+class ItemDetailView(LoginRequiredMixin, DetailView):
     """
     ビュー：詳細画面
     """
@@ -215,10 +215,6 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         Edit_item.I_name = self.request.user
         Edit_item.title = item.title
         Edit_item.unit_amount=item.unit_amount
-
-        for tag in item.tags.all() :
-            Edit_item.tags.add(tag)
-
         Edit_item.memo=item.memo
         Edit_item.price=item.price
         Edit_item.photo=item.photo
@@ -231,6 +227,10 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         Edit_item.updated_at = timezone.datetime.now()
         Edit_item.save()
 
+        for tag in item.tags.all() :
+            Edit_item.tags.add(tag)
+
+        Edit_item.save()
 
 
         UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="create_post")
@@ -273,10 +273,6 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         Edit_item.I_name = self.request.user
         Edit_item.title = item.title
         Edit_item.unit_amount=item.unit_amount
-
-        for tag in item.tags.all() :
-            Edit_item.tags.add(tag)
-
         Edit_item.memo=item.memo
         Edit_item.price=item.price
         Edit_item.photo=item.photo
@@ -289,7 +285,10 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
         Edit_item.updated_at = timezone.datetime.now()
         Edit_item.save()
 
+        for tag in item.tags.all() :
+            Edit_item.tags.add(tag)
 
+        Edit_item.save()
 
 
         UserLog.objects.create(target=self.request.user,timestamp=timezone.datetime.now(),label="update_post")
