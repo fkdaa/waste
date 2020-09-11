@@ -22,7 +22,7 @@
                 "sha256:a794f7a2f4b7c928eecfbc4ebad03712ff27fb545abe269bf01aa8500781eb1c"
             ],
             "index": "pypi",
-            "version": "==2.1.15"
+            "version": ">=2.2.13"
         },
         "django-crispy-forms": {
             "hashes": [
