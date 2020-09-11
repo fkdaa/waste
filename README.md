@@ -10,5 +10,6 @@ django
 javascript,HTML,python,CSS
 
 ### イメージキャラクター
+はいきやさいちゃん。
+大量に廃棄された野菜の幽霊で、廃棄野菜が減って成仏できる日を願っている。
 ![やさいちゃん](https://media.discordapp.net/attachments/700604911930310730/752784446742069310/yasaityaaaaaaaaaaaaaaaaaan.png?width=372&height=465)
-はいきやさいちゃん
